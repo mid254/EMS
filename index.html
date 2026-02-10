@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spa Enterprise EMS - Login</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script defer src="assets/js/dummy-backend.js"></script>
+    <script defer src="assets/js/auth.js"></script>
+  </head>
+  <body class="auth-page">
+    <main class="auth-card">
+      <section>
+        <h1>Spa Enterprise - Employee Management System</h1>
+        <p class="muted">Sign in with any demo account to explore the system.</p>
+
+        <form id="loginForm" class="form">
+          <label>
+            Email
+            <input
+              type="email"
+              id="email"
+              required
+              autocomplete="email"
+              placeholder="e.g. admin@ems.com"
+            />
+          </label>
+          <label>
+            Password
+            <input
+              type="password"
+              id="password"
+              required
+              autocomplete="current-password"
+              placeholder="Enter password"
+            />
+          </label>
+          <button class="btn primary" type="submit">Sign in</button>
+          <p id="loginError" class="error" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <aside class="login-sidebar">
+        <h2>Demo credentials</h2>
+        <p class="muted">Use these dummy accounts (no Supabase required):</p>
+        <div class="login-roles">
+          <div>
+            <span class="badge">Admin</span><br />
+            Email: <code>admin@ems.com</code><br />
+            Password: <code>admin123</code><br />
+            Work ID: <code>AD-0001</code>
+          </div>
+          <div>
+            <span class="badge">HR</span><br />
+            Email: <code>hr@ems.com</code><br />
+            Password: <code>hr123</code><br />
+            Work ID: <code>HR-0001</code>
+          </div>
+          <div>
+            <span class="badge">Manager</span><br />
+            Email: <code>manager@ems.com</code><br />
+            Password: <code>manager123</code><br />
+            Work ID: <code>MD-0001</code>
+          </div>
+          <div>
+            <span class="badge">Supervisor (IT)</span><br />
+            Email: <code>supervisor.it@ems.com</code><br />
+            Password: <code>super123</code><br />
+            Work ID: <code>S-IT-0001</code>
+          </div>
+          <div>
+            <span class="badge">Employee (Accounts)</span><br />
+            Email: <code>accounts.emp@ems.com</code><br />
+            Password: <code>emp123</code><br />
+            Work ID: <code>ACC-0001</code>
+          </div>
+          <div>
+            <span class="badge">Employee (Sales &amp; Marketing)</span><br />
+            Email: <code>sales.emp@ems.com</code><br />
+            Password: <code>emp123</code><br />
+            Work ID: <code>SM-0001</code>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </body>
+</html>
+

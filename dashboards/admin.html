@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EMS - Admin Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="./_layout.css" />
+    <script defer src="../assets/js/dummy-backend.js"></script>
+    <script defer src="../assets/js/app.js"></script>
+    <script defer src="../assets/js/roles.js"></script>
+    <script defer src="../assets/js/departments.js"></script>
+    <script defer src="../assets/js/employees.js"></script>
+    <script defer src="../assets/js/admin.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">EMS</div>
+            <div class="muted" style="font-size:.9rem">Admin</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a class="active" href="./admin.html">
+            <span class="nav-icon"></span><span>Dashboard</span>
+          </a>
+          <a href="../employees/index.html">
+            <span class="nav-icon"></span><span>Employees</span>
+          </a>
+          <a href="../attendance/index.html">
+            <span class="nav-icon"></span><span>Attendance</span>
+          </a>
+          <a href="../leave/index.html">
+            <span class="nav-icon"></span><span>Leave</span>
+          </a>
+          <a href="../payroll/index.html">
+            <span class="nav-icon"></span><span>Payroll</span>
+          </a>
+          <a href="../reports/index.html">
+            <span class="nav-icon"></span><span>Reports</span>
+          </a>
+          <a href="../settings/index.html">
+            <span class="nav-icon"></span><span>Settings</span>
+          </a>
+        </nav>
+      </aside>
+
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main" id="welcomeMain">Welcome</div>
+            <div class="welcome-sub" id="welcomeSub">Loading profile…</div>
+          </div>
+          <button class="btn ghost" id="logoutBtn">Logout</button>
+        </div>
+
+        <div class="card">
+          <h2 style="margin:0 0 8px 0">Add User (Employee Record)</h2>
+          <p class="muted" style="margin:0 0 12px 0">
+            Work ID is generated automatically based on role (e.g. <code>HR-0001</code>).
+          </p>
+
+          <form id="addEmployeeForm" class="grid two">
+            <label>
+              Full name
+              <input id="empFullName" required />
+            </label>
+            <label>
+              Email
+              <input id="empEmail" type="email" required />
+            </label>
+            <label>
+              Role
+              <select id="empRole" required></select>
+            </label>
+            <label>
+              Department
+              <select id="empDepartment" required></select>
+            </label>
+            <div style="grid-column:1/-1;display:flex;gap:10px;align-items:center">
+              <button class="btn primary" type="submit">Create employee record</button>
+              <span id="addEmployeeMsg" class="muted" aria-live="polite"></span>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2 style="margin:0 0 8px 0">Recent Employees</h2>
+          <div style="overflow:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Work ID</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Department</th>
+                  <th>Created</th>
+                </tr>
+              </thead>
+              <tbody id="recentEmployeesBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
+

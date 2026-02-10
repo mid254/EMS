@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EMS - HR Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="./_layout.css" />
+    <script defer src="../assets/js/dummy-backend.js"></script>
+    <script defer src="../assets/js/app.js"></script>
+    <script defer src="../assets/js/roles.js"></script>
+    <script defer src="../assets/js/hr.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">EMS</div>
+            <div class="muted" style="font-size:.9rem">HR</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a class="active" href="./hr.html"><span class="nav-icon"></span><span>Dashboard</span></a>
+          <a href="../employees/index.html"><span class="nav-icon"></span><span>Employees</span></a>
+          <a href="../attendance/index.html"><span class="nav-icon"></span><span>Attendance</span></a>
+          <a href="../leave/index.html"><span class="nav-icon"></span><span>Leave</span></a>
+          <a href="../payroll/index.html"><span class="nav-icon"></span><span>Payroll</span></a>
+        </nav>
+      </aside>
+
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main" id="welcomeMain">Welcome</div>
+            <div class="welcome-sub" id="welcomeSub">Loading profile…</div>
+          </div>
+          <button class="btn ghost" id="logoutBtn">Logout</button>
+        </div>
+
+        <div class="card">
+          <h2 style="margin:0">Welcome</h2>
+          <p class="muted">HR can manage employees, attendance, leave, and payroll.</p>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
+

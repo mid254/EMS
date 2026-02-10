@@ -1,0 +1,13 @@
+/* Shared dashboard tweaks (kept separate to avoid huge styles.css for university projects) */
+.kpi{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#0f0f1a;
+}
+.kpi strong{font-size:1.2rem}
+.kpi span{color:var(--muted);font-size:.9rem}
+

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spa Enterprise - Employee Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="./_layout.css" />
+    <script defer src="../assets/js/dummy-backend.js"></script>
+    <script defer src="../assets/js/app.js"></script>
+    <script defer src="../assets/js/roles.js"></script>
+    <script defer src="../assets/js/attendance.js"></script>
+    <script defer src="../assets/js/employee.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">Spa Enterprise</div>
+            <div class="muted" style="font-size:.9rem">Employee</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a class="active" href="./employee.html">
+            <span class="nav-icon"></span><span>Dashboard</span>
+          </a>
+          <a href="../attendance/index.html">
+            <span class="nav-icon"></span><span>Attendance</span>
+          </a>
+          <a href="../leave/index.html">
+            <span class="nav-icon"></span><span>Leave</span>
+          </a>
+          <a href="../payroll/index.html">
+            <span class="nav-icon"></span><span>Payslips</span>
+          </a>
+        </nav>
+      </aside>
+
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main" id="welcomeMain">Welcome</div>
+            <div class="welcome-sub" id="welcomeSub">Loading profile…</div>
+          </div>
+          <button class="btn ghost" id="logoutBtn">Logout</button>
+        </div>
+
+        <div class="card">
+          <h2 style="margin:0 0 10px 0">Attendance</h2>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn primary" id="clockInBtn">Clock in</button>
+            <button class="btn ghost" id="clockOutBtn">Clock out</button>
+            <span id="attMsg" class="muted" aria-live="polite"></span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
+
