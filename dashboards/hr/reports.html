@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboTech Solutions EMS - HR Reports</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../_layout.css" />
+    <script defer src="../../assets/js/dummy-backend.js"></script>
+    <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/hr.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
+            <div class="muted" style="font-size:.9rem">Human Resources</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="./dashboard.html"><span class="nav-icon">D</span><span>Dashboard</span></a>
+          <a href="./employees.html"><span class="nav-icon">E</span><span>Employees</span></a>
+          <a href="./attendance.html"><span class="nav-icon">A</span><span>Attendance</span></a>
+          <a href="./leave.html"><span class="nav-icon">L</span><span>Leave Management</span></a>
+          <a href="./payroll.html"><span class="nav-icon">P</span><span>Payroll Support</span></a>
+          <a class="active" href="./reports.html"><span class="nav-icon">R</span><span>Reports</span></a>
+          <a href="./policies.html"><span class="nav-icon">P</span><span>Policies</span></a>
+          <a href="./profile.html"><span class="nav-icon">P</span><span>My Profile</span></a>
+        </nav>
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">HR</div>
+            <div>
+              <div class="sidebar-profile-name">HR Officer</div>
+              <div class="sidebar-profile-role">Human Resources</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">My Profile</a>
+        </div>
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
+      </aside>
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main">Reports and Documentation</div>
+            <div class="welcome-sub">Employee list, attendance, leave, new hire and exit reports. Export to PDF or CSV.</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications"><span class="icon-bell"></span></button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
+              <span class="avatar-circle small">HR</span>
+              <span class="topbar-profile-name">HR Officer</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Available Reports</h2>
+          <p class="muted">Employee list, attendance, leave, new hire and exit reports.</p>
+          <div class="scroll-cards" style="margin-top:12px">
+            <div class="mini-card">
+              <div class="mini-title">Employee List Report</div>
+              <div class="mini-body">Full employee directory</div>
+              <div class="download-actions" style="margin-top:8px">
+                <button class="btn primary" type="button">PDF</button>
+                <button class="btn ghost" type="button">CSV</button>
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">Attendance Report</div>
+              <div class="mini-body">Daily or monthly attendance</div>
+              <div class="download-actions" style="margin-top:8px">
+                <button class="btn primary" type="button">PDF</button>
+                <button class="btn ghost" type="button">CSV</button>
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">Leave Report</div>
+              <div class="mini-body">Leave utilization</div>
+              <div class="download-actions" style="margin-top:8px">
+                <button class="btn primary" type="button">PDF</button>
+                <button class="btn ghost" type="button">CSV</button>
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">New Hire and Exit Report</div>
+              <div class="mini-body">Joiners and leavers</div>
+              <div class="download-actions" style="margin-top:8px">
+                <button class="btn primary" type="button">PDF</button>
+                <button class="btn ghost" type="button">CSV</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

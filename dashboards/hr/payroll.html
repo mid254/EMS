@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboTech Solutions EMS - HR Payroll Support</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../_layout.css" />
+    <script defer src="../../assets/js/dummy-backend.js"></script>
+    <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/hr.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
+            <div class="muted" style="font-size:.9rem">Human Resources</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="./dashboard.html">
+            <span class="nav-icon">D</span><span>Dashboard</span>
+          </a>
+          <a href="./employees.html">
+            <span class="nav-icon">E</span><span>Employees</span>
+          </a>
+          <a href="./attendance.html">
+            <span class="nav-icon">A</span><span>Attendance</span>
+          </a>
+          <a href="./leave.html">
+            <span class="nav-icon">L</span><span>Leave Management</span>
+          </a>
+          <a class="active" href="./payroll.html">
+            <span class="nav-icon">P</span><span>Payroll Support</span>
+          </a>
+          <a href="./reports.html">
+            <span class="nav-icon">R</span><span>Reports</span>
+          </a>
+          <a href="./policies.html">
+            <span class="nav-icon">P</span><span>Policies</span>
+          </a>
+          <a href="./profile.html">
+            <span class="nav-icon">P</span><span>My Profile</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">HR</div>
+            <div>
+              <div class="sidebar-profile-name">HR Officer</div>
+              <div class="sidebar-profile-role">Human Resources</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">My Profile</a>
+        </div>
+
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main">Payroll Support</div>
+            <div class="welcome-sub">View salary structures, generate payslips, forward to Accounts. HR cannot approve payments.</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications">
+              <span class="icon-bell"></span>
+            </button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
+              <span class="avatar-circle small">HR</span>
+              <span class="topbar-profile-name">HR Officer</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Salary Structures</h2>
+          <p class="muted">View salary structures. HR supports payroll but does not control finance logic.</p>
+          <div class="scroll-cards" style="margin-top:12px">
+            <div class="mini-card">
+              <div class="mini-title">IT Department</div>
+              <div class="mini-body">Base: KSh 80,000 – KSh 150,000</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">HR Department</div>
+              <div class="mini-body">Base: KSh 70,000 – KSh 120,000</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Payslips &amp; Forward to Accounts</h2>
+          <p class="muted">Generate payslips and forward payroll data to Accounts. HR cannot approve payments.</p>
+          <div class="download-actions" style="margin-top:12px">
+            <button class="btn primary" type="button">Generate Payslips</button>
+            <button class="btn ghost" type="button">Forward to Accounts</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

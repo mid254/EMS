@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboTech Solutions EMS - HR Dashboard</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../_layout.css" />
+    <script defer src="../../assets/js/dummy-backend.js"></script>
+    <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/hr.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
+            <div class="muted" style="font-size:.9rem">Human Resources</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a class="active" href="./dashboard.html">
+            <span class="nav-icon">D</span><span>Dashboard</span>
+          </a>
+          <a href="./employees.html">
+            <span class="nav-icon">E</span><span>Employees</span>
+          </a>
+          <a href="./attendance.html">
+            <span class="nav-icon">A</span><span>Attendance</span>
+          </a>
+          <a href="./leave.html">
+            <span class="nav-icon">L</span><span>Leave Management</span>
+          </a>
+          <a href="./payroll.html">
+            <span class="nav-icon">P</span><span>Payroll Support</span>
+          </a>
+          <a href="./reports.html">
+            <span class="nav-icon">R</span><span>Reports</span>
+          </a>
+          <a href="./policies.html">
+            <span class="nav-icon">P</span><span>Policies</span>
+          </a>
+          <a href="./profile.html">
+            <span class="nav-icon">P</span><span>My Profile</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">HR</div>
+            <div>
+              <div class="sidebar-profile-name">HR Officer</div>
+              <div class="sidebar-profile-role">Human Resources</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">My Profile</a>
+        </div>
+
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main" id="welcomeMain">Welcome</div>
+            <div class="welcome-sub" id="welcomeSub">HR dashboard overview</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications">
+              <span class="icon-bell"></span>
+            </button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
+              <span class="avatar-circle small">HR</span>
+              <span class="topbar-profile-name">HR Officer</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn" onclick="location.href='./index.html'">Logout</button>
+          </div>
+        </div>
+
+        <div class="top-stats cards-grid">
+          <div class="stat-card accent">
+            <div class="stat-label">Total Employees</div>
+            <div class="stat-value">128</div>
+          </div>
+          <div class="stat-card accent">
+            <div class="stat-label">New Employees (This Month)</div>
+            <div class="stat-value">5</div>
+          </div>
+          <div class="stat-card danger">
+            <div class="stat-label">Employees on Leave Today</div>
+            <div class="stat-value">16</div>
+          </div>
+          <div class="stat-card danger">
+            <div class="stat-label">Pending Leave Requests</div>
+            <div class="stat-value">8</div>
+          </div>
+          <div class="stat-card danger">
+            <div class="stat-label">Attendance Issues (Late / Absent)</div>
+            <div class="stat-value">12</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>HR Overview</h2>
+          <p class="muted">Manage employee records, attendance policies, leave administration, and payroll coordination.</p>
+          <div class="scroll-cards" style="margin-top:12px">
+            <div class="mini-card">
+              <div class="mini-title">Recent Activity</div>
+              <div class="mini-body">3 new employees added this week. 8 leave requests pending.</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">Attendance Alerts</div>
+              <div class="mini-body">5 attendance correction requests awaiting review.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

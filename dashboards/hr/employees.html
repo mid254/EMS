@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboTech Solutions EMS - HR Employees</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../_layout.css" />
+    <script defer src="../../assets/js/dummy-backend.js"></script>
+    <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/hr.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
+            <div class="muted" style="font-size:.9rem">Human Resources</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="./dashboard.html">
+            <span class="nav-icon">D</span><span>Dashboard</span>
+          </a>
+          <a class="active" href="./employees.html">
+            <span class="nav-icon">E</span><span>Employees</span>
+          </a>
+          <a href="./attendance.html">
+            <span class="nav-icon">A</span><span>Attendance</span>
+          </a>
+          <a href="./leave.html">
+            <span class="nav-icon">L</span><span>Leave Management</span>
+          </a>
+          <a href="./payroll.html">
+            <span class="nav-icon">P</span><span>Payroll Support</span>
+          </a>
+          <a href="./reports.html">
+            <span class="nav-icon">R</span><span>Reports</span>
+          </a>
+          <a href="./policies.html">
+            <span class="nav-icon">P</span><span>Policies</span>
+          </a>
+          <a href="./profile.html">
+            <span class="nav-icon">P</span><span>My Profile</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">HR</div>
+            <div>
+              <div class="sidebar-profile-name">HR Officer</div>
+              <div class="sidebar-profile-role">Human Resources</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">My Profile</a>
+        </div>
+
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main">Employee Management</div>
+            <div class="welcome-sub">Add, update, activate or deactivate employees. HR cannot manage Admin or MD accounts.</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications">
+              <span class="icon-bell"></span>
+            </button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
+              <span class="avatar-circle small">HR</span>
+              <span class="topbar-profile-name">HR Officer</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-row">
+            <h2>Employee Management</h2>
+            <button class="btn primary" type="button">➕ Add Employee</button>
+          </div>
+          <p class="muted">Employee ID, Full name, Email &amp; phone, Department, Role, Employment status, Date of joining.</p>
+          <div style="overflow:auto;margin-top:12px">
+            <table>
+              <thead>
+                <tr>
+                  <th>Employee ID</th>
+                  <th>Full Name</th>
+                  <th>Email</th>
+                  <th>Department</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Date Joined</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>HR-0001</td>
+                  <td>Samuel Green</td>
+                  <td>samuel.green@robotech.com</td>
+                  <td>HR</td>
+                  <td>HR Officer</td>
+                  <td><span class="badge">Active</span></td>
+                  <td>15 Jan 2024</td>
+                  <td>
+                    <button class="btn ghost" type="button">✏️ Edit</button>
+                    <button class="btn ghost" type="button">👁 View</button>
+                    <button class="btn ghost" type="button">❌ Deactivate</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>IT-0003</td>
+                  <td>Anita Kumar</td>
+                  <td>anita.kumar@robotech.com</td>
+                  <td>IT</td>
+                  <td>Employee</td>
+                  <td><span class="badge">Active</span></td>
+                  <td>01 Feb 2026</td>
+                  <td>
+                    <button class="btn ghost" type="button">✏️ Edit</button>
+                    <button class="btn ghost" type="button">👁 View</button>
+                    <button class="btn ghost" type="button">❌ Deactivate</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

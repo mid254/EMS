@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboTech Solutions EMS - Admin Activity Logs</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../_layout.css" />
+    <script defer src="../../assets/js/dummy-backend.js"></script>
+    <script defer src="../../assets/js/app.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
+            <div class="muted" style="font-size:.9rem">Admin</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="./dashboard.html">
+            <span class="nav-icon">D</span><span>Dashboard</span>
+          </a>
+          <a href="./employees.html">
+            <span class="nav-icon">E</span><span>Employees</span>
+          </a>
+          <a href="./users.html">
+            <span class="nav-icon">U</span><span>Users & Roles</span>
+          </a>
+          <a href="./attendance.html">
+            <span class="nav-icon">A</span><span>Attendance</span>
+          </a>
+          <a href="./leave.html">
+            <span class="nav-icon">L</span><span>Leave</span>
+          </a>
+          <a href="./payroll.html">
+            <span class="nav-icon">P</span><span>Payroll</span>
+          </a>
+          <a href="./reports.html">
+            <span class="nav-icon">R</span><span>Reports</span>
+          </a>
+          <a href="./settings.html">
+            <span class="nav-icon">S</span><span>Settings</span>
+          </a>
+          <a href="./notifications.html">
+            <span class="nav-icon">N</span><span>Notifications</span>
+          </a>
+          <a class="active" href="./activity-logs.html">
+            <span class="nav-icon">A</span><span>Activity logs</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">AD</div>
+            <div>
+              <div class="sidebar-profile-name">Admin User</div>
+              <div class="sidebar-profile-role">Administrator</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">Manage profile</a>
+        </div>
+
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main">Activity Logs (Admin Only)</div>
+            <div class="welcome-sub">Who added/edited employees, approved leave, generated payroll. Login history.</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications">
+              <span class="icon-bell"></span>
+            </button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
+              <span class="avatar-circle small">AD</span>
+              <span class="topbar-profile-name">Admin User</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Employee Actions</h2>
+          <p class="muted">Who added or edited an employee.</p>
+          <div style="overflow:auto;margin-top:12px">
+            <table>
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>User</th>
+                  <th>Action</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>10 Feb 2026, 09:15</td>
+                  <td>Admin User</td>
+                  <td>Added employee</td>
+                  <td>Added &quot;Anita Kumar&quot; to IT department.</td>
+                </tr>
+                <tr>
+                  <td>09 Feb 2026, 14:30</td>
+                  <td>HR-0001</td>
+                  <td>Edited employee</td>
+                  <td>Updated &quot;Samuel Green&quot; role to HR Officer.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Leave Approvals</h2>
+          <p class="muted">Who approved or rejected leave requests.</p>
+          <div style="overflow:auto;margin-top:12px">
+            <table>
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>User</th>
+                  <th>Action</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>10 Feb 2026, 08:40</td>
+                  <td>HR-0001</td>
+                  <td>Approved leave</td>
+                  <td>Approved leave request for &quot;Samuel Green&quot;.</td>
+                </tr>
+                <tr>
+                  <td>09 Feb 2026, 11:20</td>
+                  <td>Admin User</td>
+                  <td>Approved leave</td>
+                  <td>Approved sick leave for &quot;Maria Lopez&quot;.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Payroll Actions</h2>
+          <p class="muted">Who generated payroll.</p>
+          <div style="overflow:auto;margin-top:12px">
+            <table>
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>User</th>
+                  <th>Action</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>01 Mar 2026, 09:00</td>
+                  <td>Admin User</td>
+                  <td>Generated payroll</td>
+                  <td>March 2026 payroll generated.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Login History</h2>
+          <p class="muted">Recent system logins.</p>
+          <div style="overflow:auto;margin-top:12px">
+            <table>
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>User</th>
+                  <th>IP Address</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>10 Feb 2026, 09:00</td>
+                  <td>admin@robotech.com</td>
+                  <td>192.168.1.10</td>
+                </tr>
+                <tr>
+                  <td>10 Feb 2026, 08:45</td>
+                  <td>hr.samuel@robotech.com</td>
+                  <td>192.168.1.25</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
+

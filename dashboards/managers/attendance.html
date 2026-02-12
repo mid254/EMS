@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboTech Solutions EMS - MD Attendance Insights</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../_layout.css" />
+    <script defer src="../../assets/js/dummy-backend.js"></script>
+    <script defer src="../../assets/js/app.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar sidebar-managers">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
+            <div class="muted" style="font-size:.9rem">Managing Director</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="./dashboard.html">
+            <span class="nav-icon">D</span><span>Dashboard</span>
+          </a>
+          <a href="./departments.html">
+            <span class="nav-icon">D</span><span>Departments</span>
+          </a>
+          <a href="./employees.html">
+            <span class="nav-icon">E</span><span>Employees</span>
+          </a>
+          <a class="active" href="./attendance.html">
+            <span class="nav-icon">A</span><span>Attendance Insights</span>
+          </a>
+          <a href="./leave.html">
+            <span class="nav-icon">L</span><span>Leave Oversight</span>
+          </a>
+          <a href="./payroll.html">
+            <span class="nav-icon">P</span><span>Payroll Summary</span>
+          </a>
+          <a href="./reports.html">
+            <span class="nav-icon">R</span><span>Reports</span>
+          </a>
+          <a href="./announcements.html">
+            <span class="nav-icon">A</span><span>Announcements</span>
+          </a>
+          <a href="./profile.html">
+            <span class="nav-icon">P</span><span>My Profile</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">MD</div>
+            <div>
+              <div class="sidebar-profile-name">Managing Director</div>
+              <div class="sidebar-profile-role">Executive</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">My Profile</a>
+        </div>
+
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main">Attendance &amp; Productivity Insights</div>
+            <div class="welcome-sub">Company-wide summary, late arrivals, absentee trends, department comparison</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications">
+              <span class="icon-bell"></span>
+            </button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
+              <span class="avatar-circle small">MD</span>
+              <span class="topbar-profile-name">Managing Director</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Daily Attendance Chart</h2>
+          <p class="muted">Company-wide attendance overview.</p>
+          <div class="chart-grid" style="margin-top:12px">
+            <div class="chart-block">
+              <div class="chart-title">Present vs Absent (Today)</div>
+              <div class="bar-chart">
+                <div class="bar-row">
+                  <span>Present</span>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width:87%"></div>
+                  </div>
+                  <span class="bar-value">87%</span>
+                </div>
+                <div class="bar-row">
+                  <span>Absent</span>
+                  <div class="bar-track">
+                    <div class="bar-fill danger" style="width:13%"></div>
+                  </div>
+                  <span class="bar-value">13%</span>
+                </div>
+              </div>
+            </div>
+            <div class="chart-block">
+              <div class="chart-title">Late Arrivals &amp; Absentee Trends</div>
+              <div class="bar-chart">
+                <div class="bar-row">
+                  <span>Late (This week)</span>
+                  <div class="bar-track">
+                    <div class="bar-fill danger" style="width:5%"></div>
+                  </div>
+                  <span class="bar-value">5%</span>
+                </div>
+                <div class="bar-row">
+                  <span>On time</span>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width:95%"></div>
+                  </div>
+                  <span class="bar-value">95%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Monthly Attendance Report</h2>
+          <p class="muted">February 2026 summary.</p>
+          <div class="scroll-cards" style="margin-top:12px">
+            <div class="mini-card">
+              <div class="mini-title">Company-wide</div>
+              <div class="mini-body">Avg presence: 94% &bull; Late arrivals: 6%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Department Comparison Graph</h2>
+          <p class="muted">Attendance by department.</p>
+          <div class="chart-grid" style="margin-top:12px">
+            <div class="chart-block">
+              <div class="chart-title">Attendance by Department</div>
+              <div class="bar-chart">
+                <div class="bar-row">
+                  <span>IT</span>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width:96%"></div>
+                  </div>
+                  <span class="bar-value">96%</span>
+                </div>
+                <div class="bar-row">
+                  <span>HR</span>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width:94%"></div>
+                  </div>
+                  <span class="bar-value">94%</span>
+                </div>
+                <div class="bar-row">
+                  <span>Accounts</span>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width:92%"></div>
+                  </div>
+                  <span class="bar-value">92%</span>
+                </div>
+                <div class="bar-row">
+                  <span>Sales</span>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width:90%"></div>
+                  </div>
+                  <span class="bar-value">90%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

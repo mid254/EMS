@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboTech Solutions EMS - MD Employees</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../_layout.css" />
+    <script defer src="../../assets/js/dummy-backend.js"></script>
+    <script defer src="../../assets/js/app.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar sidebar-managers">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
+            <div class="muted" style="font-size:.9rem">Managing Director</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="./dashboard.html">
+            <span class="nav-icon">D</span><span>Dashboard</span>
+          </a>
+          <a href="./departments.html">
+            <span class="nav-icon">D</span><span>Departments</span>
+          </a>
+          <a class="active" href="./employees.html">
+            <span class="nav-icon">E</span><span>Employees</span>
+          </a>
+          <a href="./attendance.html">
+            <span class="nav-icon">A</span><span>Attendance Insights</span>
+          </a>
+          <a href="./leave.html">
+            <span class="nav-icon">L</span><span>Leave Oversight</span>
+          </a>
+          <a href="./payroll.html">
+            <span class="nav-icon">P</span><span>Payroll Summary</span>
+          </a>
+          <a href="./reports.html">
+            <span class="nav-icon">R</span><span>Reports</span>
+          </a>
+          <a href="./announcements.html">
+            <span class="nav-icon">A</span><span>Announcements</span>
+          </a>
+          <a href="./profile.html">
+            <span class="nav-icon">P</span><span>My Profile</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">MD</div>
+            <div>
+              <div class="sidebar-profile-name">Managing Director</div>
+              <div class="sidebar-profile-role">Executive</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">My Profile</a>
+        </div>
+
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main">Employee Directory</div>
+            <div class="welcome-sub">Read-only. View all employees, search and filter.</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications">
+              <span class="icon-bell"></span>
+            </button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
+              <span class="avatar-circle small">MD</span>
+              <span class="topbar-profile-name">Managing Director</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Search &amp; Filter</h2>
+          <p class="muted">Search employees by name or filter by department.</p>
+          <div class="form" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px">
+            <input type="search" placeholder="Search by name..." style="max-width:240px" />
+            <select>
+              <option value="">All Departments</option>
+              <option>IT</option>
+              <option>HR</option>
+              <option>Accounts</option>
+              <option>Sales &amp; Marketing</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>All Employees (Read-Only)</h2>
+          <p class="muted">No CRUD access. Employee ID, Full Name, Department, Role, Employment Status.</p>
+          <div style="overflow:auto;margin-top:12px">
+            <table>
+              <thead>
+                <tr>
+                  <th>Employee ID</th>
+                  <th>Full Name</th>
+                  <th>Department</th>
+                  <th>Role</th>
+                  <th>Employment Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>AD-0001</td>
+                  <td>Jane Doe</td>
+                  <td>Administration</td>
+                  <td>Admin</td>
+                  <td><span class="badge">Active</span></td>
+                </tr>
+                <tr>
+                  <td>HR-0001</td>
+                  <td>Samuel Green</td>
+                  <td>HR</td>
+                  <td>HR Officer</td>
+                  <td><span class="badge">Active</span></td>
+                </tr>
+                <tr>
+                  <td>IT-0003</td>
+                  <td>Anita Kumar</td>
+                  <td>IT</td>
+                  <td>Engineer</td>
+                  <td><span class="badge">Active</span></td>
+                </tr>
+                <tr>
+                  <td>ACC-0002</td>
+                  <td>Peter Jones</td>
+                  <td>Accounts</td>
+                  <td>Accountant</td>
+                  <td><span class="badge">Inactive</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

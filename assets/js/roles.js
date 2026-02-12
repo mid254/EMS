@@ -7,7 +7,7 @@ function roleLabel(role) {
     case Roles.hr:
       return "HR";
     case Roles.manager:
-      return "Manager";
+      return "Managing Director";
     case Roles.supervisor:
       return "Supervisor";
     case Roles.employee:
@@ -47,7 +47,7 @@ async function requireRole(allowedRoles) {
         case Roles.hr:
           return "dashboards/hr.html";
         case Roles.manager:
-          return "dashboards/manager.html";
+          return "dashboards/managers.html";
         case Roles.supervisor:
           return "dashboards/supervisor.html";
         default:

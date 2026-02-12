@@ -5,7 +5,7 @@ function roleToDashboardPath(role) {
     case "hr":
       return "dashboards/hr.html";
     case "manager":
-      return "dashboards/manager.html";
+      return "dashboards/managers.html";
     case "supervisor":
       return "dashboards/supervisor.html";
     case "employee":

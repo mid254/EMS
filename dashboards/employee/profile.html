@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboTech Solutions EMS - My Profile</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../_layout.css" />
+    <script defer src="../../assets/js/dummy-backend.js"></script>
+    <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/employee.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
+            <div class="muted" style="font-size:.9rem">Employee</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="./dashboard.html"><span class="nav-icon">D</span><span>Dashboard</span></a>
+          <a href="./clock.html"><span class="nav-icon">C</span><span>Clock In / Out</span></a>
+          <a href="./attendance.html"><span class="nav-icon">A</span><span>My Attendance</span></a>
+          <a href="./leave.html"><span class="nav-icon">L</span><span>My Leaves</span></a>
+          <a href="./payslips.html"><span class="nav-icon">P</span><span>My Payslips</span></a>
+          <a href="./notifications.html"><span class="nav-icon">N</span><span>Notifications</span></a>
+          <a class="active" href="./profile.html"><span class="nav-icon">P</span><span>My Profile</span></a>
+        </nav>
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">E</div>
+            <div>
+              <div class="sidebar-profile-name">Employee</div>
+              <div class="sidebar-profile-role">Department</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">My Profile</a>
+        </div>
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
+      </aside>
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main" id="welcomeMain">Welcome</div>
+            <div class="welcome-sub" id="welcomeSub">My profile and security</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications"><span class="icon-bell"></span></button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
+              <span class="avatar-circle small">E</span>
+              <span class="topbar-profile-name">Employee</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Personal Profile</h2>
+          <p class="muted">View personal profile. Edit limited fields: phone, address, emergency contact. Role and department are read-only.</p>
+          <form class="grid two">
+            <label>Full name <input value="Accounts Clerk" disabled /></label>
+            <label>Email <input value="accounts.emp@ems.com" disabled /></label>
+            <label>Phone <input value="+254 700 000 000" /></label>
+            <label>Address <input value="Nairobi, Kenya" /></label>
+            <label>Emergency contact <input value="John Doe +254 711 000 000" /></label>
+            <label>Role <input value="Employee" disabled /></label>
+            <label>Department <input value="Accounts" disabled /></label>
+          </form>
+          <button class="btn primary" type="button" style="margin-top:12px">Update Profile</button>
+        </div>
+        <div class="card">
+          <h2>Security and Settings</h2>
+          <p class="muted">Change password. Logout.</p>
+          <div style="margin-top:12px">
+            <button class="btn primary" type="button">Change password</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

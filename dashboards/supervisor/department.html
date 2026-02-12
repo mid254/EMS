@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboTech Solutions EMS - My Department</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../_layout.css" />
+    <script defer src="../../assets/js/dummy-backend.js"></script>
+    <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/supervisor.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
+            <div class="muted" style="font-size:.9rem">Supervisor</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="./dashboard.html"><span class="nav-icon">D</span><span>Dashboard</span></a>
+          <a class="active" href="./department.html"><span class="nav-icon">D</span><span>My Department</span></a>
+          <a href="./attendance.html"><span class="nav-icon">A</span><span>Attendance</span></a>
+          <a href="./leave.html"><span class="nav-icon">L</span><span>Leave Requests</span></a>
+          <a href="./tasks.html"><span class="nav-icon">T</span><span>Tasks</span></a>
+          <a href="./notifications.html"><span class="nav-icon">N</span><span>Notifications</span></a>
+          <a href="./profile.html"><span class="nav-icon">P</span><span>My Profile</span></a>
+        </nav>
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">S</div>
+            <div>
+              <div class="sidebar-profile-name">Supervisor</div>
+              <div class="sidebar-profile-role">IT Department</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">My Profile</a>
+        </div>
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
+      </aside>
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main">Department Employee List</div>
+            <div class="welcome-sub">Read-only. View employees in your department. Search and filter. Cannot add, edit, or delete.</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications"><span class="icon-bell"></span></button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
+              <span class="avatar-circle small">S</span>
+              <span class="topbar-profile-name">Supervisor</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Search and Filter</h2>
+          <p class="muted">Search employees in your department.</p>
+          <div class="form" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px">
+            <input type="search" placeholder="Search by name..." style="max-width:240px" />
+          </div>
+        </div>
+        <div class="card">
+          <h2>My Department Employees (Read-Only)</h2>
+          <p class="muted">Employee ID, Name, Role, Employment Status, Contact info. Cannot add, edit, or delete employees.</p>
+          <div style="overflow:auto;margin-top:12px">
+            <table>
+              <thead>
+                <tr>
+                  <th>Employee ID</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Employment Status</th>
+                  <th>Contact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>IT-0003</td>
+                  <td>Anita Kumar</td>
+                  <td>Engineer</td>
+                  <td><span class="badge">Active</span></td>
+                  <td>anita.kumar@robotech.com</td>
+                </tr>
+                <tr>
+                  <td>IT-0004</td>
+                  <td>Sarah Lee</td>
+                  <td>Developer</td>
+                  <td><span class="badge">Active</span></td>
+                  <td>sarah.lee@robotech.com</td>
+                </tr>
+                <tr>
+                  <td>IT-0005</td>
+                  <td>Maria Lopez</td>
+                  <td>Developer</td>
+                  <td><span class="badge">Active</span></td>
+                  <td>maria.lopez@robotech.com</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

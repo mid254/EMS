@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboTech Solutions EMS - My Leaves</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../_layout.css" />
+    <script defer src="../../assets/js/dummy-backend.js"></script>
+    <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/employee.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
+            <div class="muted" style="font-size:.9rem">Employee</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="./dashboard.html"><span class="nav-icon">D</span><span>Dashboard</span></a>
+          <a href="./clock.html"><span class="nav-icon">C</span><span>Clock In / Out</span></a>
+          <a href="./attendance.html"><span class="nav-icon">A</span><span>My Attendance</span></a>
+          <a class="active" href="./leave.html"><span class="nav-icon">L</span><span>My Leaves</span></a>
+          <a href="./payslips.html"><span class="nav-icon">P</span><span>My Payslips</span></a>
+          <a href="./notifications.html"><span class="nav-icon">N</span><span>Notifications</span></a>
+          <a href="./profile.html"><span class="nav-icon">P</span><span>My Profile</span></a>
+        </nav>
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">E</div>
+            <div>
+              <div class="sidebar-profile-name">Employee</div>
+              <div class="sidebar-profile-role">Department</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">My Profile</a>
+        </div>
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
+      </aside>
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main" id="welcomeMain">Welcome</div>
+            <div class="welcome-sub" id="welcomeSub">Leave self-service</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications"><span class="icon-bell"></span></button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
+              <span class="avatar-circle small">E</span>
+              <span class="topbar-profile-name">Employee</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header-row">
+            <h2>Apply for Leave</h2>
+            <button class="btn primary" type="button">+ New Leave Request</button>
+          </div>
+          <p class="muted">Apply for leave. View approval status and leave history.</p>
+          <div class="form" style="margin-top:12px">
+            <label>Leave type <select><option>Annual</option><option>Sick</option><option>Maternity</option><option>Other</option></select></label>
+            <label>Start date <input type="date" /></label>
+            <label>End date <input type="date" /></label>
+            <label>Reason <input type="text" placeholder="Reason for leave" /></label>
+            <button class="btn primary" type="button">Submit Request</button>
+          </div>
+        </div>
+        <div class="card">
+          <h2>My Leave History</h2>
+          <p class="muted">Leave type, Start/End date, Reason, Status (Pending / Approved / Rejected).</p>
+          <div style="overflow:auto;margin-top:12px">
+            <table>
+              <thead>
+                <tr>
+                  <th>Leave Type</th>
+                  <th>Start</th>
+                  <th>End</th>
+                  <th>Reason</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Annual</td>
+                  <td>15 Feb 2026</td>
+                  <td>20 Feb 2026</td>
+                  <td>Family trip</td>
+                  <td><span class="badge">Pending</span></td>
+                </tr>
+                <tr>
+                  <td>Annual</td>
+                  <td>01 Jan 2026</td>
+                  <td>05 Jan 2026</td>
+                  <td>Holiday</td>
+                  <td><span class="badge">Approved</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

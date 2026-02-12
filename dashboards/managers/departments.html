@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboTech Solutions EMS - MD Departments</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../_layout.css" />
+    <script defer src="../../assets/js/dummy-backend.js"></script>
+    <script defer src="../../assets/js/app.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar sidebar-managers">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
+            <div class="muted" style="font-size:.9rem">Managing Director</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="./dashboard.html">
+            <span class="nav-icon">D</span><span>Dashboard</span>
+          </a>
+          <a class="active" href="./departments.html">
+            <span class="nav-icon">D</span><span>Departments</span>
+          </a>
+          <a href="./employees.html">
+            <span class="nav-icon">E</span><span>Employees</span>
+          </a>
+          <a href="./attendance.html">
+            <span class="nav-icon">A</span><span>Attendance Insights</span>
+          </a>
+          <a href="./leave.html">
+            <span class="nav-icon">L</span><span>Leave Oversight</span>
+          </a>
+          <a href="./payroll.html">
+            <span class="nav-icon">P</span><span>Payroll Summary</span>
+          </a>
+          <a href="./reports.html">
+            <span class="nav-icon">R</span><span>Reports</span>
+          </a>
+          <a href="./announcements.html">
+            <span class="nav-icon">A</span><span>Announcements</span>
+          </a>
+          <a href="./profile.html">
+            <span class="nav-icon">P</span><span>My Profile</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">MD</div>
+            <div>
+              <div class="sidebar-profile-name">Managing Director</div>
+              <div class="sidebar-profile-role">Executive</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">My Profile</a>
+        </div>
+
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main">Department Overview</div>
+            <div class="welcome-sub">View all departments and department-level statistics. Read-only.</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications">
+              <span class="icon-bell"></span>
+            </button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
+              <span class="avatar-circle small">MD</span>
+              <span class="topbar-profile-name">Managing Director</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>All Departments</h2>
+          <p class="muted">Department name, employee count, attendance rate, current manager. MD does NOT edit employee records here.</p>
+          <div style="overflow:auto;margin-top:12px">
+            <table>
+              <thead>
+                <tr>
+                  <th>Department Name</th>
+                  <th>Employees</th>
+                  <th>Attendance Rate</th>
+                  <th>Manager / Supervisor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>IT</td>
+                  <td>25</td>
+                  <td>96%</td>
+                  <td>John Tech</td>
+                </tr>
+                <tr>
+                  <td>HR</td>
+                  <td>8</td>
+                  <td>94%</td>
+                  <td>Samuel Green</td>
+                </tr>
+                <tr>
+                  <td>Accounts</td>
+                  <td>10</td>
+                  <td>92%</td>
+                  <td>Peter Jones</td>
+                </tr>
+                <tr>
+                  <td>Sales &amp; Marketing</td>
+                  <td>20</td>
+                  <td>90%</td>
+                  <td>David Brown</td>
+                </tr>
+                <tr>
+                  <td>Administration</td>
+                  <td>5</td>
+                  <td>98%</td>
+                  <td>Jane Doe</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Department Statistics</h2>
+          <div class="scroll-cards" style="margin-top:12px">
+            <div class="mini-card">
+              <div class="mini-title">IT</div>
+              <div class="mini-body">25 employees &bull; 96% attendance &bull; John Tech</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">HR</div>
+              <div class="mini-body">8 employees &bull; 94% attendance &bull; Samuel Green</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">Accounts</div>
+              <div class="mini-body">10 employees &bull; 92% attendance &bull; Peter Jones</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

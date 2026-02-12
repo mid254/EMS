@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboTech Solutions EMS - MD Leave Oversight</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../_layout.css" />
+    <script defer src="../../assets/js/dummy-backend.js"></script>
+    <script defer src="../../assets/js/app.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar sidebar-managers">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
+            <div class="muted" style="font-size:.9rem">Managing Director</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="./dashboard.html">
+            <span class="nav-icon">D</span><span>Dashboard</span>
+          </a>
+          <a href="./departments.html">
+            <span class="nav-icon">D</span><span>Departments</span>
+          </a>
+          <a href="./employees.html">
+            <span class="nav-icon">E</span><span>Employees</span>
+          </a>
+          <a href="./attendance.html">
+            <span class="nav-icon">A</span><span>Attendance Insights</span>
+          </a>
+          <a class="active" href="./leave.html">
+            <span class="nav-icon">L</span><span>Leave Oversight</span>
+          </a>
+          <a href="./payroll.html">
+            <span class="nav-icon">P</span><span>Payroll Summary</span>
+          </a>
+          <a href="./reports.html">
+            <span class="nav-icon">R</span><span>Reports</span>
+          </a>
+          <a href="./announcements.html">
+            <span class="nav-icon">A</span><span>Announcements</span>
+          </a>
+          <a href="./profile.html">
+            <span class="nav-icon">P</span><span>My Profile</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">MD</div>
+            <div>
+              <div class="sidebar-profile-name">Managing Director</div>
+              <div class="sidebar-profile-role">Executive</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">My Profile</a>
+        </div>
+
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main">Leave Oversight</div>
+            <div class="welcome-sub">View all leave requests. Approve or reject senior staff leave. Override approvals if escalated.</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications">
+              <span class="icon-bell"></span>
+            </button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
+              <span class="avatar-circle small">MD</span>
+              <span class="topbar-profile-name">Managing Director</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>All Leave Requests</h2>
+          <p class="muted">Employee, Role, Leave type, Approval status (HR / Manager). Approve, reject, or override.</p>
+          <div style="overflow:auto;margin-top:12px">
+            <table>
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Role</th>
+                  <th>Leave Type</th>
+                  <th>Dates</th>
+                  <th>Status (HR / Manager)</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Samuel Green</td>
+                  <td>HR Officer</td>
+                  <td>Annual</td>
+                  <td>10 Feb – 14 Feb 2026</td>
+                  <td><span class="badge">Pending</span></td>
+                  <td>
+                    <button class="btn primary" type="button">Approve</button>
+                    <button class="btn ghost" type="button">Reject</button>
+                    <button class="btn ghost" type="button">Override</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Maria Lopez</td>
+                  <td>Senior Engineer</td>
+                  <td>Sick</td>
+                  <td>09 Feb – 11 Feb 2026</td>
+                  <td><span class="badge">Approved (HR)</span></td>
+                  <td>
+                    <button class="btn ghost" type="button">Override</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Peter Jones</td>
+                  <td>Accountant</td>
+                  <td>Annual</td>
+                  <td>15 Feb – 20 Feb 2026</td>
+                  <td><span class="badge">Pending</span></td>
+                  <td>
+                    <button class="btn primary" type="button">Approve</button>
+                    <button class="btn ghost" type="button">Reject</button>
+                    <button class="btn ghost" type="button">Override</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

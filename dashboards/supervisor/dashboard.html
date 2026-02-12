@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboTech Solutions EMS - Supervisor Dashboard</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../_layout.css" />
+    <script defer src="../../assets/js/dummy-backend.js"></script>
+    <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/supervisor.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
+            <div class="muted" style="font-size:.9rem">Supervisor</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a class="active" href="./dashboard.html">
+            <span class="nav-icon">D</span><span>Dashboard</span>
+          </a>
+          <a href="./department.html">
+            <span class="nav-icon">D</span><span>My Department</span>
+          </a>
+          <a href="./attendance.html">
+            <span class="nav-icon">A</span><span>Attendance</span>
+          </a>
+          <a href="./leave.html">
+            <span class="nav-icon">L</span><span>Leave Requests</span>
+          </a>
+          <a href="./tasks.html">
+            <span class="nav-icon">T</span><span>Tasks</span>
+          </a>
+          <a href="./notifications.html">
+            <span class="nav-icon">N</span><span>Notifications</span>
+          </a>
+          <a href="./profile.html">
+            <span class="nav-icon">P</span><span>My Profile</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">S</div>
+            <div>
+              <div class="sidebar-profile-name" id="supervisorName">Supervisor</div>
+              <div class="sidebar-profile-role" id="supervisorDept">IT Department</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">My Profile</a>
+        </div>
+
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main" id="welcomeMain">Welcome</div>
+            <div class="welcome-sub" id="welcomeSub">Daily overview for your department</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications">
+              <span class="icon-bell"></span>
+            </button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
+              <span class="avatar-circle small">S</span>
+              <span class="topbar-profile-name" id="topbarName">Supervisor</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn" onclick="location.href='./index.html'">Logout</button>
+          </div>
+        </div>
+
+        <div class="top-stats cards-grid">
+          <div class="stat-card accent">
+            <div class="stat-label">Total Employees (in Department)</div>
+            <div class="stat-value">25</div>
+          </div>
+          <div class="stat-card accent">
+            <div class="stat-label">Present Today</div>
+            <div class="stat-value">22</div>
+          </div>
+          <div class="stat-card danger">
+            <div class="stat-label">Absent / Late Today</div>
+            <div class="stat-value">3</div>
+          </div>
+          <div class="stat-card danger">
+            <div class="stat-label">Pending Leave Requests</div>
+            <div class="stat-value">2</div>
+          </div>
+          <div class="stat-card danger">
+            <div class="stat-label">Attendance Issues</div>
+            <div class="stat-value">1</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Department Daily Overview</h2>
+          <p class="muted">Monitor daily attendance, task compliance, and leave requests for your department only.</p>
+          <div class="scroll-cards" style="margin-top:12px">
+            <div class="mini-card">
+              <div class="mini-title">Today&apos;s Status</div>
+              <div class="mini-body">22 present, 2 late, 1 absent. 2 leave requests pending approval.</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">Tasks</div>
+              <div class="mini-body">3 tasks in progress, 1 overdue.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

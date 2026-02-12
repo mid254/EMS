@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboTech Solutions EMS - Admin Payroll</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../_layout.css" />
+    <script defer src="../../assets/js/dummy-backend.js"></script>
+    <script defer src="../../assets/js/app.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
+            <div class="muted" style="font-size:.9rem">Admin</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="./dashboard.html">
+            <span class="nav-icon">D</span><span>Dashboard</span>
+          </a>
+          <a href="./employees.html">
+            <span class="nav-icon">E</span><span>Employees</span>
+          </a>
+          <a href="./users.html">
+            <span class="nav-icon">U</span><span>Users & Roles</span>
+          </a>
+          <a href="./attendance.html">
+            <span class="nav-icon">A</span><span>Attendance</span>
+          </a>
+          <a href="./leave.html">
+            <span class="nav-icon">L</span><span>Leave</span>
+          </a>
+          <a class="active" href="./payroll.html">
+            <span class="nav-icon">P</span><span>Payroll</span>
+          </a>
+          <a href="./reports.html">
+            <span class="nav-icon">R</span><span>Reports</span>
+          </a>
+          <a href="./settings.html">
+            <span class="nav-icon">S</span><span>Settings</span>
+          </a>
+          <a href="./notifications.html">
+            <span class="nav-icon">N</span><span>Notifications</span>
+          </a>
+          <a href="./activity-logs.html">
+            <span class="nav-icon">A</span><span>Activity logs</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">AD</div>
+            <div>
+              <div class="sidebar-profile-name">Admin User</div>
+              <div class="sidebar-profile-role">Administrator</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">Manage profile</a>
+        </div>
+
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main">Payroll Management</div>
+            <div class="welcome-sub">View summary, generate monthly payroll, total cost, download reports. Salary edits done by HR/Accounts.</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications">
+              <span class="icon-bell"></span>
+            </button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
+              <span class="avatar-circle small">AD</span>
+              <span class="topbar-profile-name">Admin User</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+
+        <div class="top-stats cards-grid">
+          <div class="stat-card accent">
+            <div class="stat-label">Total Payroll Cost (March)</div>
+            <div class="stat-value">KSh 24,500,000</div>
+          </div>
+          <div class="stat-card accent">
+            <div class="stat-label">Payroll Status</div>
+            <div class="stat-value stat-value-sm">March Payroll Generated</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-row">
+            <h2>Payroll Summary</h2>
+            <div class="download-actions">
+              <button class="btn primary" type="button">Generate Payroll</button>
+              <button class="btn ghost" type="button">Download Report</button>
+            </div>
+          </div>
+          <p class="muted">View payroll summary, generate monthly payroll, download reports. Admin does NOT edit salaries.</p>
+          <div class="scroll-cards" style="margin-top:12px">
+            <div class="mini-card">
+              <div class="mini-title">IT Department</div>
+              <div class="mini-body">
+                Status: Confirmed<br />
+                Work IDs: IT-0003, IT-0004, IT-0005
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">HR Department</div>
+              <div class="mini-body">
+                Status: Pending confirmations<br />
+                Work IDs: HR-0001, HR-0002
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">Sales &amp; Marketing</div>
+              <div class="mini-body">
+                Status: Partially confirmed<br />
+                Work IDs: SM-0001, SM-0002, SM-0003
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">Accounts</div>
+              <div class="mini-body">
+                Status: Confirmed<br />
+                Work IDs: ACC-0001, ACC-0002
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboTech Solutions EMS - Admin Dashboard</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../_layout.css" />
+    <script defer src="../../assets/js/dummy-backend.js"></script>
+    <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/departments.js"></script>
+    <script defer src="../../assets/js/employees.js"></script>
+    <script defer src="../../assets/js/admin.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
+            <div class="muted" style="font-size:.9rem">Admin</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a class="active" href="./dashboard.html">
+            <span class="nav-icon">D</span><span>Dashboard</span>
+          </a>
+          <a href="./employees.html">
+            <span class="nav-icon">E</span><span>Employees</span>
+          </a>
+          <a href="./users.html">
+            <span class="nav-icon">U</span><span>Users & Roles</span>
+          </a>
+          <a href="./attendance.html">
+            <span class="nav-icon">A</span><span>Attendance</span>
+          </a>
+          <a href="./leave.html">
+            <span class="nav-icon">L</span><span>Leave</span>
+          </a>
+          <a href="./payroll.html">
+            <span class="nav-icon">P</span><span>Payroll</span>
+          </a>
+          <a href="./reports.html">
+            <span class="nav-icon">R</span><span>Reports</span>
+          </a>
+          <a href="./settings.html">
+            <span class="nav-icon">S</span><span>Settings</span>
+          </a>
+          <a href="./notifications.html">
+            <span class="nav-icon">N</span><span>Notifications</span>
+          </a>
+          <a href="./activity-logs.html">
+            <span class="nav-icon">A</span><span>Activity logs</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">AD</div>
+            <div>
+              <div class="sidebar-profile-name">Admin User</div>
+              <div class="sidebar-profile-role">Administrator</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">Manage profile</a>
+        </div>
+
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main" id="welcomeMain">Welcome</div>
+            <div class="welcome-sub" id="welcomeSub">Admin dashboard overview</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications">
+              <span class="icon-bell"></span>
+            </button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
+              <span class="avatar-circle small">AD</span>
+              <span class="topbar-profile-name">Admin User</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn" onclick="location.href='./index.html'">Logout</button>
+          </div>
+        </div>
+
+        <div class="top-stats cards-grid">
+          <div class="stat-card accent">
+            <div class="stat-label">Total Employees</div>
+            <div class="stat-value" id="totalEmployeesCount">128</div>
+          </div>
+          <div class="stat-card accent">
+            <div class="stat-label">Total Departments</div>
+            <div class="stat-value" id="totalDepartmentsCount">8</div>
+          </div>
+          <div class="stat-card accent">
+            <div class="stat-label">Present Today</div>
+            <div class="stat-value" id="presentTodayCount">112</div>
+          </div>
+          <div class="stat-card danger">
+            <div class="stat-label">Absent / On Leave Today</div>
+            <div class="stat-value" id="absentTodayCount">16</div>
+          </div>
+          <div class="stat-card danger">
+            <div class="stat-label">Pending Leave Requests</div>
+            <div class="stat-value" id="pendingLeaveCount">5</div>
+          </div>
+          <div class="stat-card accent">
+            <div class="stat-label">Payroll Status</div>
+            <div class="stat-value stat-value-sm" id="payrollStatus">March Payroll Generated</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>System activity logs (dummy data)</h2>
+          <p class="muted">Placeholder activity cards. Later this will be driven by API calls.</p>
+          <div class="scroll-cards">
+            <div class="mini-card">
+              <div class="mini-title">New employees</div>
+              <div class="mini-body">3 new employees added today.</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">Leave approvals</div>
+              <div class="mini-body">2 leave requests pending approval.</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">Payroll</div>
+              <div class="mini-body">Last payroll run: 28 Jan 2026.</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">Profile updates</div>
+              <div class="mini-body">5 employees updated their profiles this week.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Confirmed payroll work IDs (dummy data)</h2>
+          <p class="muted">Scrollable list of employees who have confirmed their payroll.</p>
+          <div class="scroll-cards">
+            <div class="mini-card">
+              <div class="mini-title">IT Department</div>
+              <div class="mini-body">
+                IT-0003, IT-0004, IT-0005
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">HR Department</div>
+              <div class="mini-body">
+                HR-0001, HR-0002
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">Sales &amp; Marketing</div>
+              <div class="mini-body">
+                SM-0001, SM-0002, SM-0003
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
+

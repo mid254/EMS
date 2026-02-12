@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboTech Solutions EMS - User & Role Management</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../_layout.css" />
+    <script defer src="../../assets/js/dummy-backend.js"></script>
+    <script defer src="../../assets/js/app.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
+            <div class="muted" style="font-size:.9rem">Admin</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="./dashboard.html">
+            <span class="nav-icon">D</span><span>Dashboard</span>
+          </a>
+          <a href="./employees.html">
+            <span class="nav-icon">E</span><span>Employees</span>
+          </a>
+          <a class="active" href="./users.html">
+            <span class="nav-icon">U</span><span>Users & Roles</span>
+          </a>
+          <a href="./attendance.html">
+            <span class="nav-icon">A</span><span>Attendance</span>
+          </a>
+          <a href="./leave.html">
+            <span class="nav-icon">L</span><span>Leave</span>
+          </a>
+          <a href="./payroll.html">
+            <span class="nav-icon">P</span><span>Payroll</span>
+          </a>
+          <a href="./reports.html">
+            <span class="nav-icon">R</span><span>Reports</span>
+          </a>
+          <a href="./settings.html">
+            <span class="nav-icon">S</span><span>Settings</span>
+          </a>
+          <a href="./notifications.html">
+            <span class="nav-icon">N</span><span>Notifications</span>
+          </a>
+          <a href="./activity-logs.html">
+            <span class="nav-icon">A</span><span>Activity logs</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">AD</div>
+            <div>
+              <div class="sidebar-profile-name">Admin User</div>
+              <div class="sidebar-profile-role">Administrator</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">Manage profile</a>
+        </div>
+
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="topbar">
+          <div class="welcome">
+            <div class="welcome-main">User & Role Management</div>
+            <div class="welcome-sub">Manage system users, assign roles, reset passwords, enable or disable access</div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications">
+              <span class="icon-bell"></span>
+            </button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
+              <span class="avatar-circle small">AD</span>
+              <span class="topbar-profile-name">Admin User</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-row">
+            <h2>System Users</h2>
+            <button class="btn primary" type="button">+ Create User</button>
+          </div>
+          <p class="muted">Create system users and assign roles: Admin, Manager, HR, IT, Accounts, Sales & Marketing.</p>
+          <div style="overflow:auto;margin-top:12px">
+            <table>
+              <thead>
+                <tr>
+                  <th>Username / Email</th>
+                  <th>Assigned Role</th>
+                  <th>Last Login</th>
+                  <th>Account Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>admin@robotech.com</td>
+                  <td><span class="badge">Admin</span></td>
+                  <td>10 Feb 2026, 09:00</td>
+                  <td><span class="badge">Active</span></td>
+                  <td>
+                    <button class="btn ghost" type="button">Reset Password</button>
+                    <button class="btn ghost" type="button">Disable</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>hr.samuel@robotech.com</td>
+                  <td><span class="badge">HR</span></td>
+                  <td>10 Feb 2026, 08:45</td>
+                  <td><span class="badge">Active</span></td>
+                  <td>
+                    <button class="btn ghost" type="button">Reset Password</button>
+                    <button class="btn ghost" type="button">Disable</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>manager.it@robotech.com</td>
+                  <td><span class="badge">Manager</span></td>
+                  <td>09 Feb 2026, 17:30</td>
+                  <td><span class="badge">Active</span></td>
+                  <td>
+                    <button class="btn ghost" type="button">Reset Password</button>
+                    <button class="btn ghost" type="button">Disable</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>accounts@robotech.com</td>
+                  <td><span class="badge">Accounts</span></td>
+                  <td>08 Feb 2026, 16:00</td>
+                  <td><span class="badge">Inactive</span></td>
+                  <td>
+                    <button class="btn ghost" type="button">Reset Password</button>
+                    <button class="btn ghost" type="button">Enable</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Role Summary</h2>
+          <p class="muted">Available system roles and their permissions.</p>
+          <div class="scroll-cards" style="margin-top:12px">
+            <div class="mini-card">
+              <div class="mini-title">Admin</div>
+              <div class="mini-body">Full system access, user management</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">Manager</div>
+              <div class="mini-body">Team oversight, leave approval</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">HR</div>
+              <div class="mini-body">Employees, leave, attendance</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">IT</div>
+              <div class="mini-body">Technical configuration</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">Accounts</div>
+              <div class="mini-body">Payroll, salaries, reports</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-title">Sales & Marketing</div>
+              <div class="mini-body">Department-specific access</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

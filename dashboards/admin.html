@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EMS - Admin Dashboard</title>
+    <title>RoboTech Solutions EMS - Admin Dashboard</title>
     <link rel="stylesheet" href="../assets/css/styles.css" />
     <link rel="stylesheet" href="./_layout.css" />
     <script defer src="../assets/js/dummy-backend.js"></script>
@@ -19,33 +19,55 @@
         <div class="brand">
           <div class="dot"></div>
           <div>
-            <div class="brand-title">EMS</div>
+            <div class="brand-title">RoboTech Solutions EMS</div>
             <div class="muted" style="font-size:.9rem">Admin</div>
           </div>
         </div>
         <nav class="nav">
-          <a class="active" href="./admin.html">
-            <span class="nav-icon"></span><span>Dashboard</span>
+          <a class="active" href="./admin/dashboard.html">
+            <span class="nav-icon">D</span><span>Dashboard</span>
           </a>
-          <a href="../employees/index.html">
-            <span class="nav-icon"></span><span>Employees</span>
+          <a href="./admin/employees.html">
+            <span class="nav-icon">E</span><span>Employees</span>
           </a>
-          <a href="../attendance/index.html">
-            <span class="nav-icon"></span><span>Attendance</span>
+          <a href="./admin/attendance.html">
+            <span class="nav-icon">A</span><span>Attendance</span>
           </a>
-          <a href="../leave/index.html">
-            <span class="nav-icon"></span><span>Leave</span>
+          <a href="./admin/leave.html">
+            <span class="nav-icon">L</span><span>Leave</span>
           </a>
-          <a href="../payroll/index.html">
-            <span class="nav-icon"></span><span>Payroll</span>
+          <a href="./admin/payroll.html">
+            <span class="nav-icon">P</span><span>Payroll</span>
           </a>
-          <a href="../reports/index.html">
-            <span class="nav-icon"></span><span>Reports</span>
+          <a href="./admin/reports.html">
+            <span class="nav-icon">R</span><span>Reports</span>
           </a>
-          <a href="../settings/index.html">
-            <span class="nav-icon"></span><span>Settings</span>
+          <a href="./admin/settings.html">
+            <span class="nav-icon">S</span><span>Settings</span>
+          </a>
+          <a href="./admin/notifications.html">
+            <span class="nav-icon">N</span><span>Notifications</span>
+          </a>
+          <a href="./admin/activity-logs.html">
+            <span class="nav-icon">A</span><span>Activity logs</span>
           </a>
         </nav>
+
+        <div class="sidebar-profile">
+          <div class="sidebar-profile-main">
+            <div class="avatar-circle">AD</div>
+            <div>
+              <div class="sidebar-profile-name">Admin User</div>
+              <div class="sidebar-profile-role">Administrator</div>
+            </div>
+          </div>
+          <a class="btn ghost sidebar-profile-btn text-white" href="admin/profile.html">Manage profile</a>
+        </div>
+
+        <div class="sidebar-footer">
+          <hr />
+          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
+        </div>
       </aside>
 
       <section class="content">
@@ -54,7 +76,31 @@
             <div class="welcome-main" id="welcomeMain">Welcome</div>
             <div class="welcome-sub" id="welcomeSub">Loading profile…</div>
           </div>
-          <button class="btn ghost" id="logoutBtn">Logout</button>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" aria-label="Notifications">
+              <span class="icon-bell"></span>
+            </button>
+            <button class="topbar-profile" type="button">
+              <span class="avatar-circle small">AD</span>
+              <span class="topbar-profile-name">Admin User</span>
+            </button>
+            <button class="btn ghost" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+
+        <div class="top-stats">
+          <div class="stat-card">
+            <div class="stat-label">Total employees</div>
+            <div class="stat-value" id="totalEmployeesCount">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Active employees</div>
+            <div class="stat-value" id="activeEmployeesCount">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Employees on leave</div>
+            <div class="stat-value" id="onLeaveEmployeesCount">0</div>
+          </div>
         </div>
 
         <div class="card">
