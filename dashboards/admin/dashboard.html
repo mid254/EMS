@@ -6,7 +6,6 @@
     <title>RoboTech Solutions EMS - Admin Dashboard</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
-    <script defer src="../../assets/js/dummy-backend.js"></script>
     <script defer src="../../assets/js/app.js"></script>
     <script defer src="../../assets/js/roles.js"></script>
     <script defer src="../../assets/js/departments.js"></script>
@@ -87,81 +86,55 @@
               <span class="avatar-circle small">AD</span>
               <span class="topbar-profile-name">Admin User</span>
             </button>
-            <button class="btn ghost" id="logoutBtn" onclick="location.href='./index.html'">Logout</button>
+            <button class="btn ghost" id="logoutBtn">Logout</button>
           </div>
         </div>
 
         <div class="top-stats cards-grid">
           <div class="stat-card accent">
             <div class="stat-label">Total Employees</div>
-            <div class="stat-value" id="totalEmployeesCount">128</div>
+            <div class="stat-value" id="totalEmployeesCount">--</div>
           </div>
           <div class="stat-card accent">
             <div class="stat-label">Total Departments</div>
-            <div class="stat-value" id="totalDepartmentsCount">8</div>
+            <div class="stat-value" id="totalDepartmentsCount">--</div>
           </div>
           <div class="stat-card accent">
             <div class="stat-label">Present Today</div>
-            <div class="stat-value" id="presentTodayCount">112</div>
+            <div class="stat-value" id="presentTodayCount">--</div>
           </div>
           <div class="stat-card danger">
             <div class="stat-label">Absent / On Leave Today</div>
-            <div class="stat-value" id="absentTodayCount">16</div>
+            <div class="stat-value" id="absentTodayCount">--</div>
           </div>
           <div class="stat-card danger">
             <div class="stat-label">Pending Leave Requests</div>
-            <div class="stat-value" id="pendingLeaveCount">5</div>
+            <div class="stat-value" id="pendingLeaveCount">--</div>
           </div>
           <div class="stat-card accent">
             <div class="stat-label">Payroll Status</div>
-            <div class="stat-value stat-value-sm" id="payrollStatus">March Payroll Generated</div>
+            <div class="stat-value stat-value-sm" id="payrollStatus">Data will appear here</div>
           </div>
         </div>
 
         <div class="card">
-          <h2>System activity logs (dummy data)</h2>
-          <p class="muted">Placeholder activity cards. Later this will be driven by API calls.</p>
+          <h2>System activity logs</h2>
+          <p class="muted">Once connected to Supabase, recent activity will appear here.</p>
           <div class="scroll-cards">
-            <div class="mini-card">
-              <div class="mini-title">New employees</div>
-              <div class="mini-body">3 new employees added today.</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Leave approvals</div>
-              <div class="mini-body">2 leave requests pending approval.</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Payroll</div>
-              <div class="mini-body">Last payroll run: 28 Jan 2026.</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Profile updates</div>
-              <div class="mini-body">5 employees updated their profiles this week.</div>
+            <div class="mini-card" style="min-width:260px">
+              <div class="mini-title">No recent activity</div>
+              <div class="mini-body">Activity will appear here once the system is in use.</div>
             </div>
           </div>
         </div>
 
         <div class="card">
-          <h2>Confirmed payroll work IDs (dummy data)</h2>
-          <p class="muted">Scrollable list of employees who have confirmed their payroll.</p>
+          <h2>Confirmed payroll work IDs</h2>
+          <p class="muted">Once connected to Supabase, payroll confirmations will appear here.</p>
           <div class="scroll-cards">
-            <div class="mini-card">
-              <div class="mini-title">IT Department</div>
-              <div class="mini-body">
-                IT-0003, IT-0004, IT-0005
-              </div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">HR Department</div>
-              <div class="mini-body">
-                HR-0001, HR-0002
-              </div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Sales &amp; Marketing</div>
-              <div class="mini-body">
-                SM-0001, SM-0002, SM-0003
-              </div>
+            <div class="mini-card" style="min-width:260px">
+              <div class="mini-title">No payroll confirmations</div>
+              <div class="mini-body">Confirmed work IDs will appear here once payroll is processed.</div>
             </div>
           </div>
         </div>

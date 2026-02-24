@@ -6,7 +6,6 @@
     <title>RoboTech Solutions EMS - User & Role Management</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
-    <script defer src="../../assets/js/dummy-backend.js"></script>
     <script defer src="../../assets/js/app.js"></script>
   </head>
   <body>
@@ -104,45 +103,10 @@
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="systemUsersBody">
                 <tr>
-                  <td>admin@robotech.com</td>
-                  <td><span class="badge">Admin</span></td>
-                  <td>10 Feb 2026, 09:00</td>
-                  <td><span class="badge">Active</span></td>
-                  <td>
-                    <button class="btn ghost" type="button">Reset Password</button>
-                    <button class="btn ghost" type="button">Disable</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>hr.samuel@robotech.com</td>
-                  <td><span class="badge">HR</span></td>
-                  <td>10 Feb 2026, 08:45</td>
-                  <td><span class="badge">Active</span></td>
-                  <td>
-                    <button class="btn ghost" type="button">Reset Password</button>
-                    <button class="btn ghost" type="button">Disable</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>manager.it@robotech.com</td>
-                  <td><span class="badge">Manager</span></td>
-                  <td>09 Feb 2026, 17:30</td>
-                  <td><span class="badge">Active</span></td>
-                  <td>
-                    <button class="btn ghost" type="button">Reset Password</button>
-                    <button class="btn ghost" type="button">Disable</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>accounts@robotech.com</td>
-                  <td><span class="badge">Accounts</span></td>
-                  <td>08 Feb 2026, 16:00</td>
-                  <td><span class="badge">Inactive</span></td>
-                  <td>
-                    <button class="btn ghost" type="button">Reset Password</button>
-                    <button class="btn ghost" type="button">Enable</button>
+                  <td colspan="5" class="muted" style="text-align:center;padding:18px">
+                    No system users to display yet.
                   </td>
                 </tr>
               </tbody>
@@ -152,31 +116,27 @@
 
         <div class="card">
           <h2>Role Summary</h2>
-          <p class="muted">Available system roles and their permissions.</p>
+          <p class="muted">Roles will be available based on your configured EMS setup.</p>
           <div class="scroll-cards" style="margin-top:12px">
             <div class="mini-card">
               <div class="mini-title">Admin</div>
               <div class="mini-body">Full system access, user management</div>
             </div>
             <div class="mini-card">
-              <div class="mini-title">Manager</div>
-              <div class="mini-body">Team oversight, leave approval</div>
+              <div class="mini-title">MD</div>
+              <div class="mini-body">Executive oversight and approvals</div>
             </div>
             <div class="mini-card">
               <div class="mini-title">HR</div>
               <div class="mini-body">Employees, leave, attendance</div>
             </div>
             <div class="mini-card">
-              <div class="mini-title">IT</div>
-              <div class="mini-body">Technical configuration</div>
+              <div class="mini-title">Supervisor</div>
+              <div class="mini-body">Department oversight and task management</div>
             </div>
             <div class="mini-card">
-              <div class="mini-title">Accounts</div>
-              <div class="mini-body">Payroll, salaries, reports</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Sales & Marketing</div>
-              <div class="mini-body">Department-specific access</div>
+              <div class="mini-title">Employee</div>
+              <div class="mini-body">Self-service: attendance, leave, profile</div>
             </div>
           </div>
         </div>

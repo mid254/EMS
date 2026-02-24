@@ -6,7 +6,6 @@
     <title>RoboTech Solutions EMS - Supervisor Tasks</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
-    <script defer src="../../assets/js/dummy-backend.js"></script>
     <script defer src="../../assets/js/app.js"></script>
     <script defer src="../../assets/js/roles.js"></script>
     <script defer src="../../assets/js/supervisor.js"></script>
@@ -74,27 +73,11 @@
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="tasksBody">
                 <tr>
-                  <td>API Integration - Module A</td>
-                  <td>Anita Kumar</td>
-                  <td>15 Feb 2026</td>
-                  <td><span class="badge">In Progress</span></td>
-                  <td><button class="btn ghost" type="button">Mark Complete</button></td>
-                </tr>
-                <tr>
-                  <td>Frontend Refactor</td>
-                  <td>Sarah Lee</td>
-                  <td>12 Feb 2026</td>
-                  <td><span class="badge">Overdue</span></td>
-                  <td><button class="btn ghost" type="button">Mark Complete</button></td>
-                </tr>
-                <tr>
-                  <td>Documentation Update</td>
-                  <td>Maria Lopez</td>
-                  <td>20 Feb 2026</td>
-                  <td><span class="badge">Pending</span></td>
-                  <td><button class="btn ghost" type="button">Mark Complete</button></td>
+                  <td colspan="5" class="muted" style="text-align:center;padding:18px">
+                    No tasks to display yet.
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -104,17 +87,9 @@
           <h2>Team Workload</h2>
           <p class="muted">Monitor team workload distribution.</p>
           <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card">
-              <div class="mini-title">Anita Kumar</div>
-              <div class="mini-body">2 active tasks, 1 completed this week</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Sarah Lee</div>
-              <div class="mini-body">1 overdue, 1 in progress</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Maria Lopez</div>
-              <div class="mini-body">1 pending task</div>
+            <div class="mini-card" style="min-width:260px">
+              <div class="mini-title">No workload data</div>
+              <div class="mini-body">Workload will appear here once tasks are created.</div>
             </div>
           </div>
         </div>

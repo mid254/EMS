@@ -1,12 +1,3 @@
-async function loadMyProfile() {
-  const user = DummyDB.getCurrentUser();
-  if (!user) {
-    window.location.href = "../index.html";
-    return null;
-  }
-  return user;
-}
-
 function setText(id, text) {
   const el = document.getElementById(id);
   if (el) el.textContent = text ?? "";
@@ -14,8 +5,15 @@ function setText(id, text) {
 
 async function onLogoutClick(e) {
   e.preventDefault();
-  DummyDB.logout();
-  window.location.href = "../index.html";
+  try {
+    if (window.supabaseClient && window.supabaseClient.auth) {
+      await window.supabaseClient.auth.signOut();
+    }
+  } catch (err) {
+    console.error("Error during Supabase sign-out:", err);
+  } finally {
+    window.location.href = "/index.html";
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -6,7 +6,6 @@
     <title>RoboTech Solutions EMS - Admin Leave</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
-    <script defer src="../../assets/js/dummy-backend.js"></script>
     <script defer src="../../assets/js/app.js"></script>
   </head>
   <body>
@@ -102,39 +101,10 @@
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="adminLeaveRequestsBody">
                 <tr>
-                  <td>Samuel Green</td>
-                  <td>Annual</td>
-                  <td>10 Feb 2026</td>
-                  <td>14 Feb 2026</td>
-                  <td><span class="badge">Pending</span></td>
-                  <td>
-                    <button class="btn primary" type="button">Approve</button>
-                    <button class="btn ghost" type="button">Reject</button>
-                    <button class="btn ghost" type="button">Override</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Maria Lopez</td>
-                  <td>Sick</td>
-                  <td>09 Feb 2026</td>
-                  <td>11 Feb 2026</td>
-                  <td><span class="badge">Approved</span></td>
-                  <td>
-                    <button class="btn ghost" type="button">Override</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Peter Jones</td>
-                  <td>Annual</td>
-                  <td>15 Feb 2026</td>
-                  <td>20 Feb 2026</td>
-                  <td><span class="badge">Pending</span></td>
-                  <td>
-                    <button class="btn primary" type="button">Approve</button>
-                    <button class="btn ghost" type="button">Reject</button>
-                    <button class="btn ghost" type="button">Override</button>
+                  <td colspan="6" class="muted" style="text-align:center;padding:18px">
+                    No leave requests to display yet.
                   </td>
                 </tr>
               </tbody>
@@ -143,20 +113,12 @@
         </div>
 
         <div class="card">
-          <h2>Leave Balances (Sample)</h2>
+          <h2>Leave Balances</h2>
           <p class="muted">View employee leave balances across the organization.</p>
           <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card">
-              <div class="mini-title">Samuel Green (HR-0001)</div>
-              <div class="mini-body">Annual: 12 days left &bull; Sick: 10 days left</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Maria Lopez (IT-0005)</div>
-              <div class="mini-body">Annual: 8 days left &bull; Sick: 7 days left</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Jane Doe (AD-0001)</div>
-              <div class="mini-body">Annual: 15 days left &bull; Sick: 10 days left</div>
+            <div class="mini-card" style="min-width:260px">
+              <div class="mini-title">No leave balance data</div>
+              <div class="mini-body">Leave balances will appear here once data is available.</div>
             </div>
           </div>
         </div>

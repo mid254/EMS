@@ -6,7 +6,6 @@
     <title>RoboTech Solutions EMS - My Attendance</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
-    <script defer src="../../assets/js/dummy-backend.js"></script>
     <script defer src="../../assets/js/app.js"></script>
     <script defer src="../../assets/js/roles.js"></script>
     <script defer src="../../assets/js/employee.js"></script>
@@ -63,8 +62,8 @@
         <div class="card">
           <h2>Filter by Date</h2>
           <div class="form" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px">
-            <label>From: <input type="date" value="2026-02-01" /></label>
-            <label>To: <input type="date" value="2026-02-28" /></label>
+            <label>From: <input type="date" /></label>
+            <label>To: <input type="date" /></label>
           </div>
         </div>
         <div class="card">
@@ -80,24 +79,11 @@
                   <th>Status</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="myAttendanceBody">
                 <tr>
-                  <td>10 Feb 2026</td>
-                  <td>08:00</td>
-                  <td>17:00</td>
-                  <td><span class="badge">Present</span></td>
-                </tr>
-                <tr>
-                  <td>09 Feb 2026</td>
-                  <td>08:15</td>
-                  <td>17:10</td>
-                  <td><span class="badge">Late</span></td>
-                </tr>
-                <tr>
-                  <td>07 Feb 2026</td>
-                  <td>08:00</td>
-                  <td>17:00</td>
-                  <td><span class="badge">Present</span></td>
+                  <td colspan="4" class="muted" style="text-align:center;padding:18px">
+                    No attendance records to display yet.
+                  </td>
                 </tr>
               </tbody>
             </table>

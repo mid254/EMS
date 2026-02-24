@@ -6,7 +6,6 @@
     <title>RoboTech Solutions EMS - Admin Settings</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
-    <script defer src="../../assets/js/dummy-backend.js"></script>
     <script defer src="../../assets/js/app.js"></script>
   </head>
   <body>
@@ -91,21 +90,9 @@
           <h2>Manage Departments</h2>
           <p class="muted">Add, edit, or remove departments.</p>
           <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card">
-              <div class="mini-title">IT</div>
-              <div class="mini-body">25 employees</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">HR</div>
-              <div class="mini-body">8 employees</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Accounts</div>
-              <div class="mini-body">10 employees</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Sales &amp; Marketing</div>
-              <div class="mini-body">20 employees</div>
+            <div class="mini-card" style="min-width:260px">
+              <div class="mini-title">No departments configured</div>
+              <div class="mini-body">Departments will appear here once created.</div>
             </div>
           </div>
           <button class="btn primary" type="button" style="margin-top:12px">Add Department</button>
@@ -115,21 +102,9 @@
           <h2>Manage Job Roles</h2>
           <p class="muted">Configure job roles and titles.</p>
           <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card">
-              <div class="mini-title">Admin</div>
-              <div class="mini-body">Full system access</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">HR Officer</div>
-              <div class="mini-body">HR department</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Engineer</div>
-              <div class="mini-body">IT department</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Accountant</div>
-              <div class="mini-body">Accounts department</div>
+            <div class="mini-card" style="min-width:260px">
+              <div class="mini-title">No job roles configured</div>
+              <div class="mini-body">Job roles will appear here once created.</div>
             </div>
           </div>
           <button class="btn primary" type="button" style="margin-top:12px">Add Job Role</button>
@@ -139,17 +114,9 @@
           <h2>Configure Leave Types</h2>
           <p class="muted">Set leave types and default days.</p>
           <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card">
-              <div class="mini-title">Annual Leave</div>
-              <div class="mini-body">20 days per year</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Sick Leave</div>
-              <div class="mini-body">10 days per year</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Emergency Leave</div>
-              <div class="mini-body">5 days per year</div>
+            <div class="mini-card" style="min-width:260px">
+              <div class="mini-title">No leave types configured</div>
+              <div class="mini-body">Leave types will appear here once created.</div>
             </div>
           </div>
           <button class="btn primary" type="button" style="margin-top:12px">Add Leave Type</button>
@@ -160,10 +127,10 @@
           <p class="muted">Configure standard working hours for the organization.</p>
           <div class="form" style="margin-top:12px">
             <label>
-              Start Time: <input type="time" value="08:00" />
+              Start Time: <input type="time" />
             </label>
             <label>
-              End Time: <input type="time" value="17:00" />
+              End Time: <input type="time" />
             </label>
             <label>
               Working Days: <select><option>Monday - Friday</option><option>Monday - Saturday</option></select>
@@ -184,16 +151,11 @@
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="holidaysBody">
                 <tr>
-                  <td>01 Jan 2026</td>
-                  <td>New Year&apos;s Day</td>
-                  <td><button class="btn ghost" type="button">Remove</button></td>
-                </tr>
-                <tr>
-                  <td>25 Dec 2026</td>
-                  <td>Christmas Day</td>
-                  <td><button class="btn ghost" type="button">Remove</button></td>
+                  <td colspan="3" class="muted" style="text-align:center;padding:18px">
+                    No holidays configured yet.
+                  </td>
                 </tr>
               </tbody>
             </table>

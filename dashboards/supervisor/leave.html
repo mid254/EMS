@@ -6,7 +6,6 @@
 <title>RoboTech Solutions EMS - Supervisor Leave Requests</title>
 <link rel="stylesheet" href="../../assets/css/styles.css"/>
 <link rel="stylesheet" href="../_layout.css"/>
-<script defer src="../../assets/js/dummy-backend.js"></script>
 <script defer src="../../assets/js/app.js"></script>
 <script defer src="../../assets/js/roles.js"></script>
 <script defer src="../../assets/js/supervisor.js"></script>
@@ -29,7 +28,7 @@
 </aside>
 <section class="content">
 <div class="topbar"><div class="welcome"><div class="welcome-main">Leave Requests</div><div class="welcome-sub">View leave from your department. Approve or recommend.</div></div><div class="topbar-actions"><button class="icon-button" type="button" aria-label="Notifications"><span class="icon-bell"></span></button><button class="topbar-profile" type="button" onclick="location.href='./profile.html'"><span class="avatar-circle small">S</span><span class="topbar-profile-name">Supervisor</span></button><button class="btn ghost" id="logoutBtn">Logout</button></div></div>
-<div class="card"><h2>Leave Applications</h2><p class="muted">Approve or recommend leave requests from your department.</p><div style="overflow:auto;margin-top:12px"><table><thead><tr><th>Employee</th><th>Leave Type</th><th>Duration</th><th>Reason</th><th>Status</th><th>Actions</th></tr></thead><tbody><tr><td>Anita Kumar</td><td>Annual</td><td>5 days</td><td>Family trip</td><td><span class="badge">Pending</span></td><td><button class="btn primary" type="button">Approve</button><button class="btn ghost" type="button">Recommend</button><button class="btn ghost" type="button">Add Remarks</button></td></tr></tbody></table></div></div>
+<div class="card"><h2>Leave Applications</h2><p class="muted">Approve or recommend leave requests from your department.</p><div style="overflow:auto;margin-top:12px"><table><thead><tr><th>Employee</th><th>Leave Type</th><th>Duration</th><th>Reason</th><th>Status</th><th>Actions</th></tr></thead><tbody id="supervisorLeaveBody"><tr><td colspan="6" class="muted" style="text-align:center;padding:18px">No leave applications to display yet.</td></tr></tbody></table></div></div>
 </section>
 </div>
 </body>

@@ -1,4 +1,10 @@
-const Roles = DummyDB.ROLES;
+const Roles = {
+  admin: "admin",
+  hr: "hr",
+  md: "md",
+  supervisor: "supervisor",
+  employee: "employee",
+};
 
 function roleLabel(role) {
   switch (role) {
@@ -36,26 +42,8 @@ function rolePrefix(role) {
 }
 
 async function requireRole(allowedRoles) {
-  const profile = await loadMyProfile();
-  if (!profile) return null;
-  if (!allowedRoles.includes(profile.role)) {
-    // send user to their own dashboard
-    window.location.href = "../" + (function () {
-      switch (profile.role) {
-        case Roles.admin:
-          return "dashboards/admin.html";
-        case Roles.hr:
-          return "dashboards/hr.html";
-        case Roles.manager:
-          return "dashboards/managers.html";
-        case Roles.supervisor:
-          return "dashboards/supervisor.html";
-        default:
-          return "dashboards/employee.html";
-      }
-    })();
-    return null;
-  }
-  return profile;
+  // Placeholder: once Supabase-based profile loading is added,
+  // this can enforce role-based access. For now, allow access.
+  return null;
 }
 

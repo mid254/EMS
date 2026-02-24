@@ -36,7 +36,7 @@ drop policy if exists "profiles_select_self_or_admin" on public.profiles;
 create policy "profiles_select_self_or_admin"
 on public.profiles for select
 to authenticated
-using (id = auth.uid() or public.current_role() = 'admin');
+using (id = auth.uid() or public.current_role() in ('admin','md'));
 
 drop policy if exists "profiles_update_self" on public.profiles;
 create policy "profiles_update_self"
@@ -48,14 +48,15 @@ with check (id = auth.uid());
 -- Employees
 alter table public.employees enable row level security;
 
--- Admin/HR full access
+-- Admin/HR/MD full access
 drop policy if exists "employees_admin_hr_all" on public.employees;
-create policy "employees_admin_hr_all"
+drop policy if exists "employees_admin_hr_md_all" on public.employees;
+create policy "employees_admin_hr_md_all"
 on public.employees
 for all
 to authenticated
-using (public.current_role() in ('admin','hr'))
-with check (public.current_role() in ('admin','hr'));
+using (public.current_role() in ('admin','hr','md'))
+with check (public.current_role() in ('admin','hr','md'));
 
 -- Supervisor: select employees in their department
 drop policy if exists "employees_supervisor_select_department" on public.employees;
@@ -68,24 +69,14 @@ using (
   and department_id = public.current_department_id()
 );
 
--- Manager: select employees in their department (simple university-level rule)
-drop policy if exists "employees_manager_select_department" on public.employees;
-create policy "employees_manager_select_department"
-on public.employees
-for select
-to authenticated
-using (
-  public.current_role() = 'manager'
-  and department_id = public.current_department_id()
-);
-
--- Employee: select their own employee record (by auth_user_id)
+-- Any authenticated user: can select their own employee record (needed for login redirects)
+drop policy if exists "employees_select_self" on public.employees;
 drop policy if exists "employees_employee_select_self" on public.employees;
-create policy "employees_employee_select_self"
+create policy "employees_select_self"
 on public.employees
 for select
 to authenticated
-using (public.current_role() = 'employee' and auth_user_id = auth.uid());
+using (auth_user_id = auth.uid());
 
 -- Attendance
 alter table public.attendance enable row level security;
@@ -94,8 +85,8 @@ create policy "attendance_self_rw"
 on public.attendance
 for all
 to authenticated
-using (user_id = auth.uid() or public.current_role() in ('admin','hr'))
-with check (user_id = auth.uid() or public.current_role() in ('admin','hr'));
+using (user_id = auth.uid() or public.current_role() in ('admin','hr','md'))
+with check (user_id = auth.uid() or public.current_role() in ('admin','hr','md'));
 
 -- Leaves
 alter table public.leaves enable row level security;
@@ -104,7 +95,7 @@ create policy "leaves_self"
 on public.leaves
 for select
 to authenticated
-using (user_id = auth.uid() or public.current_role() in ('admin','hr','manager'));
+using (user_id = auth.uid() or public.current_role() in ('admin','hr','md'));
 
 drop policy if exists "leaves_apply_self" on public.leaves;
 create policy "leaves_apply_self"
@@ -114,12 +105,13 @@ to authenticated
 with check (user_id = auth.uid());
 
 drop policy if exists "leaves_decide_manager_hr_admin" on public.leaves;
-create policy "leaves_decide_manager_hr_admin"
+drop policy if exists "leaves_decide_md_hr_admin" on public.leaves;
+create policy "leaves_decide_md_hr_admin"
 on public.leaves
 for update
 to authenticated
-using (public.current_role() in ('admin','hr','manager'))
-with check (public.current_role() in ('admin','hr','manager'));
+using (public.current_role() in ('admin','hr','md'))
+with check (public.current_role() in ('admin','hr','md'));
 
 -- Payroll
 alter table public.payroll enable row level security;
@@ -128,15 +120,15 @@ create policy "payroll_self_read"
 on public.payroll
 for select
 to authenticated
-using (user_id = auth.uid() or public.current_role() in ('admin','hr'));
+using (user_id = auth.uid() or public.current_role() in ('admin','hr','md'));
 
 drop policy if exists "payroll_hr_admin_manage" on public.payroll;
 create policy "payroll_hr_admin_manage"
 on public.payroll
 for all
 to authenticated
-using (public.current_role() in ('admin','hr'))
-with check (public.current_role() in ('admin','hr'));
+using (public.current_role() in ('admin','hr','md'))
+with check (public.current_role() in ('admin','hr','md'));
 
 -- Activity logs
 alter table public.activity_logs enable row level security;
@@ -145,5 +137,5 @@ create policy "activity_logs_admin_hr_read"
 on public.activity_logs
 for select
 to authenticated
-using (public.current_role() in ('admin','hr'));
+using (public.current_role() in ('admin','hr','md'));
 

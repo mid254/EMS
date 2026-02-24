@@ -6,7 +6,6 @@
     <title>RoboTech Solutions EMS - Admin Attendance</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
-    <script defer src="../../assets/js/dummy-backend.js"></script>
     <script defer src="../../assets/js/app.js"></script>
   </head>
   <body>
@@ -90,19 +89,19 @@
         <div class="top-stats cards-grid">
           <div class="stat-card accent">
             <div class="stat-label">Present Today</div>
-            <div class="stat-value">112</div>
+            <div class="stat-value">--</div>
           </div>
           <div class="stat-card danger">
             <div class="stat-label">Late Arrivals</div>
-            <div class="stat-value">5</div>
+            <div class="stat-value">--</div>
           </div>
           <div class="stat-card danger">
             <div class="stat-label">Early Checkouts</div>
-            <div class="stat-value">3</div>
+            <div class="stat-value">--</div>
           </div>
           <div class="stat-card accent">
             <div class="stat-label">Absent</div>
-            <div class="stat-value">16</div>
+            <div class="stat-value">--</div>
           </div>
         </div>
 
@@ -116,17 +115,9 @@
           </div>
           <p class="muted">Admin view of today&apos;s attendance. Approve corrections or export report.</p>
           <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card">
-              <div class="mini-title">AD-0001 &mdash; Jane Doe</div>
-              <div class="mini-body">In: 08:00 &bull; Out: 17:00 &bull; On time</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">HR-0001 &mdash; Samuel Green</div>
-              <div class="mini-body">In: 08:15 &bull; Out: 17:10 &bull; Late (15 min)</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">IT-0003 &mdash; Anita Kumar</div>
-              <div class="mini-body">In: 09:00 &bull; Out: 18:00 &bull; Late (1 hr)</div>
+            <div class="mini-card" style="min-width:260px">
+              <div class="mini-title">No attendance summary</div>
+              <div class="mini-body">Today&apos;s attendance summary will appear here once data is available.</div>
             </div>
           </div>
         </div>
@@ -135,21 +126,9 @@
           <h2>Department-wise Attendance</h2>
           <p class="muted">Attendance breakdown by department for today.</p>
           <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card">
-              <div class="mini-title">IT Department</div>
-              <div class="mini-body">Present: 22 &bull; Absent: 3 &bull; Late: 2</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">HR Department</div>
-              <div class="mini-body">Present: 7 &bull; Absent: 1 &bull; Late: 1</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Sales &amp; Marketing</div>
-              <div class="mini-body">Present: 18 &bull; Absent: 2 &bull; Late: 2</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Accounts</div>
-              <div class="mini-body">Present: 9 &bull; Absent: 1 &bull; Late: 0</div>
+            <div class="mini-card" style="min-width:260px">
+              <div class="mini-title">No department breakdown</div>
+              <div class="mini-body">Department-wise attendance will appear here once data is available.</div>
             </div>
           </div>
         </div>
@@ -158,13 +137,9 @@
           <h2>Late Arrivals</h2>
           <p class="muted">Employees who clocked in after the scheduled start time.</p>
           <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card">
-              <div class="mini-title">HR-0001 &mdash; Samuel Green</div>
-              <div class="mini-body">Expected: 08:00 &bull; Actual: 08:15 (15 min late)</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">IT-0003 &mdash; Anita Kumar</div>
-              <div class="mini-body">Expected: 08:00 &bull; Actual: 09:00 (1 hr late)</div>
+            <div class="mini-card" style="min-width:260px">
+              <div class="mini-title">No late arrivals</div>
+              <div class="mini-body">Late arrivals will appear here once data is available.</div>
             </div>
           </div>
         </div>

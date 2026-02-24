@@ -1,14 +1,64 @@
+-- CREATE TABLE departments (
+--   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+--   name TEXT NOT NULL,
+--   created_at TIMESTAMP DEFAULT NOW()
+-- );
+
+-- CREATE TABLE employees (
+--   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+--   auth_user_id UUID UNIQUE REFERENCES auth.users(id) ON DELETE CASCADE,
+
+--   work_id TEXT UNIQUE NOT NULL,
+
+--   email TEXT NOT NULL,
+
+--   full_name TEXT NOT NULL,
+
+--   role TEXT NOT NULL CHECK (
+--     role IN ('admin', 'md', 'hr', 'supervisor', 'employee')
+--   ),
+
+--   department_id UUID REFERENCES departments(id),
+
+--   created_at TIMESTAMP DEFAULT NOW()
+-- );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- EMS Database Schema (Supabase / Postgres)
 
 -- 1) Types
 do $$
 begin
   if not exists (select 1 from pg_type where typname = 'app_role') then
-    create type public.app_role as enum ('admin','hr','manager','supervisor','employee');
+    create type public.app_role as enum ('admin','md','hr','supervisor','employee');
   end if;
 end $$;
 
--- 2) Departments (at least 3 departments are seeded in seed.sql)
+-- 2) Departments
 create table if not exists public.departments (
   id uuid primary key default gen_random_uuid(),
   name text not null unique,
@@ -89,8 +139,8 @@ create table if not exists public.activity_logs (
 
 -- 9) Work ID sequences (separate per role; sequential within each role)
 create sequence if not exists public.work_id_admin_seq start 1;
+create sequence if not exists public.work_id_md_seq start 1;
 create sequence if not exists public.work_id_hr_seq start 1;
-create sequence if not exists public.work_id_manager_seq start 1;
 create sequence if not exists public.work_id_supervisor_seq start 1;
 create sequence if not exists public.work_id_employee_seq start 1;
 
@@ -103,11 +153,11 @@ declare
   prefix text;
 begin
   case p_role
-    when 'admin' then prefix := 'ADM'; n := nextval('public.work_id_admin_seq');
-    when 'hr' then prefix := 'HR'; n := nextval('public.work_id_hr_seq');
-    when 'manager' then prefix := 'MGR'; n := nextval('public.work_id_manager_seq');
-    when 'supervisor' then prefix := 'SUP'; n := nextval('public.work_id_supervisor_seq');
-    else prefix := 'EMP'; n := nextval('public.work_id_employee_seq');
+    when 'admin' then prefix := 'AD';   n := nextval('public.work_id_admin_seq');
+    when 'md' then prefix := 'MD';      n := nextval('public.work_id_md_seq');
+    when 'hr' then prefix := 'HR';      n := nextval('public.work_id_hr_seq');
+    when 'supervisor' then prefix := 'S';   n := nextval('public.work_id_supervisor_seq');
+    else prefix := 'EMP';              n := nextval('public.work_id_employee_seq');
   end case;
 
   return prefix || '-' || lpad(n::text, 4, '0');

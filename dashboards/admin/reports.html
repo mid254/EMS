@@ -6,7 +6,6 @@
     <title>RoboTech Solutions EMS - Admin Reports</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
-    <script defer src="../../assets/js/dummy-backend.js"></script>
     <script defer src="../../assets/js/app.js"></script>
   </head>
   <body>
@@ -92,16 +91,16 @@
           <p class="muted">Filter by date range, department, or role.</p>
           <div class="form" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px">
             <label style="display:inline-flex;align-items:center;gap:6px">
-              From: <input type="date" value="2026-02-01" />
+              From: <input type="date" />
             </label>
             <label style="display:inline-flex;align-items:center;gap:6px">
-              To: <input type="date" value="2026-02-28" />
+              To: <input type="date" />
             </label>
             <label style="display:inline-flex;align-items:center;gap:6px">
               Department: <select><option value="">All</option><option>IT</option><option>HR</option><option>Accounts</option><option>Sales &amp; Marketing</option></select>
             </label>
             <label style="display:inline-flex;align-items:center;gap:6px">
-              Role: <select><option value="">All</option><option>Admin</option><option>Manager</option><option>HR</option></select>
+              Role: <select><option value="">All</option><option>Admin</option><option>MD</option><option>HR</option><option>Supervisor</option><option>Employee</option></select>
             </label>
           </div>
         </div>
@@ -146,55 +145,8 @@
         </div>
 
         <div class="card">
-          <h2>Visual analytics (dummy charts)</h2>
-          <p class="muted">Simple bar-style visualizations. Replace later with real chart components.</p>
-          <div class="chart-grid">
-            <div class="chart-block">
-              <div class="chart-title">Headcount by department</div>
-              <div class="bar-chart">
-                <div class="bar-row">
-                  <span>IT</span>
-                  <div class="bar-track">
-                    <div class="bar-fill" style="width:70%"></div>
-                  </div>
-                  <span class="bar-value">25</span>
-                </div>
-                <div class="bar-row">
-                  <span>HR</span>
-                  <div class="bar-track">
-                    <div class="bar-fill" style="width:30%"></div>
-                  </div>
-                  <span class="bar-value">8</span>
-                </div>
-                <div class="bar-row">
-                  <span>Sales</span>
-                  <div class="bar-track">
-                    <div class="bar-fill" style="width:60%"></div>
-                  </div>
-                  <span class="bar-value">20</span>
-                </div>
-              </div>
-            </div>
-            <div class="chart-block">
-              <div class="chart-title">Attendance vs. absence</div>
-              <div class="bar-chart">
-                <div class="bar-row">
-                  <span>Present</span>
-                  <div class="bar-track">
-                    <div class="bar-fill" style="width:90%"></div>
-                  </div>
-                  <span class="bar-value">90%</span>
-                </div>
-                <div class="bar-row">
-                  <span>Absent</span>
-                  <div class="bar-track">
-                    <div class="bar-fill danger" style="width:10%"></div>
-                  </div>
-                  <span class="bar-value">10%</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <h2>Visual analytics</h2>
+          <p class="muted">Charts will appear here once report data is available.</p>
         </div>
 
       </section>
