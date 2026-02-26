@@ -445,6 +445,88 @@ async function wireProfileSave(profile) {
   });
 }
 
+async function loadEmployeeTasks(profile) {
+  const tbody = document.getElementById("employeeTasksBody");
+  if (!tbody || !window.supabaseClient) return;
+  const sb = window.supabaseClient;
+  const msg = document.getElementById("employeeTaskInlineMsg");
+
+  const render = async () => {
+    const { data, error } = await sb
+      .from("task_assignees")
+      .select("id,task_id,assignee_status,employee_remarks,supervisor_remarks,tasks(id,title,due_date,description,supervisor_user_id,status)")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      tbody.innerHTML = '<tr><td colspan="6" class="muted" style="text-align:center;padding:18px">Unable to load tasks.</td></tr>';
+      return;
+    }
+
+    const rows = data || [];
+    if (!rows.length) {
+      tbody.innerHTML = '<tr><td colspan="6" class="muted" style="text-align:center;padding:18px">No tasks assigned yet.</td></tr>';
+      return;
+    }
+
+    const supervisorIds = [...new Set(rows.map((r) => r.tasks?.supervisor_user_id).filter(Boolean))];
+    const { data: supervisors } = supervisorIds.length
+      ? await sb.from("profiles").select("id,full_name").in("id", supervisorIds)
+      : { data: [] };
+    const supervisorById = new Map((supervisors || []).map((s) => [s.id, s.full_name]));
+
+    tbody.innerHTML = rows
+      .map((row) => {
+        const task = row.tasks || {};
+        const supervisor = supervisorById.get(task.supervisor_user_id) || "Supervisor";
+        return `<tr>
+          <td>${safeText(task.title, "-")}</td>
+          <td>${safeText(supervisor, "-")}</td>
+          <td>${task.due_date ? formatDate(task.due_date) : "-"}</td>
+          <td>${safeText(row.assignee_status, "assigned")}</td>
+          <td>${safeText(row.supervisor_remarks || row.employee_remarks, "-")}</td>
+          <td>
+            <button class="btn ghost emp-task-submit-btn" type="button" data-id="${row.id}">Submit</button>
+            <button class="btn ghost emp-task-remark-btn" type="button" data-id="${row.id}">Add Remark</button>
+          </td>
+        </tr>`;
+      })
+      .join("");
+  };
+
+  tbody.addEventListener("click", async (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+    const id = target.dataset.id;
+    if (!id) return;
+
+    if (target.classList.contains("emp-task-submit-btn")) {
+      const { error } = await sb.from("task_assignees").update({ assignee_status: "submitted" }).eq("id", id);
+      if (error) {
+        if (msg) msg.textContent = error.message || "Unable to submit task update.";
+        return;
+      }
+      if (msg) msg.textContent = "Task submitted for supervisor review.";
+      await logActivity("task_submitted", "task", { assignee_row_id: id, recipient_user_id: profile.id });
+      await render();
+      return;
+    }
+
+    if (target.classList.contains("emp-task-remark-btn")) {
+      const remark = window.prompt("Enter your remark:", "");
+      if (remark == null) return;
+      const { error } = await sb.from("task_assignees").update({ employee_remarks: remark }).eq("id", id);
+      if (error) {
+        if (msg) msg.textContent = error.message || "Unable to save remark.";
+        return;
+      }
+      if (msg) msg.textContent = "Remark saved.";
+      await render();
+    }
+  });
+
+  await render();
+}
+
 function renderNotifications(targetId, items) {
   const container = document.getElementById(targetId);
   if (!container) return;
@@ -617,7 +699,7 @@ async function loadNotifications() {
       const details = row.details || {};
       const body = safeText(
         details.message,
-        details.reason || details.leave_type || details.status || details.address || details.phone || ""
+        details.reason || details.leave_type || details.status || details.task_title || details.assignee_work_id || details.address || details.phone || ""
       );
       return {
         id: row.id,
@@ -664,5 +746,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   if (path.endsWith("/notifications.html")) {
     await loadNotifications();
+  }
+  if (path.endsWith("/tasks.html")) {
+    await loadEmployeeTasks(profile);
   }
 });

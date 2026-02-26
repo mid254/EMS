@@ -37,6 +37,18 @@ const Employees = (function () {
     return data || [];
   }
 
+  async function listEmployeesInMyDepartment(departmentId) {
+    const sb = getClient();
+    if (!departmentId) return [];
+    const { data, error } = await sb
+      .from("employees")
+      .select("id, auth_user_id, work_id, full_name, email, role, department_id, departments(name)")
+      .eq("department_id", departmentId)
+      .order("full_name", { ascending: true });
+    if (error) throw error;
+    return data || [];
+  }
+
   async function createEmployee({ full_name, email, phone, role, department_id }) {
     const sb = getClient();
     const clean = {
@@ -89,6 +101,7 @@ const Employees = (function () {
     countEmployees,
     listRecentEmployees,
     listAllEmployees,
+    listEmployeesInMyDepartment,
     createEmployee,
     updateEmployee,
     deleteEmployee,

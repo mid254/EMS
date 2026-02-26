@@ -49,8 +49,8 @@
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">Task and Work Status</div>
-            <div class="welcome-sub" id="welcomeSub"></div>
+            <div class="welcome-main" id="welcomeMain">Task and Work Status</div>
+            <div class="welcome-sub" id="welcomeSub">Assign tasks by Work ID and manage approvals for your department team.</div>
           </div>
           <div class="topbar-actions">
             <button class="icon-button" type="button" aria-label="Notifications"><span class="icon-bell"></span></button>
@@ -62,22 +62,39 @@
           </div>
         </div>
         <div class="card">
+          <div class="card-header-row">
+            <h2>Assign Task</h2>
+            <button class="btn primary" type="button" id="supAssignTaskBtn">Assign Task</button>
+          </div>
+          <p class="muted">Assign to one employee or a team using Work IDs from your department.</p>
+          <div class="form" style="margin-top:12px">
+            <label>Task title <input type="text" id="supTaskTitle" placeholder="Task title" /></label>
+            <label>Description <input type="text" id="supTaskDescription" placeholder="Task details" /></label>
+            <label>Due date <input type="date" id="supTaskDueDate" /></label>
+            <label>Supervisor remarks <input type="text" id="supTaskSupervisorRemarks" placeholder="Initial remarks (optional)" /></label>
+            <label>Assign by Work ID (comma separated) <input type="text" id="supTaskWorkIdsInput" placeholder="EMP-0001, EMP-0002" /></label>
+          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="supAssignableMembers"></div>
+          <div id="supTaskInlineMsg" class="muted" style="margin-top:8px"></div>
+        </div>
+        <div class="card">
           <h2>Assigned Tasks</h2>
-          <p class="muted">View tasks and mark completion status.</p>
+          <p class="muted">Approve, reject, and add remarks for assigned tasks.</p>
           <div style="overflow:auto;margin-top:12px">
             <table>
               <thead>
                 <tr>
                   <th>Task</th>
-                  <th>Assigned To</th>
+                  <th>Assigned Team</th>
                   <th>Due Date</th>
                   <th>Status</th>
+                  <th>Remarks</th>
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody id="tasksBody">
+              <tbody id="supervisorTasksBody">
                 <tr>
-                  <td colspan="5" class="muted" style="text-align:center;padding:18px">
+                  <td colspan="6" class="muted" style="text-align:center;padding:18px">
                     No tasks to display yet.
                   </td>
                 </tr>
@@ -87,13 +104,8 @@
         </div>
         <div class="card">
           <h2>Team Workload</h2>
-          <p class="muted">Monitor team workload distribution.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No workload data</div>
-              <div class="mini-body">Workload will appear here once tasks are created.</div>
-            </div>
-          </div>
+          <p class="muted">Current task distribution for your department members.</p>
+          <div class="scroll-cards" style="margin-top:12px" id="supTeamWorkloadCards"></div>
         </div>
       </section>
     </div>

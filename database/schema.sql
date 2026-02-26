@@ -197,6 +197,34 @@ create table if not exists public.holidays (
   unique (holiday_date, name, country_code)
 );
 
+-- 8c) Supervisor task management
+create table if not exists public.tasks (
+  id uuid primary key default gen_random_uuid(),
+  supervisor_user_id uuid not null references auth.users(id) on delete cascade,
+  department_id uuid not null references public.departments(id),
+  title text not null,
+  description text,
+  due_date date,
+  status text not null default 'assigned', -- assigned/submitted/approved/rejected
+  supervisor_remarks text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists public.task_assignees (
+  id uuid primary key default gen_random_uuid(),
+  task_id uuid not null references public.tasks(id) on delete cascade,
+  assignee_user_id uuid references auth.users(id) on delete set null,
+  assignee_work_id text not null,
+  assignee_name text not null,
+  assignee_status text not null default 'assigned', -- assigned/submitted/approved/rejected
+  employee_remarks text,
+  supervisor_remarks text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (task_id, assignee_work_id)
+);
+
 -- 9) Work ID sequences (separate per role; sequential within each role)
 create sequence if not exists public.work_id_admin_seq start 1;
 create sequence if not exists public.work_id_md_seq start 1;
@@ -246,6 +274,16 @@ for each row execute function public.set_updated_at();
 drop trigger if exists trg_working_hours_updated_at on public.working_hours;
 create trigger trg_working_hours_updated_at
 before update on public.working_hours
+for each row execute function public.set_updated_at();
+
+drop trigger if exists trg_tasks_updated_at on public.tasks;
+create trigger trg_tasks_updated_at
+before update on public.tasks
+for each row execute function public.set_updated_at();
+
+drop trigger if exists trg_task_assignees_updated_at on public.task_assignees;
+create trigger trg_task_assignees_updated_at
+before update on public.task_assignees
 for each row execute function public.set_updated_at();
 
 -- 11) Auto-generate Work ID on employees insert

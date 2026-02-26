@@ -183,6 +183,16 @@ for select
 to authenticated
 using (coalesce(details->>'notify_all', 'false') = 'true');
 
+drop policy if exists "activity_logs_recipient_read" on public.activity_logs;
+create policy "activity_logs_recipient_read"
+on public.activity_logs
+for select
+to authenticated
+using (
+  details ? 'recipient_user_id'
+  and details->>'recipient_user_id' = auth.uid()::text
+);
+
 -- Job roles
 alter table public.job_roles enable row level security;
 drop policy if exists "job_roles_select_auth" on public.job_roles;
@@ -238,4 +248,124 @@ on public.holidays for all
 to authenticated
 using (public.current_role() in ('admin','hr','md'))
 with check (public.current_role() in ('admin','hr','md'));
+
+-- Tasks
+alter table public.tasks enable row level security;
+drop policy if exists "tasks_supervisor_manage_own_department" on public.tasks;
+create policy "tasks_supervisor_manage_own_department"
+on public.tasks for all
+to authenticated
+using (
+  (public.current_role() = 'supervisor' and supervisor_user_id = auth.uid() and department_id = public.current_department_id())
+  or public.current_role() in ('admin','hr','md')
+)
+with check (
+  (public.current_role() = 'supervisor' and supervisor_user_id = auth.uid() and department_id = public.current_department_id())
+  or public.current_role() in ('admin','hr','md')
+);
+
+drop policy if exists "tasks_employee_read_assigned" on public.tasks;
+create policy "tasks_employee_read_assigned"
+on public.tasks for select
+to authenticated
+using (
+  exists (
+    select 1
+    from public.task_assignees ta
+    where ta.task_id = tasks.id
+      and ta.assignee_user_id = auth.uid()
+  )
+);
+
+-- Task assignees
+alter table public.task_assignees enable row level security;
+drop policy if exists "task_assignees_supervisor_manage" on public.task_assignees;
+drop policy if exists "task_assignees_supervisor_select" on public.task_assignees;
+create policy "task_assignees_supervisor_select"
+on public.task_assignees for select
+to authenticated
+using (
+  public.current_role() in ('admin','hr','md')
+  or (
+    public.current_role() = 'supervisor'
+    and exists (
+      select 1
+      from public.profiles p
+      where p.id = task_assignees.assignee_user_id
+        and p.department_id = public.current_department_id()
+    )
+  )
+);
+
+drop policy if exists "task_assignees_supervisor_insert" on public.task_assignees;
+create policy "task_assignees_supervisor_insert"
+on public.task_assignees for insert
+to authenticated
+with check (
+  exists (
+    select 1
+    from public.tasks t
+    where t.id = task_assignees.task_id
+      and (
+        (public.current_role() = 'supervisor' and t.supervisor_user_id = auth.uid() and t.department_id = public.current_department_id())
+        or public.current_role() in ('admin','hr','md')
+      )
+  )
+);
+
+drop policy if exists "task_assignees_supervisor_update" on public.task_assignees;
+create policy "task_assignees_supervisor_update"
+on public.task_assignees for update
+to authenticated
+using (
+  exists (
+    select 1
+    from public.tasks t
+    where t.id = task_assignees.task_id
+      and (
+        (public.current_role() = 'supervisor' and t.supervisor_user_id = auth.uid() and t.department_id = public.current_department_id())
+        or public.current_role() in ('admin','hr','md')
+      )
+  )
+)
+with check (
+  exists (
+    select 1
+    from public.tasks t
+    where t.id = task_assignees.task_id
+      and (
+        (public.current_role() = 'supervisor' and t.supervisor_user_id = auth.uid() and t.department_id = public.current_department_id())
+        or public.current_role() in ('admin','hr','md')
+      )
+  )
+);
+
+drop policy if exists "task_assignees_supervisor_delete" on public.task_assignees;
+create policy "task_assignees_supervisor_delete"
+on public.task_assignees for delete
+to authenticated
+using (
+  exists (
+    select 1
+    from public.tasks t
+    where t.id = task_assignees.task_id
+      and (
+        (public.current_role() = 'supervisor' and t.supervisor_user_id = auth.uid() and t.department_id = public.current_department_id())
+        or public.current_role() in ('admin','hr','md')
+      )
+  )
+);
+
+drop policy if exists "task_assignees_employee_read_self" on public.task_assignees;
+create policy "task_assignees_employee_read_self"
+on public.task_assignees for select
+to authenticated
+using (assignee_user_id = auth.uid());
+
+drop policy if exists "task_assignees_employee_update_self" on public.task_assignees;
+create policy "task_assignees_employee_update_self"
+on public.task_assignees for update
+to authenticated
+using (assignee_user_id = auth.uid())
+with check (assignee_user_id = auth.uid());
 

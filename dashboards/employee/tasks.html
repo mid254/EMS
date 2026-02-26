@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RoboTech Solutions EMS - Notifications</title>
+    <title>RoboTech Solutions EMS - My Tasks</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -28,8 +28,8 @@
           <a href="./attendance.html"><span class="nav-icon">A</span><span>My Attendance</span></a>
           <a href="./leave.html"><span class="nav-icon">L</span><span>My Leaves</span></a>
           <a href="./payslips.html"><span class="nav-icon">P</span><span>My Payslips</span></a>
-          <a href="./tasks.html"><span class="nav-icon">T</span><span>My Tasks</span></a>
-          <a class="active" href="./notifications.html"><span class="nav-icon">N</span><span>Notifications</span></a>
+          <a class="active" href="./tasks.html"><span class="nav-icon">T</span><span>My Tasks</span></a>
+          <a href="./notifications.html"><span class="nav-icon">N</span><span>Notifications</span></a>
           <a href="./profile.html"><span class="nav-icon">P</span><span>My Profile</span></a>
         </nav>
         <div class="sidebar-profile">
@@ -51,7 +51,7 @@
         <div class="topbar">
           <div class="welcome">
             <div class="welcome-main" id="welcomeMain">Welcome</div>
-            <div class="welcome-sub" id="welcomeSub">Your notifications</div>
+            <div class="welcome-sub" id="welcomeSub">Tasks assigned by your supervisor</div>
           </div>
           <div class="topbar-actions">
             <button class="icon-button" type="button" aria-label="Notifications"><span class="icon-bell"></span></button>
@@ -63,16 +63,28 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-header-row">
-            <h2>Notifications</h2>
-            <div class="download-actions">
-              <button class="btn ghost notif-filter-btn active" type="button" id="notifFilterAll">All</button>
-              <button class="btn ghost notif-filter-btn" type="button" id="notifFilterUnread">Unread</button>
-              <button class="btn ghost notif-filter-btn" type="button" id="notifFilterRead">Read</button>
-              <button class="btn primary" type="button" id="notifMarkAllReadBtn">Mark All Read</button>
-            </div>
+          <h2>Assigned Tasks</h2>
+          <p class="muted">Review assigned work, add remarks, and submit completion updates.</p>
+          <div style="overflow:auto;margin-top:12px">
+            <table>
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Supervisor</th>
+                  <th>Due Date</th>
+                  <th>Status</th>
+                  <th>Remarks</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="employeeTasksBody">
+                <tr>
+                  <td colspan="6" class="muted" style="text-align:center;padding:18px">No tasks assigned yet.</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div class="notif-list" id="employeeNotificationsList"></div>
+          <div id="employeeTaskInlineMsg" class="muted" style="margin-top:8px"></div>
         </div>
       </section>
     </div>
