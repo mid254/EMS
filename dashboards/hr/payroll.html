@@ -6,6 +6,8 @@
     <title>RoboTech Solutions EMS - HR Payroll Support</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
     <script defer src="../../assets/js/roles.js"></script>
     <script defer src="../../assets/js/hr.js"></script>
@@ -85,21 +87,17 @@
         <div class="card">
           <h2>Salary Structures</h2>
           <p class="muted">View salary structures. HR supports payroll but does not control finance logic.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No salary structures</div>
-              <div class="mini-body">Salary structures will appear here once configured.</div>
-            </div>
-          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="hrPayrollSummaryCards"></div>
         </div>
 
         <div class="card">
           <h2>Payslips &amp; Forward to Accounts</h2>
           <p class="muted">Generate payslips and forward payroll data to Accounts. HR cannot approve payments.</p>
           <div class="download-actions" style="margin-top:12px">
-            <button class="btn primary" type="button">Generate Payslips</button>
-            <button class="btn ghost" type="button">Forward to Accounts</button>
+            <button class="btn primary" type="button" id="hrGeneratePayslipsBtn">Generate Payslips</button>
+            <button class="btn ghost" type="button" id="hrForwardToAccountsBtn">Forward to Accounts</button>
           </div>
+          <div id="hrPayrollInlineMsg" class="muted" style="margin-top:8px"></div>
         </div>
       </section>
     </div>

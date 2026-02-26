@@ -6,7 +6,11 @@
     <title>RoboTech Solutions EMS - MD Reports</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/manager.js"></script>
   </head>
   <body>
     <div class="app">
@@ -68,8 +72,8 @@
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">Reports &amp; Analytics</div>
-            <div class="welcome-sub">Company attendance, leave utilization, department performance. Export to PDF or CSV.</div>
+            <div class="welcome-main" id="welcomeMain">Reports &amp; Analytics</div>
+            <div class="welcome-sub" id="welcomeSub">Company attendance, leave utilization, department performance. Export to PDF or CSV.</div>
           </div>
           <div class="topbar-actions">
             <button class="icon-button" type="button" aria-label="Notifications">
@@ -91,24 +95,24 @@
               <div class="mini-title">Company Attendance Report</div>
               <div class="mini-body">Company-wide attendance overview</div>
               <div class="download-actions" style="margin-top:8px">
-                <button class="btn primary" type="button">PDF</button>
-                <button class="btn ghost" type="button">CSV</button>
+                <button class="btn primary" type="button" data-md-report="attendance-pdf">PDF</button>
+                <button class="btn ghost" type="button" data-md-report="attendance-csv">CSV</button>
               </div>
             </div>
             <div class="mini-card">
               <div class="mini-title">Leave Utilization Report</div>
               <div class="mini-body">Leave usage across departments</div>
               <div class="download-actions" style="margin-top:8px">
-                <button class="btn primary" type="button">PDF</button>
-                <button class="btn ghost" type="button">CSV</button>
+                <button class="btn primary" type="button" data-md-report="leave-pdf">PDF</button>
+                <button class="btn ghost" type="button" data-md-report="leave-csv">CSV</button>
               </div>
             </div>
             <div class="mini-card">
               <div class="mini-title">Department Performance Summary</div>
               <div class="mini-body">Department-level performance metrics</div>
               <div class="download-actions" style="margin-top:8px">
-                <button class="btn primary" type="button">PDF</button>
-                <button class="btn ghost" type="button">CSV</button>
+                <button class="btn primary" type="button" data-md-report="performance-pdf">PDF</button>
+                <button class="btn ghost" type="button" data-md-report="performance-csv">CSV</button>
               </div>
             </div>
           </div>
@@ -118,9 +122,10 @@
           <h2>Export Options</h2>
           <p class="muted">Download reports in PDF or CSV format.</p>
           <div class="download-actions" style="margin-top:12px">
-            <button class="btn primary" type="button">Export PDF</button>
-            <button class="btn ghost" type="button">Export CSV</button>
+            <button class="btn primary" type="button" id="mdReportsExportPdfBtn">Export PDF</button>
+            <button class="btn ghost" type="button" id="mdReportsExportCsvBtn">Export CSV</button>
           </div>
+          <div id="mdReportsInlineMsg" class="muted" style="margin-top:8px"></div>
         </div>
       </section>
     </div>

@@ -6,7 +6,11 @@
     <title>RoboTech Solutions EMS - MD Announcements</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/manager.js"></script>
   </head>
   <body>
     <div class="app">
@@ -68,8 +72,8 @@
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">Announcements &amp; Directives</div>
-            <div class="welcome-sub">Post company-wide announcements, send messages to department heads, view acknowledgement status</div>
+            <div class="welcome-main" id="welcomeMain">Announcements &amp; Directives</div>
+            <div class="welcome-sub" id="welcomeSub">Post company-wide announcements, send messages to department heads, view acknowledgement status</div>
           </div>
           <div class="topbar-actions">
             <button class="icon-button" type="button" aria-label="Notifications">
@@ -86,42 +90,34 @@
         <div class="card">
           <div class="card-header-row">
             <h2>Post Announcement</h2>
-            <button class="btn primary" type="button">+ New Announcement</button>
+            <button class="btn primary" type="button" id="mdNewAnnouncementBtn">+ New Announcement</button>
           </div>
           <p class="muted">Post company-wide announcements or send messages to department heads.</p>
-          <div class="form" style="margin-top:12px">
+          <div class="form" style="margin-top:12px" id="mdAnnouncementFormWrap">
             <label>
               Subject
-              <input type="text" placeholder="Announcement title" />
+              <input type="text" id="mdAnnouncementSubject" placeholder="Announcement title" />
             </label>
             <label>
               Message
-              <textarea rows="4" placeholder="Your message..." style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);resize:vertical"></textarea>
+              <textarea id="mdAnnouncementMessage" rows="4" placeholder="Your message..." style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);resize:vertical"></textarea>
             </label>
             <label>
               Recipients
-              <select>
-                <option>All Employees</option>
-                <option>Department Heads Only</option>
-                <option>IT</option>
-                <option>HR</option>
-                <option>Accounts</option>
-                <option>Sales &amp; Marketing</option>
+              <select id="mdAnnouncementRecipients">
+                <option value="all">All Employees</option>
+                <option value="heads">Department Heads Only</option>
               </select>
             </label>
-            <button class="btn primary" type="button">Post Announcement</button>
+            <button class="btn primary" type="button" id="mdPostAnnouncementBtn">Post Announcement</button>
+            <div id="mdAnnouncementInlineMsg" class="muted" style="margin-top:8px"></div>
           </div>
         </div>
 
         <div class="card">
           <h2>Recent Announcements</h2>
           <p class="muted">View acknowledgement status.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No announcements</div>
-              <div class="mini-body">Announcements will appear here once created.</div>
-            </div>
-          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="mdAnnouncementsList"></div>
         </div>
       </section>
     </div>

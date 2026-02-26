@@ -6,6 +6,8 @@
     <title>RoboTech Solutions EMS - HR Leave Management</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
     <script defer src="../../assets/js/roles.js"></script>
     <script defer src="../../assets/js/hr.js"></script>
@@ -111,12 +113,7 @@
         <div class="card">
           <h2>Leave Types</h2>
           <p class="muted">Annual, Sick, Maternity, etc.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No leave types configured</div>
-              <div class="mini-body">Leave types will appear here once configured in the system.</div>
-            </div>
-          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="hrLeaveTypesCards"></div>
         </div>
       </section>
     </div>

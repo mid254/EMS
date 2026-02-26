@@ -6,7 +6,11 @@
     <title>RoboTech Solutions EMS - MD Attendance Insights</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/manager.js"></script>
   </head>
   <body>
     <div class="app">
@@ -68,8 +72,8 @@
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">Attendance &amp; Productivity Insights</div>
-            <div class="welcome-sub">Company-wide summary, late arrivals, absentee trends, department comparison</div>
+            <div class="welcome-main" id="welcomeMain">Attendance &amp; Productivity Insights</div>
+            <div class="welcome-sub" id="welcomeSub">Company-wide summary, late arrivals, absentee trends, department comparison</div>
           </div>
           <div class="topbar-actions">
             <button class="icon-button" type="button" aria-label="Notifications">
@@ -89,11 +93,11 @@
           <div class="chart-grid" style="margin-top:12px">
             <div class="chart-block">
               <div class="chart-title">Present vs Absent (Today)</div>
-              <p class="muted" style="margin:0">No data available yet.</p>
+              <p class="muted" style="margin:0" id="mdAttPresentAbsentSummary">--</p>
             </div>
             <div class="chart-block">
               <div class="chart-title">Late Arrivals &amp; Absentee Trends</div>
-              <p class="muted" style="margin:0">No data available yet.</p>
+              <p class="muted" style="margin:0" id="mdAttLateAbsentSummary">--</p>
             </div>
           </div>
         </div>
@@ -101,12 +105,7 @@
         <div class="card">
           <h2>Monthly Attendance Report</h2>
           <p class="muted">Monthly summaries will appear here once data is available.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No monthly summary</div>
-              <div class="mini-body">No data available yet.</div>
-            </div>
-          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="mdMonthlyAttendanceCards"></div>
         </div>
 
         <div class="card">
@@ -115,7 +114,7 @@
           <div class="chart-grid" style="margin-top:12px">
             <div class="chart-block">
               <div class="chart-title">Attendance by Department</div>
-              <p class="muted" style="margin:0">No data available yet.</p>
+              <p class="muted" style="margin:0" id="mdDepartmentAttendanceSummary">--</p>
             </div>
           </div>
         </div>

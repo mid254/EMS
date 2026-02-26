@@ -6,6 +6,8 @@
     <title>RoboTech Solutions EMS - HR Profile</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
     <script defer src="../../assets/js/roles.js"></script>
     <script defer src="../../assets/js/hr.js"></script>
@@ -88,23 +90,23 @@
           <div class="grid two">
             <label>
               Email
-              <input value="" placeholder="Your email will appear here" disabled />
+              <input id="hrProfileEmail" value="" placeholder="Your email will appear here" disabled />
             </label>
             <label>
               Work ID
-              <input value="" placeholder="Your work ID will appear here" disabled />
+              <input id="hrProfileWorkId" value="" placeholder="Your work ID will appear here" disabled />
             </label>
             <label>
               Role
-              <input value="" placeholder="Your role will appear here" disabled />
+              <input id="hrProfileRole" value="" placeholder="Your role will appear here" disabled />
             </label>
             <label>
               Department
-              <input value="" placeholder="Your department will appear here" disabled />
+              <input id="hrProfileDepartment" value="" placeholder="Your department will appear here" disabled />
             </label>
           </div>
           <div style="margin-top:10px">
-            <button class="btn primary" type="button">Change password</button>
+            <button class="btn primary" type="button" id="hrChangePasswordBtn">Change password</button>
           </div>
         </div>
 
@@ -114,14 +116,15 @@
           <form class="grid two">
             <label>
               Full name
-              <input value="" placeholder="Enter your full name" />
+              <input id="hrProfileFullName" value="" placeholder="Enter your full name" />
             </label>
             <label>
               Phone number
-              <input value="" placeholder="Enter your phone number" />
+              <input id="hrProfilePhone" value="" placeholder="Enter your phone number" />
             </label>
           </form>
-          <button class="btn primary" type="button" style="margin-top:12px">Update Profile</button>
+          <button class="btn primary" type="button" id="hrUpdateProfileBtn" style="margin-top:12px">Update Profile</button>
+          <div id="hrProfileInlineMsg" class="muted" style="margin-top:8px"></div>
         </div>
       </section>
     </div>

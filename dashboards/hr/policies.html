@@ -6,6 +6,8 @@
     <title>RoboTech Solutions EMS - HR Policies</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
     <script defer src="../../assets/js/roles.js"></script>
     <script defer src="../../assets/js/hr.js"></script>
@@ -85,15 +87,11 @@
         <div class="card">
           <div class="card-header-row">
             <h2>HR Policies</h2>
-            <button class="btn primary" type="button">+ Upload Policy</button>
+            <button class="btn primary" type="button" id="hrUploadPolicyBtn">+ Upload Policy</button>
           </div>
           <p class="muted">Upload and manage HR policies.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No policies uploaded</div>
-              <div class="mini-body">Policies will appear here once uploaded.</div>
-            </div>
-          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="hrPoliciesCards"></div>
+          <div id="hrPoliciesInlineMsg" class="muted" style="margin-top:8px"></div>
         </div>
 
         <div class="card">
@@ -101,7 +99,7 @@
           <p class="muted">Manage standard working hours.</p>
           <div class="form" style="margin-top:12px">
             <label>
-              Standard Hours: <input type="text" value="" placeholder="Will be configured in settings" disabled />
+              Standard Hours: <input type="text" id="hrWorkingHoursDisplay" value="" placeholder="Will be configured in settings" disabled />
             </label>
           </div>
         </div>
@@ -109,12 +107,7 @@
         <div class="card">
           <h2>Compliance Records</h2>
           <p class="muted">Maintain compliance documentation.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No compliance records</div>
-              <div class="mini-body">Compliance records will appear here once added.</div>
-            </div>
-          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="hrComplianceCards"></div>
         </div>
       </section>
     </div>

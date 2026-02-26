@@ -6,7 +6,11 @@
     <title>RoboTech Solutions EMS - MD Departments</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/manager.js"></script>
   </head>
   <body>
     <div class="app">
@@ -68,8 +72,8 @@
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">Department Overview</div>
-            <div class="welcome-sub">View all departments and department-level statistics. Read-only.</div>
+            <div class="welcome-main" id="welcomeMain">Department Overview</div>
+            <div class="welcome-sub" id="welcomeSub">View all departments and department-level statistics. Read-only.</div>
           </div>
           <div class="topbar-actions">
             <button class="icon-button" type="button" aria-label="Notifications">
@@ -109,12 +113,7 @@
 
         <div class="card">
           <h2>Department Statistics</h2>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No department statistics</div>
-              <div class="mini-body">Department stats will appear here once data is available.</div>
-            </div>
-          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="mdDepartmentStatsCards"></div>
         </div>
       </section>
     </div>

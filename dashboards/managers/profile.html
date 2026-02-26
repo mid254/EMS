@@ -6,7 +6,11 @@
     <title>RoboTech Solutions EMS - MD Profile</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/manager.js"></script>
   </head>
   <body>
     <div class="app">
@@ -68,8 +72,8 @@
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">My Profile &amp; Security</div>
-            <div class="welcome-sub">View and update your profile. Change password. Secure logout.</div>
+            <div class="welcome-main" id="welcomeMain">My Profile &amp; Security</div>
+            <div class="welcome-sub" id="welcomeSub">View and update your profile. Change password. Secure logout.</div>
           </div>
           <div class="topbar-actions">
             <button class="icon-button" type="button" aria-label="Notifications">
@@ -89,15 +93,15 @@
           <div class="grid two">
             <label>
               Email
-              <input value="" placeholder="Your email will appear here" disabled />
+              <input id="mdProfileEmail" value="" placeholder="Your email will appear here" disabled />
             </label>
             <label>
               Role
-              <input value="" placeholder="Your role will appear here" disabled />
+              <input id="mdProfileRole" value="" placeholder="Your role will appear here" disabled />
             </label>
           </div>
           <div style="margin-top:10px">
-            <button class="btn primary" type="button">Change password</button>
+            <button class="btn primary" type="button" id="mdChangePasswordBtn">Change password</button>
           </div>
         </div>
 
@@ -107,18 +111,19 @@
           <form class="grid two">
             <label>
               Full name
-              <input value="" placeholder="Enter your full name" />
+              <input id="mdProfileFullName" value="" placeholder="Enter your full name" />
             </label>
             <label>
               Phone number
-              <input value="" placeholder="Enter your phone number" />
+              <input id="mdProfilePhone" value="" placeholder="Enter your phone number" />
             </label>
             <label>
               Office
-              <input value="" placeholder="Enter your office location" />
+              <input id="mdProfileAddress" value="" placeholder="Enter your office location" />
             </label>
           </form>
-          <button class="btn primary" type="button" style="margin-top:12px">Update Profile</button>
+          <button class="btn primary" type="button" id="mdUpdateProfileBtn" style="margin-top:12px">Update Profile</button>
+          <div id="mdProfileInlineMsg" class="muted" style="margin-top:8px"></div>
         </div>
       </section>
     </div>

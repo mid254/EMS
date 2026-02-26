@@ -6,7 +6,11 @@
     <title>RoboTech Solutions EMS - MD Leave Oversight</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/manager.js"></script>
   </head>
   <body>
     <div class="app">
@@ -68,8 +72,8 @@
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">Leave Oversight</div>
-            <div class="welcome-sub">View all leave requests. Approve or reject senior staff leave. Override approvals if escalated.</div>
+            <div class="welcome-main" id="welcomeMain">Leave Oversight</div>
+            <div class="welcome-sub" id="welcomeSub">View all leave requests. Approve or reject senior staff leave. Override approvals if escalated.</div>
           </div>
           <div class="topbar-actions">
             <button class="icon-button" type="button" aria-label="Notifications">

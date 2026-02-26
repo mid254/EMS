@@ -6,7 +6,11 @@
     <title>RoboTech Solutions EMS - MD Payroll Summary</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/manager.js"></script>
   </head>
   <body>
     <div class="app">
@@ -68,8 +72,8 @@
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">Payroll &amp; Financial Overview</div>
-            <div class="welcome-sub">View only. Total payroll cost, salary distribution. Cannot edit salaries or payslips.</div>
+            <div class="welcome-main" id="welcomeMain">Payroll &amp; Financial Overview</div>
+            <div class="welcome-sub" id="welcomeSub">View only. Total payroll cost, salary distribution. Cannot edit salaries or payslips.</div>
           </div>
           <div class="topbar-actions">
             <button class="icon-button" type="button" aria-label="Notifications">
@@ -85,12 +89,12 @@
 
         <div class="top-stats cards-grid">
           <div class="stat-card accent">
-            <div class="stat-label">Total Payroll Cost (March)</div>
-            <div class="stat-value">--</div>
+            <div class="stat-label">Total Payroll Cost</div>
+            <div class="stat-value" id="mdPayrollTotalCost">--</div>
           </div>
           <div class="stat-card accent">
             <div class="stat-label">Payroll Status</div>
-            <div class="stat-value stat-value-sm">No payroll generated</div>
+            <div class="stat-value stat-value-sm" id="mdPayrollStatus">--</div>
           </div>
         </div>
 
@@ -100,7 +104,7 @@
           <div class="chart-grid" style="margin-top:12px">
             <div class="chart-block">
               <div class="chart-title">Department Payroll</div>
-              <p class="muted" style="margin:0">No distribution data available yet.</p>
+              <div class="scroll-cards" style="margin-top:10px" id="mdPayrollByDepartmentCards"></div>
             </div>
           </div>
         </div>
@@ -109,9 +113,10 @@
           <h2>Payroll Summary Report</h2>
           <p class="muted">Download report. No edits allowed.</p>
           <div class="download-actions" style="margin-top:12px">
-            <button class="btn primary" type="button">Download PDF</button>
-            <button class="btn ghost" type="button">Download CSV</button>
+            <button class="btn primary" type="button" id="mdPayrollDownloadPdfBtn">Download PDF</button>
+            <button class="btn ghost" type="button" id="mdPayrollDownloadCsvBtn">Download CSV</button>
           </div>
+          <div id="mdPayrollInlineMsg" class="muted" style="margin-top:8px"></div>
         </div>
       </section>
     </div>

@@ -6,7 +6,11 @@
     <title>RoboTech Solutions EMS - MD Employees</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/manager.js"></script>
   </head>
   <body>
     <div class="app">
@@ -68,8 +72,8 @@
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">Employee Directory</div>
-            <div class="welcome-sub">Read-only. View all employees, search and filter.</div>
+            <div class="welcome-main" id="welcomeMain">Employee Directory</div>
+            <div class="welcome-sub" id="welcomeSub">Read-only. View all employees, search and filter.</div>
           </div>
           <div class="topbar-actions">
             <button class="icon-button" type="button" aria-label="Notifications">
@@ -87,13 +91,9 @@
           <h2>Search &amp; Filter</h2>
           <p class="muted">Search employees by name or filter by department.</p>
           <div class="form" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px">
-            <input type="search" placeholder="Search by name..." style="max-width:240px" />
-            <select>
+            <input type="search" id="mdEmployeeSearchInput" placeholder="Search by name..." style="max-width:240px" />
+            <select id="mdEmployeeDepartmentFilter">
               <option value="">All Departments</option>
-              <option>IT</option>
-              <option>HR</option>
-              <option>Accounts</option>
-              <option>Sales &amp; Marketing</option>
             </select>
           </div>
         </div>
