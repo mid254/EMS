@@ -6,6 +6,8 @@
     <title>RoboTech Solutions EMS - My Leaves</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
     <script defer src="../../assets/js/roles.js"></script>
     <script defer src="../../assets/js/employee.js"></script>
@@ -62,15 +64,16 @@
         <div class="card">
           <div class="card-header-row">
             <h2>Apply for Leave</h2>
-            <button class="btn primary" type="button">+ New Leave Request</button>
+            <button class="btn primary" type="button" id="newLeaveRequestBtn">+ New Leave Request</button>
           </div>
           <p class="muted">Apply for leave. View approval status and leave history.</p>
           <div class="form" style="margin-top:12px">
-            <label>Leave type <select><option>Annual</option><option>Sick</option><option>Maternity</option><option>Other</option></select></label>
-            <label>Start date <input type="date" /></label>
-            <label>End date <input type="date" /></label>
-            <label>Reason <input type="text" placeholder="Reason for leave" /></label>
-            <button class="btn primary" type="button">Submit Request</button>
+            <label>Leave type <select id="leaveType"><option>Annual</option><option>Sick</option><option>Maternity</option><option>Other</option></select></label>
+            <label>Start date <input type="date" id="leaveStartDate" /></label>
+            <label>End date <input type="date" id="leaveEndDate" /></label>
+            <label>Reason <input type="text" id="leaveReason" placeholder="Reason for leave" /></label>
+            <button class="btn primary" type="button" id="submitLeaveBtn">Submit Request</button>
+            <span id="leaveMsg" class="muted" aria-live="polite"></span>
           </div>
         </div>
         <div class="card">

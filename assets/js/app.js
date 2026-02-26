@@ -69,6 +69,10 @@ function wireNotificationButtons() {
     btn.dataset.wiredDemo = "1";
     btn.addEventListener("click", (e) => {
       e.preventDefault();
+      if (window.location.pathname.includes("/dashboards/employee/")) {
+        window.location.href = "/dashboards/employee/notifications.html";
+        return;
+      }
       showDemoMessage(btn, "No new notifications yet. Notifications will appear here once the system is in active use.");
     });
   });
@@ -106,6 +110,9 @@ function wireHeaderActionButtons() {
 }
 
 function wireEmployeeLeaveForm() {
+  // Real leave flow is implemented in employee.js.
+  if (document.getElementById("submitLeaveBtn")) return;
+
   const historyBody = document.getElementById("myLeaveHistoryBody");
   if (!historyBody) return;
 

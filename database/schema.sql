@@ -87,9 +87,16 @@ create table if not exists public.profiles (
   role public.app_role not null default 'employee',
   department_id uuid references public.departments(id),
   work_id text unique,
+  phone text,
+  address text,
+  emergency_contact text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+alter table public.profiles add column if not exists phone text;
+alter table public.profiles add column if not exists address text;
+alter table public.profiles add column if not exists emergency_contact text;
 
 -- 5) Attendance
 create table if not exists public.attendance (
@@ -103,7 +110,8 @@ create table if not exists public.attendance (
 -- 6) Leaves
 create table if not exists public.leaves (
   id uuid primary key default gen_random_uuid(),
-  user_id uuid not null references auth.users(id) on delete cascade,
+  user_id uuid not null default auth.uid() references auth.users(id) on delete cascade,
+  leave_type text not null default 'Annual',
   start_date date not null,
   end_date date not null,
   reason text,
@@ -112,6 +120,26 @@ create table if not exists public.leaves (
   decided_at timestamptz,
   created_at timestamptz not null default now()
 );
+
+alter table public.leaves add column if not exists leave_type text not null default 'Annual';
+alter table public.leaves alter column user_id set default auth.uid();
+
+-- 6b) Leaves: default user_id to auth.uid()
+create or replace function public.leaves_before_insert()
+returns trigger
+language plpgsql
+as $$
+begin
+  if new.user_id is null then
+    new.user_id := auth.uid();
+  end if;
+  return new;
+end $$;
+
+drop trigger if exists trg_leaves_before_insert on public.leaves;
+create trigger trg_leaves_before_insert
+before insert on public.leaves
+for each row execute function public.leaves_before_insert();
 
 -- 7) Payroll
 create table if not exists public.payroll (

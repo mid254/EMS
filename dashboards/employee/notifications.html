@@ -6,6 +6,8 @@
     <title>RoboTech Solutions EMS - Notifications</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
     <script defer src="../../assets/js/roles.js"></script>
     <script defer src="../../assets/js/employee.js"></script>
@@ -61,30 +63,15 @@
         </div>
         <div class="card">
           <h2>Leave Alerts</h2>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card">
-              <div class="mini-title">Leave Approved</div>
-              <div class="mini-body">Your annual leave (15–20 Feb) has been approved.</div>
-            </div>
-          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="leaveAlertsList"></div>
         </div>
         <div class="card">
           <h2>Attendance Reminders</h2>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card">
-              <div class="mini-title">Clock In Reminder</div>
-              <div class="mini-body">Remember to clock in when you start work.</div>
-            </div>
-          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="attendanceAlertsList"></div>
         </div>
         <div class="card">
           <h2>Announcements</h2>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card">
-              <div class="mini-title">Company Update</div>
-              <div class="mini-body">New leave policy effective 01 Mar 2026.</div>
-            </div>
-          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="announcementList"></div>
         </div>
       </section>
     </div>

@@ -77,36 +77,37 @@
               <span class="avatar-circle small">E</span>
               <span class="topbar-profile-name" id="topbarName">Employee</span>
             </button>
-            <button class="btn ghost" id="logoutBtn" onclick="location.href='./index.html'">Logout</button>
+            <button class="btn ghost" id="logoutBtn">Logout</button>
           </div>
         </div>
 
         <div class="top-stats cards-grid">
           <div class="stat-card accent">
             <div class="stat-label">Attendance Status (Today)</div>
-            <div class="stat-value stat-value-sm">Present</div>
+            <div class="stat-value stat-value-sm" id="empAttendanceStatus">--</div>
           </div>
           <div class="stat-card accent">
             <div class="stat-label">Total Working Days (This Month)</div>
-            <div class="stat-value">18</div>
+            <div class="stat-value" id="empWorkingDays">--</div>
           </div>
           <div class="stat-card accent">
             <div class="stat-label">Leave Balance</div>
-            <div class="stat-value">12 days</div>
+            <div class="stat-value" id="empLeaveBalance">--</div>
           </div>
           <div class="stat-card danger">
             <div class="stat-label">Pending Leave Requests</div>
-            <div class="stat-value">1</div>
+            <div class="stat-value" id="empPendingLeaves">--</div>
           </div>
         </div>
 
         <div class="card">
-          <h2>Quick Actions</h2>
-          <p class="muted">View personal information, manage attendance, apply for leave.</p>
-          <div class="download-actions" style="margin-top:12px">
-            <a href="./clock.html" class="btn primary">Clock In / Out</a>
-            <a href="./leave.html" class="btn ghost">Apply for Leave</a>
-            <a href="./payslips.html" class="btn ghost">View Payslips</a>
+          <h2>Recent Activities</h2>
+          <p class="muted">Latest activities retrieved from the database.</p>
+          <div class="scroll-cards" style="margin-top:12px" id="recentActivitiesList">
+            <div class="mini-card">
+              <div class="mini-title">Loading...</div>
+              <div class="mini-body">Fetching recent activities.</div>
+            </div>
           </div>
         </div>
       </section>

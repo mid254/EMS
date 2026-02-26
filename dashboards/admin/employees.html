@@ -30,9 +30,6 @@
           <a class="active" href="./employees.html">
             <span class="nav-icon">E</span><span>Employees</span>
           </a>
-          <a href="./users.html">
-            <span class="nav-icon">U</span><span>Users & Roles</span>
-          </a>
           <a href="./attendance.html">
             <span class="nav-icon">A</span><span>Attendance</span>
           </a>
@@ -94,15 +91,35 @@
         <div class="card">
           <div class="card-header-row">
             <h2>All Employees</h2>
-            <button class="btn primary" type="button">➕ Add Employee</button>
+            <button class="btn primary" type="button" id="openEmployeeFormBtn">➕ Add Employee</button>
           </div>
-          <p class="muted">View, add, edit, activate or deactivate employees. Assign departments and roles.</p>
+          <p class="muted">Filter, view and manage all employees in the system.</p>
+          <div class="form" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px">
+            <label>
+              Department
+              <select id="filterDepartment">
+                <option value="">All departments</option>
+              </select>
+            </label>
+            <label>
+              Role
+              <select id="filterRole">
+                <option value="">All roles</option>
+              </select>
+            </label>
+            <div class="muted" id="employeesSummary" style="align-self:flex-end">
+              Total employees: --
+            </div>
+          </div>
+          <div id="departmentStats" class="scroll-cards" style="margin-top:8px"></div>
           <div style="overflow:auto;margin-top:12px">
             <table>
-              <thead>
+              <thead style="background-color:#0f172a;color:#e5e7eb">
                 <tr>
-                  <th>Employee ID</th>
-                  <th>Full Name</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone Number</th>
+                  <th>Work ID</th>
                   <th>Department</th>
                   <th>Role</th>
                   <th>Status</th>
@@ -111,13 +128,51 @@
               </thead>
               <tbody id="adminEmployeesBody">
                 <tr>
-                  <td colspan="6" class="muted" style="text-align:center;padding:18px">
+                  <td colspan="8" class="muted" style="text-align:center;padding:18px">
                     No employees to display yet.
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
+        </div>
+
+        <div class="card" id="employeeFormCard" style="margin-top:16px;display:none">
+          <h2 id="employeeFormTitle">Add Employee</h2>
+          <p class="muted" id="employeeFormSubtitle">
+            Fill in the details below to add a new employee. Work ID will be generated automatically.
+          </p>
+          <form id="employeeForm" class="form" style="margin-top:12px">
+            <label>
+              Full Name
+              <input type="text" id="empFullName" required placeholder="e.g. Jane Doe" />
+            </label>
+            <label>
+              Email
+              <input type="email" id="empEmail" required placeholder="e.g. jane.doe@company.com" />
+            </label>
+            <label>
+              Phone Number
+              <input type="tel" id="empPhone" placeholder="e.g. +260..." />
+            </label>
+            <label>
+              Department
+              <select id="empDepartment" required>
+                <option value="">Select department</option>
+              </select>
+            </label>
+            <label>
+              Role
+              <select id="empRole" required>
+                <option value="">Select role</option>
+              </select>
+            </label>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+              <button class="btn primary" type="submit" id="saveEmployeeBtn">Save</button>
+              <button class="btn ghost" type="button" id="cancelEmployeeForm">Cancel</button>
+            </div>
+            <p class="error" id="employeeFormError" aria-live="polite" style="margin-top:8px"></p>
+          </form>
         </div>
       </section>
     </div>

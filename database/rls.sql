@@ -139,3 +139,17 @@ for select
 to authenticated
 using (public.current_role() in ('admin','hr','md'));
 
+drop policy if exists "activity_logs_self_read" on public.activity_logs;
+create policy "activity_logs_self_read"
+on public.activity_logs
+for select
+to authenticated
+using (actor_user_id = auth.uid());
+
+drop policy if exists "activity_logs_self_insert" on public.activity_logs;
+create policy "activity_logs_self_insert"
+on public.activity_logs
+for insert
+to authenticated
+with check (actor_user_id = auth.uid());
+

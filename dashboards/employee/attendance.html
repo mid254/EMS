@@ -6,6 +6,8 @@
     <title>RoboTech Solutions EMS - My Attendance</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
     <script defer src="../../assets/js/roles.js"></script>
     <script defer src="../../assets/js/employee.js"></script>
@@ -62,8 +64,9 @@
         <div class="card">
           <h2>Filter by Date</h2>
           <div class="form" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px">
-            <label>From: <input type="date" /></label>
-            <label>To: <input type="date" /></label>
+            <label>From: <input type="date" id="attendanceFromDate" /></label>
+            <label>To: <input type="date" id="attendanceToDate" /></label>
+            <button class="btn ghost" type="button" id="attendanceFilterBtn">Apply Filter</button>
           </div>
         </div>
         <div class="card">
