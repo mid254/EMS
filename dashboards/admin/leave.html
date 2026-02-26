@@ -6,7 +6,11 @@
     <title>RoboTech Solutions EMS - Admin Leave</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/admin-pages.js"></script>
   </head>
   <body>
     <div class="app">
@@ -19,35 +23,16 @@
           </div>
         </div>
         <nav class="nav">
-          <a href="./dashboard.html">
-            <span class="nav-icon">D</span><span>Dashboard</span>
-          </a>
-          <a href="./employees.html">
-            <span class="nav-icon">E</span><span>Employees</span>
-          </a>
-          <a href="./attendance.html">
-            <span class="nav-icon">A</span><span>Attendance</span>
-          </a>
-          <a class="active" href="./leave.html">
-            <span class="nav-icon">L</span><span>Leave</span>
-          </a>
-          <a href="./payroll.html">
-            <span class="nav-icon">P</span><span>Payroll</span>
-          </a>
-          <a href="./reports.html">
-            <span class="nav-icon">R</span><span>Reports</span>
-          </a>
-          <a href="./settings.html">
-            <span class="nav-icon">S</span><span>Settings</span>
-          </a>
-          <a href="./notifications.html">
-            <span class="nav-icon">N</span><span>Notifications</span>
-          </a>
-          <a href="./activity-logs.html">
-            <span class="nav-icon">A</span><span>Activity logs</span>
-          </a>
+          <a href="./dashboard.html"><span class="nav-icon">D</span><span>Dashboard</span></a>
+          <a href="./employees.html"><span class="nav-icon">E</span><span>Employees</span></a>
+          <a href="./attendance.html"><span class="nav-icon">A</span><span>Attendance</span></a>
+          <a class="active" href="./leave.html"><span class="nav-icon">L</span><span>Leave</span></a>
+          <a href="./payroll.html"><span class="nav-icon">P</span><span>Payroll</span></a>
+          <a href="./reports.html"><span class="nav-icon">R</span><span>Reports</span></a>
+          <a href="./settings.html"><span class="nav-icon">S</span><span>Settings</span></a>
+          <a href="./notifications.html"><span class="nav-icon">N</span><span>Notifications</span></a>
+          <a href="./activity-logs.html"><span class="nav-icon">A</span><span>Activity logs</span></a>
         </nav>
-
         <div class="sidebar-profile">
           <div class="sidebar-profile-main">
             <div class="avatar-circle">AD</div>
@@ -58,7 +43,6 @@
           </div>
           <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">Manage profile</a>
         </div>
-
         <div class="sidebar-footer">
           <hr />
           <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
@@ -68,14 +52,12 @@
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">Leave Management</div>
-            <div class="welcome-sub">View all leave requests, approve or reject, override manager decisions, view leave balances</div>
+            <div class="welcome-main" id="welcomeMain">Leave Management</div>
+            <div class="welcome-sub" id="welcomeSub">Review and manage all leave requests by department.</div>
           </div>
           <div class="topbar-actions">
-            <button class="icon-button" type="button" aria-label="Notifications">
-              <span class="icon-bell"></span>
-            </button>
-            <button class="topbar-profile" type="button">
+            <button class="icon-button" type="button" aria-label="Notifications"><span class="icon-bell"></span></button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
               <span class="avatar-circle small">AD</span>
               <span class="topbar-profile-name">Admin User</span>
             </button>
@@ -83,44 +65,30 @@
           </div>
         </div>
 
-        <div class="card">
-          <h2>All Leave Requests</h2>
-          <p class="muted">View, approve or reject leave. Override manager decisions when needed.</p>
-          <div style="overflow:auto;margin-top:12px">
-            <table>
-              <thead>
-                <tr>
-                  <th>Employee Name</th>
-                  <th>Leave Type</th>
-                  <th>Start Date</th>
-                  <th>End Date</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="adminLeaveRequestsBody">
-                <tr>
-                  <td colspan="6" class="muted" style="text-align:center;padding:18px">
-                    No leave requests to display yet.
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2>Leave Balances</h2>
-          <p class="muted">View employee leave balances across the organization.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No leave balance data</div>
-              <div class="mini-body">Leave balances will appear here once data is available.</div>
+        <div class="grid two admin-leave-grid">
+          <div class="card">
+            <div class="card-header-row">
+              <h2>All Leave Requests</h2>
+              <label>Department
+                <select id="adminLeaveDepartmentFilter"></select>
+              </label>
             </div>
+            <div style="overflow:auto;margin-top:12px">
+              <table>
+                <thead>
+                  <tr><th>Employee</th><th>Department</th><th>Type</th><th>Start</th><th>End</th><th>Status</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="adminLeaveRequestsBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Leave Balances</h2>
+            <div class="scroll-cards" id="adminLeaveBalancesList"></div>
           </div>
         </div>
       </section>
     </div>
   </body>
 </html>
-

@@ -6,7 +6,11 @@
     <title>RoboTech Solutions EMS - Admin Activity Logs</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/admin-pages.js"></script>
   </head>
   <body>
     <div class="app">
@@ -19,33 +23,15 @@
           </div>
         </div>
         <nav class="nav">
-          <a href="./dashboard.html">
-            <span class="nav-icon">D</span><span>Dashboard</span>
-          </a>
-          <a href="./employees.html">
-            <span class="nav-icon">E</span><span>Employees</span>
-          </a>
-          <a href="./attendance.html">
-            <span class="nav-icon">A</span><span>Attendance</span>
-          </a>
-          <a href="./leave.html">
-            <span class="nav-icon">L</span><span>Leave</span>
-          </a>
-          <a href="./payroll.html">
-            <span class="nav-icon">P</span><span>Payroll</span>
-          </a>
-          <a href="./reports.html">
-            <span class="nav-icon">R</span><span>Reports</span>
-          </a>
-          <a href="./settings.html">
-            <span class="nav-icon">S</span><span>Settings</span>
-          </a>
-          <a href="./notifications.html">
-            <span class="nav-icon">N</span><span>Notifications</span>
-          </a>
-          <a class="active" href="./activity-logs.html">
-            <span class="nav-icon">A</span><span>Activity logs</span>
-          </a>
+          <a href="./dashboard.html"><span class="nav-icon">D</span><span>Dashboard</span></a>
+          <a href="./employees.html"><span class="nav-icon">E</span><span>Employees</span></a>
+          <a href="./attendance.html"><span class="nav-icon">A</span><span>Attendance</span></a>
+          <a href="./leave.html"><span class="nav-icon">L</span><span>Leave</span></a>
+          <a href="./payroll.html"><span class="nav-icon">P</span><span>Payroll</span></a>
+          <a href="./reports.html"><span class="nav-icon">R</span><span>Reports</span></a>
+          <a href="./settings.html"><span class="nav-icon">S</span><span>Settings</span></a>
+          <a href="./notifications.html"><span class="nav-icon">N</span><span>Notifications</span></a>
+          <a class="active" href="./activity-logs.html"><span class="nav-icon">A</span><span>Activity logs</span></a>
         </nav>
 
         <div class="sidebar-profile">
@@ -68,13 +54,11 @@
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">Activity Logs (Admin Only)</div>
-            <div class="welcome-sub">Who added/edited employees, approved leave, generated payroll. Login history.</div>
+            <div class="welcome-main" id="welcomeMain">Activity Logs</div>
+            <div class="welcome-sub" id="welcomeSub">Audit trail for employee, leave, payroll and login events.</div>
           </div>
           <div class="topbar-actions">
-            <button class="icon-button" type="button" aria-label="Notifications">
-              <span class="icon-bell"></span>
-            </button>
+            <button class="icon-button" type="button" aria-label="Notifications"><span class="icon-bell"></span></button>
             <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
               <span class="avatar-circle small">AD</span>
               <span class="topbar-profile-name">Admin User</span>
@@ -83,102 +67,92 @@
           </div>
         </div>
 
-        <div class="card">
-          <h2>Employee Actions</h2>
-          <p class="muted">Who added or edited an employee.</p>
-          <div style="overflow:auto;margin-top:12px">
-            <table>
-              <thead>
-                <tr>
-                  <th>Time</th>
-                  <th>User</th>
-                  <th>Action</th>
-                  <th>Details</th>
-                </tr>
-              </thead>
-              <tbody id="employeeActionsBody">
-                <tr>
-                  <td colspan="4" class="muted" style="text-align:center;padding:18px">
-                    No activity logs to display yet.
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        <div class="grid two admin-logs-grid">
+          <div class="card">
+            <div class="card-header-row">
+              <h2>Employee Actions</h2>
+              <label>Quarter
+                <select id="employeeActionsQuarter">
+                  <option value="">All</option>
+                  <option value="Q1">Q1</option>
+                  <option value="Q2">Q2</option>
+                  <option value="Q3">Q3</option>
+                  <option value="Q4">Q4</option>
+                </select>
+              </label>
+            </div>
+            <div style="overflow:auto;margin-top:8px">
+              <table>
+                <thead><tr><th>Time</th><th>User</th><th>Action</th><th>Details</th></tr></thead>
+                <tbody id="employeeActionsBody"></tbody>
+              </table>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <h2>Leave Approvals</h2>
-          <p class="muted">Who approved or rejected leave requests.</p>
-          <div style="overflow:auto;margin-top:12px">
-            <table>
-              <thead>
-                <tr>
-                  <th>Time</th>
-                  <th>User</th>
-                  <th>Action</th>
-                  <th>Details</th>
-                </tr>
-              </thead>
-              <tbody id="leaveApprovalsBody">
-                <tr>
-                  <td colspan="4" class="muted" style="text-align:center;padding:18px">
-                    No leave approvals to display yet.
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="card">
+            <div class="card-header-row">
+              <h2>Leave Approvals</h2>
+              <label>Quarter
+                <select id="leaveApprovalsQuarter">
+                  <option value="">All</option>
+                  <option value="Q1">Q1</option>
+                  <option value="Q2">Q2</option>
+                  <option value="Q3">Q3</option>
+                  <option value="Q4">Q4</option>
+                </select>
+              </label>
+            </div>
+            <div style="overflow:auto;margin-top:8px">
+              <table>
+                <thead><tr><th>Time</th><th>User</th><th>Action</th><th>Details</th></tr></thead>
+                <tbody id="leaveApprovalsBody"></tbody>
+              </table>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <h2>Payroll Actions</h2>
-          <p class="muted">Who generated payroll.</p>
-          <div style="overflow:auto;margin-top:12px">
-            <table>
-              <thead>
-                <tr>
-                  <th>Time</th>
-                  <th>User</th>
-                  <th>Action</th>
-                  <th>Details</th>
-                </tr>
-              </thead>
-              <tbody id="payrollActionsBody">
-                <tr>
-                  <td colspan="4" class="muted" style="text-align:center;padding:18px">
-                    No payroll actions to display yet.
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="card">
+            <div class="card-header-row">
+              <h2>Payroll Actions</h2>
+              <label>Quarter
+                <select id="payrollActionsQuarter">
+                  <option value="">All</option>
+                  <option value="Q1">Q1</option>
+                  <option value="Q2">Q2</option>
+                  <option value="Q3">Q3</option>
+                  <option value="Q4">Q4</option>
+                </select>
+              </label>
+            </div>
+            <div style="overflow:auto;margin-top:8px">
+              <table>
+                <thead><tr><th>Time</th><th>User</th><th>Action</th><th>Details</th></tr></thead>
+                <tbody id="payrollActionsBody"></tbody>
+              </table>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <h2>Login History</h2>
-          <p class="muted">Recent system logins.</p>
-          <div style="overflow:auto;margin-top:12px">
-            <table>
-              <thead>
-                <tr>
-                  <th>Time</th>
-                  <th>User</th>
-                  <th>IP Address</th>
-                </tr>
-              </thead>
-              <tbody id="loginHistoryBody">
-                <tr>
-                  <td colspan="3" class="muted" style="text-align:center;padding:18px">
-                    No login history to display yet.
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="card">
+            <div class="card-header-row">
+              <h2>Login History</h2>
+              <label>Quarter
+                <select id="loginHistoryQuarter">
+                  <option value="">All</option>
+                  <option value="Q1">Q1</option>
+                  <option value="Q2">Q2</option>
+                  <option value="Q3">Q3</option>
+                  <option value="Q4">Q4</option>
+                </select>
+              </label>
+            </div>
+            <div style="overflow:auto;margin-top:8px">
+              <table>
+                <thead><tr><th>Time</th><th>User</th><th>Action</th><th>Details</th></tr></thead>
+                <tbody id="loginHistoryBody"></tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
     </div>
   </body>
 </html>
-

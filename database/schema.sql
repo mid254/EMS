@@ -165,6 +165,38 @@ create table if not exists public.activity_logs (
   created_at timestamptz not null default now()
 );
 
+-- 8b) Admin settings tables
+create table if not exists public.job_roles (
+  id uuid primary key default gen_random_uuid(),
+  name text not null unique,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.leave_types (
+  id uuid primary key default gen_random_uuid(),
+  name text not null unique,
+  default_days integer not null default 0,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.working_hours (
+  id uuid primary key default gen_random_uuid(),
+  start_time time not null default '08:00',
+  end_time time not null default '17:00',
+  working_days text not null default 'Monday - Friday',
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists public.holidays (
+  id uuid primary key default gen_random_uuid(),
+  holiday_date date not null,
+  name text not null,
+  country_code text not null default 'KE',
+  created_at timestamptz not null default now(),
+  unique (holiday_date, name, country_code)
+);
+
 -- 9) Work ID sequences (separate per role; sequential within each role)
 create sequence if not exists public.work_id_admin_seq start 1;
 create sequence if not exists public.work_id_md_seq start 1;
@@ -209,6 +241,11 @@ for each row execute function public.set_updated_at();
 drop trigger if exists trg_profiles_updated_at on public.profiles;
 create trigger trg_profiles_updated_at
 before update on public.profiles
+for each row execute function public.set_updated_at();
+
+drop trigger if exists trg_working_hours_updated_at on public.working_hours;
+create trigger trg_working_hours_updated_at
+before update on public.working_hours
 for each row execute function public.set_updated_at();
 
 -- 11) Auto-generate Work ID on employees insert

@@ -6,112 +6,66 @@
     <title>RoboTech Solutions EMS - Admin Payroll</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/admin-pages.js"></script>
   </head>
   <body>
     <div class="app">
       <aside class="sidebar">
-        <div class="brand">
-          <div class="dot"></div>
-          <div>
-            <div class="brand-title">RoboTech Solutions EMS</div>
-            <div class="muted" style="font-size:.9rem">Admin</div>
-          </div>
-        </div>
+        <div class="brand"><div class="dot"></div><div><div class="brand-title">RoboTech Solutions EMS</div><div class="muted" style="font-size:.9rem">Admin</div></div></div>
         <nav class="nav">
-          <a href="./dashboard.html">
-            <span class="nav-icon">D</span><span>Dashboard</span>
-          </a>
-          <a href="./employees.html">
-            <span class="nav-icon">E</span><span>Employees</span>
-          </a>
-          <a href="./attendance.html">
-            <span class="nav-icon">A</span><span>Attendance</span>
-          </a>
-          <a href="./leave.html">
-            <span class="nav-icon">L</span><span>Leave</span>
-          </a>
-          <a class="active" href="./payroll.html">
-            <span class="nav-icon">P</span><span>Payroll</span>
-          </a>
-          <a href="./reports.html">
-            <span class="nav-icon">R</span><span>Reports</span>
-          </a>
-          <a href="./settings.html">
-            <span class="nav-icon">S</span><span>Settings</span>
-          </a>
-          <a href="./notifications.html">
-            <span class="nav-icon">N</span><span>Notifications</span>
-          </a>
-          <a href="./activity-logs.html">
-            <span class="nav-icon">A</span><span>Activity logs</span>
-          </a>
+          <a href="./dashboard.html"><span class="nav-icon">D</span><span>Dashboard</span></a>
+          <a href="./employees.html"><span class="nav-icon">E</span><span>Employees</span></a>
+          <a href="./attendance.html"><span class="nav-icon">A</span><span>Attendance</span></a>
+          <a href="./leave.html"><span class="nav-icon">L</span><span>Leave</span></a>
+          <a class="active" href="./payroll.html"><span class="nav-icon">P</span><span>Payroll</span></a>
+          <a href="./reports.html"><span class="nav-icon">R</span><span>Reports</span></a>
+          <a href="./settings.html"><span class="nav-icon">S</span><span>Settings</span></a>
+          <a href="./notifications.html"><span class="nav-icon">N</span><span>Notifications</span></a>
+          <a href="./activity-logs.html"><span class="nav-icon">A</span><span>Activity logs</span></a>
         </nav>
-
-        <div class="sidebar-profile">
-          <div class="sidebar-profile-main">
-            <div class="avatar-circle">AD</div>
-            <div>
-              <div class="sidebar-profile-name">Admin User</div>
-              <div class="sidebar-profile-role">Administrator</div>
-            </div>
-          </div>
-          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">Manage profile</a>
-        </div>
-
-        <div class="sidebar-footer">
-          <hr />
-          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
-        </div>
+        <div class="sidebar-profile"><div class="sidebar-profile-main"><div class="avatar-circle">AD</div><div><div class="sidebar-profile-name">Admin User</div><div class="sidebar-profile-role">Administrator</div></div></div><a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">Manage profile</a></div>
+        <div class="sidebar-footer"><hr /><div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div></div>
       </aside>
 
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">Payroll Management</div>
-            <div class="welcome-sub">View summary, generate monthly payroll, total cost, download reports. Salary edits done by HR/Accounts.</div>
+            <div class="welcome-main" id="welcomeMain">Payroll Management</div>
+            <div class="welcome-sub" id="welcomeSub">Generate and review payroll from database records.</div>
           </div>
           <div class="topbar-actions">
-            <button class="icon-button" type="button" aria-label="Notifications">
-              <span class="icon-bell"></span>
-            </button>
-            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
-              <span class="avatar-circle small">AD</span>
-              <span class="topbar-profile-name">Admin User</span>
-            </button>
+            <button class="icon-button" type="button" aria-label="Notifications"><span class="icon-bell"></span></button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'"><span class="avatar-circle small">AD</span><span class="topbar-profile-name">Admin User</span></button>
             <button class="btn ghost" id="logoutBtn">Logout</button>
           </div>
         </div>
 
         <div class="top-stats cards-grid">
-          <div class="stat-card accent">
-            <div class="stat-label">Total Payroll Cost (March)</div>
-            <div class="stat-value">--</div>
-          </div>
-          <div class="stat-card accent">
-            <div class="stat-label">Payroll Status</div>
-            <div class="stat-value stat-value-sm">No payroll generated</div>
-          </div>
+          <div class="stat-card accent"><div class="stat-label">Total Payroll Cost (Current Month)</div><div class="stat-value" id="adminPayrollTotalCost">--</div></div>
+          <div class="stat-card accent"><div class="stat-label">Payroll Records (Current Month)</div><div class="stat-value" id="adminPayrollRecordCount">--</div></div>
+          <div class="stat-card accent"><div class="stat-label">Payroll Status</div><div class="stat-value stat-value-sm" id="adminPayrollStatus">--</div></div>
         </div>
 
         <div class="card">
           <div class="card-header-row">
             <h2>Payroll Summary</h2>
             <div class="download-actions">
-              <button class="btn primary" type="button">Generate Payroll</button>
-              <button class="btn ghost" type="button">Download Report</button>
+              <button class="btn primary" type="button" id="adminGeneratePayrollBtn">Generate Payroll</button>
+              <button class="btn ghost" type="button" id="adminDownloadPayrollBtn">Download Report</button>
             </div>
           </div>
-          <p class="muted">View payroll summary, generate monthly payroll, download reports. Admin does NOT edit salaries.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No payroll data</div>
-              <div class="mini-body">Payroll summaries will appear here once generated.</div>
-            </div>
+          <div style="overflow:auto;margin-top:12px">
+            <table>
+              <thead><tr><th>Work ID</th><th>Employee</th><th>Period</th><th>Net Pay</th><th>Created</th></tr></thead>
+              <tbody id="adminPayrollSummaryBody"></tbody>
+            </table>
           </div>
         </div>
       </section>
     </div>
   </body>
 </html>
-

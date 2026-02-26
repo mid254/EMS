@@ -13,6 +13,7 @@
     <script defer src="../../assets/js/departments.js"></script>
     <script defer src="../../assets/js/employees.js"></script>
     <script defer src="../../assets/js/admin.js"></script>
+    <script defer src="../../assets/js/admin-pages.js"></script>
   </head>
   <body>
     <div class="app">
@@ -116,25 +117,17 @@
           </div>
         </div>
 
-        <div class="card">
-          <h2>System activity logs</h2>
-          <p class="muted">Once connected to Supabase, recent activity will appear here.</p>
-          <div class="scroll-cards">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No recent activity</div>
-              <div class="mini-body">Activity will appear here once the system is in use.</div>
-            </div>
+        <div class="grid two admin-dashboard-grid">
+          <div class="card">
+            <h2>System activity logs</h2>
+            <p class="muted">Recent system activities retrieved from database.</p>
+            <div class="scroll-cards" id="adminDashboardActivityList"></div>
           </div>
-        </div>
 
-        <div class="card">
-          <h2>Confirmed payroll work IDs</h2>
-          <p class="muted">Once connected to Supabase, payroll confirmations will appear here.</p>
-          <div class="scroll-cards">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No payroll confirmations</div>
-              <div class="mini-body">Confirmed work IDs will appear here once payroll is processed.</div>
-            </div>
+          <div class="card">
+            <h2>Confirmed payroll work IDs</h2>
+            <p class="muted">Payroll confirmations retrieved from database.</p>
+            <div class="scroll-cards" id="adminDashboardPayrollIds"></div>
           </div>
         </div>
       </section>

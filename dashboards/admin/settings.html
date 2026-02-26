@@ -6,7 +6,11 @@
     <title>RoboTech Solutions EMS - Admin Settings</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/admin-pages.js"></script>
   </head>
   <body>
     <div class="app">
@@ -19,33 +23,15 @@
           </div>
         </div>
         <nav class="nav">
-          <a href="./dashboard.html">
-            <span class="nav-icon">D</span><span>Dashboard</span>
-          </a>
-          <a href="./employees.html">
-            <span class="nav-icon">E</span><span>Employees</span>
-          </a>
-          <a href="./attendance.html">
-            <span class="nav-icon">A</span><span>Attendance</span>
-          </a>
-          <a href="./leave.html">
-            <span class="nav-icon">L</span><span>Leave</span>
-          </a>
-          <a href="./payroll.html">
-            <span class="nav-icon">P</span><span>Payroll</span>
-          </a>
-          <a href="./reports.html">
-            <span class="nav-icon">R</span><span>Reports</span>
-          </a>
-          <a class="active" href="./settings.html">
-            <span class="nav-icon">S</span><span>Settings</span>
-          </a>
-          <a href="./notifications.html">
-            <span class="nav-icon">N</span><span>Notifications</span>
-          </a>
-          <a href="./activity-logs.html">
-            <span class="nav-icon">A</span><span>Activity logs</span>
-          </a>
+          <a href="./dashboard.html"><span class="nav-icon">D</span><span>Dashboard</span></a>
+          <a href="./employees.html"><span class="nav-icon">E</span><span>Employees</span></a>
+          <a href="./attendance.html"><span class="nav-icon">A</span><span>Attendance</span></a>
+          <a href="./leave.html"><span class="nav-icon">L</span><span>Leave</span></a>
+          <a href="./payroll.html"><span class="nav-icon">P</span><span>Payroll</span></a>
+          <a href="./reports.html"><span class="nav-icon">R</span><span>Reports</span></a>
+          <a class="active" href="./settings.html"><span class="nav-icon">S</span><span>Settings</span></a>
+          <a href="./notifications.html"><span class="nav-icon">N</span><span>Notifications</span></a>
+          <a href="./activity-logs.html"><span class="nav-icon">A</span><span>Activity logs</span></a>
         </nav>
 
         <div class="sidebar-profile">
@@ -68,13 +54,11 @@
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">System Settings (Admin Only)</div>
-            <div class="welcome-sub">Manage departments, job roles, leave types, working hours, holidays</div>
+            <div class="welcome-main" id="welcomeMain">System Settings</div>
+            <div class="welcome-sub" id="welcomeSub">Manage departments, roles, leave types, working hours and holidays.</div>
           </div>
           <div class="topbar-actions">
-            <button class="icon-button" type="button" aria-label="Notifications">
-              <span class="icon-bell"></span>
-            </button>
+            <button class="icon-button" type="button" aria-label="Notifications"><span class="icon-bell"></span></button>
             <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
               <span class="avatar-circle small">AD</span>
               <span class="topbar-profile-name">Admin User</span>
@@ -85,82 +69,51 @@
 
         <div class="card">
           <h2>Manage Departments</h2>
-          <p class="muted">Add, edit, or remove departments.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No departments configured</div>
-              <div class="mini-body">Departments will appear here once created.</div>
-            </div>
-          </div>
-          <button class="btn primary" type="button" style="margin-top:12px">Add Department</button>
+          <div class="scroll-cards" id="settingsDepartmentsList"></div>
+          <button class="btn primary" type="button" id="settingsAddDepartmentBtn" style="margin-top:12px">Add Department</button>
         </div>
 
         <div class="card">
           <h2>Manage Job Roles</h2>
-          <p class="muted">Configure job roles and titles.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No job roles configured</div>
-              <div class="mini-body">Job roles will appear here once created.</div>
-            </div>
-          </div>
-          <button class="btn primary" type="button" style="margin-top:12px">Add Job Role</button>
+          <div class="scroll-cards" id="settingsJobRolesList"></div>
+          <button class="btn primary" type="button" id="settingsAddJobRoleBtn" style="margin-top:12px">Add Job Role</button>
         </div>
 
         <div class="card">
           <h2>Configure Leave Types</h2>
-          <p class="muted">Set leave types and default days.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No leave types configured</div>
-              <div class="mini-body">Leave types will appear here once created.</div>
-            </div>
-          </div>
-          <button class="btn primary" type="button" style="margin-top:12px">Add Leave Type</button>
+          <div class="scroll-cards" id="settingsLeaveTypesList"></div>
+          <button class="btn primary" type="button" id="settingsAddLeaveTypeBtn" style="margin-top:12px">Add Leave Type</button>
         </div>
 
         <div class="card">
           <h2>Set Working Hours</h2>
-          <p class="muted">Configure standard working hours for the organization.</p>
           <div class="form" style="margin-top:12px">
-            <label>
-              Start Time: <input type="time" />
-            </label>
-            <label>
-              End Time: <input type="time" />
-            </label>
-            <label>
-              Working Days: <select><option>Monday - Friday</option><option>Monday - Saturday</option></select>
+            <label>Start Time <input type="time" id="settingsWorkStartTime" /></label>
+            <label>End Time <input type="time" id="settingsWorkEndTime" /></label>
+            <label>Working Days
+              <select id="settingsWorkingDays">
+                <option>Monday - Friday</option>
+                <option>Monday - Saturday</option>
+              </select>
             </label>
           </div>
-          <button class="btn primary" type="button" style="margin-top:12px">Save Working Hours</button>
+          <button class="btn primary" type="button" id="settingsSaveWorkingHoursBtn" style="margin-top:12px">Save Working Hours</button>
         </div>
 
         <div class="card">
-          <h2>Manage Holidays</h2>
-          <p class="muted">Add or remove public holidays.</p>
+          <h2>Manage Holidays (Kenya)</h2>
           <div style="overflow:auto;margin-top:12px">
             <table>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Holiday Name</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="holidaysBody">
-                <tr>
-                  <td colspan="3" class="muted" style="text-align:center;padding:18px">
-                    No holidays configured yet.
-                  </td>
-                </tr>
-              </tbody>
+              <thead><tr><th>Date</th><th>Holiday Name</th><th>Actions</th></tr></thead>
+              <tbody id="holidaysBody"></tbody>
             </table>
           </div>
-          <button class="btn primary" type="button" style="margin-top:12px">Add Holiday</button>
+          <div class="download-actions" style="margin-top:12px">
+            <button class="btn primary" type="button" id="settingsSyncKenyaHolidaysBtn">Sync Kenya Upcoming Holidays</button>
+            <button class="btn ghost" type="button" id="settingsAddHolidayBtn">Add Holiday</button>
+          </div>
         </div>
       </section>
     </div>
   </body>
 </html>
-

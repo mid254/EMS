@@ -29,6 +29,13 @@ on public.departments for select
 to authenticated
 using (true);
 
+drop policy if exists "departments_admin_manage" on public.departments;
+create policy "departments_admin_manage"
+on public.departments for all
+to authenticated
+using (public.current_role() in ('admin','hr','md'))
+with check (public.current_role() in ('admin','hr','md'));
+
 -- Profiles
 alter table public.profiles enable row level security;
 
@@ -160,4 +167,75 @@ for update
 to authenticated
 using (actor_user_id = auth.uid())
 with check (actor_user_id = auth.uid());
+
+drop policy if exists "activity_logs_admin_update" on public.activity_logs;
+create policy "activity_logs_admin_update"
+on public.activity_logs
+for update
+to authenticated
+using (public.current_role() in ('admin','hr','md'))
+with check (public.current_role() in ('admin','hr','md'));
+
+drop policy if exists "activity_logs_broadcast_read" on public.activity_logs;
+create policy "activity_logs_broadcast_read"
+on public.activity_logs
+for select
+to authenticated
+using (coalesce(details->>'notify_all', 'false') = 'true');
+
+-- Job roles
+alter table public.job_roles enable row level security;
+drop policy if exists "job_roles_select_auth" on public.job_roles;
+create policy "job_roles_select_auth"
+on public.job_roles for select
+to authenticated
+using (true);
+drop policy if exists "job_roles_admin_manage" on public.job_roles;
+create policy "job_roles_admin_manage"
+on public.job_roles for all
+to authenticated
+using (public.current_role() in ('admin','hr','md'))
+with check (public.current_role() in ('admin','hr','md'));
+
+-- Leave types
+alter table public.leave_types enable row level security;
+drop policy if exists "leave_types_select_auth" on public.leave_types;
+create policy "leave_types_select_auth"
+on public.leave_types for select
+to authenticated
+using (true);
+drop policy if exists "leave_types_admin_manage" on public.leave_types;
+create policy "leave_types_admin_manage"
+on public.leave_types for all
+to authenticated
+using (public.current_role() in ('admin','hr','md'))
+with check (public.current_role() in ('admin','hr','md'));
+
+-- Working hours
+alter table public.working_hours enable row level security;
+drop policy if exists "working_hours_select_auth" on public.working_hours;
+create policy "working_hours_select_auth"
+on public.working_hours for select
+to authenticated
+using (true);
+drop policy if exists "working_hours_admin_manage" on public.working_hours;
+create policy "working_hours_admin_manage"
+on public.working_hours for all
+to authenticated
+using (public.current_role() in ('admin','hr','md'))
+with check (public.current_role() in ('admin','hr','md'));
+
+-- Holidays
+alter table public.holidays enable row level security;
+drop policy if exists "holidays_select_auth" on public.holidays;
+create policy "holidays_select_auth"
+on public.holidays for select
+to authenticated
+using (true);
+drop policy if exists "holidays_admin_manage" on public.holidays;
+create policy "holidays_admin_manage"
+on public.holidays for all
+to authenticated
+using (public.current_role() in ('admin','hr','md'))
+with check (public.current_role() in ('admin','hr','md'));
 

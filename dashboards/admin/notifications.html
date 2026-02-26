@@ -6,7 +6,11 @@
     <title>RoboTech Solutions EMS - Admin Notifications</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/admin-pages.js"></script>
   </head>
   <body>
     <div class="app">
@@ -19,33 +23,15 @@
           </div>
         </div>
         <nav class="nav">
-          <a href="./dashboard.html">
-            <span class="nav-icon">D</span><span>Dashboard</span>
-          </a>
-          <a href="./employees.html">
-            <span class="nav-icon">E</span><span>Employees</span>
-          </a>
-          <a href="./attendance.html">
-            <span class="nav-icon">A</span><span>Attendance</span>
-          </a>
-          <a href="./leave.html">
-            <span class="nav-icon">L</span><span>Leave</span>
-          </a>
-          <a href="./payroll.html">
-            <span class="nav-icon">P</span><span>Payroll</span>
-          </a>
-          <a href="./reports.html">
-            <span class="nav-icon">R</span><span>Reports</span>
-          </a>
-          <a href="./settings.html">
-            <span class="nav-icon">S</span><span>Settings</span>
-          </a>
-          <a class="active" href="./notifications.html">
-            <span class="nav-icon">N</span><span>Notifications</span>
-          </a>
-          <a href="./activity-logs.html">
-            <span class="nav-icon">A</span><span>Activity logs</span>
-          </a>
+          <a href="./dashboard.html"><span class="nav-icon">D</span><span>Dashboard</span></a>
+          <a href="./employees.html"><span class="nav-icon">E</span><span>Employees</span></a>
+          <a href="./attendance.html"><span class="nav-icon">A</span><span>Attendance</span></a>
+          <a href="./leave.html"><span class="nav-icon">L</span><span>Leave</span></a>
+          <a href="./payroll.html"><span class="nav-icon">P</span><span>Payroll</span></a>
+          <a href="./reports.html"><span class="nav-icon">R</span><span>Reports</span></a>
+          <a href="./settings.html"><span class="nav-icon">S</span><span>Settings</span></a>
+          <a class="active" href="./notifications.html"><span class="nav-icon">N</span><span>Notifications</span></a>
+          <a href="./activity-logs.html"><span class="nav-icon">A</span><span>Activity logs</span></a>
         </nav>
 
         <div class="sidebar-profile">
@@ -68,13 +54,11 @@
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">Notifications & Alerts</div>
-            <div class="welcome-sub">New leave requests, payroll notifications, system alerts (e.g. inactive users)</div>
+            <div class="welcome-main" id="welcomeMain">Admin Notifications</div>
+            <div class="welcome-sub" id="welcomeSub">System-wide alerts and activity notifications.</div>
           </div>
           <div class="topbar-actions">
-            <button class="icon-button" type="button" aria-label="Notifications">
-              <span class="icon-bell"></span>
-            </button>
+            <button class="icon-button" type="button" aria-label="Notifications"><span class="icon-bell"></span></button>
             <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
               <span class="avatar-circle small">AD</span>
               <span class="topbar-profile-name">Admin User</span>
@@ -84,40 +68,18 @@
         </div>
 
         <div class="card">
-          <h2>New Leave Requests</h2>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No notifications</div>
-              <div class="mini-body">New leave requests will appear here once data is available.</div>
+          <div class="card-header-row">
+            <h2>Notifications</h2>
+            <div class="download-actions">
+              <button class="btn ghost notif-filter-btn active" type="button" id="adminNotifFilterAll">All</button>
+              <button class="btn ghost notif-filter-btn" type="button" id="adminNotifFilterUnread">Unread</button>
+              <button class="btn ghost notif-filter-btn" type="button" id="adminNotifFilterRead">Read</button>
+              <button class="btn primary" type="button" id="adminNotifMarkAllRead">Mark All Read</button>
             </div>
           </div>
-        </div>
-
-        <div class="card">
-          <h2>Payroll Notifications</h2>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No payroll notifications</div>
-              <div class="mini-body">Payroll notifications will appear here once payroll is generated.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2>System Alerts</h2>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card">
-              <div class="mini-title">Inactive Users</div>
-              <div class="mini-body">Inactive users will appear here once data is available.</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">System Maintenance</div>
-              <div class="mini-body">Scheduled for Saturday 10:00–12:00. EMS may be briefly unavailable.</div>
-            </div>
-          </div>
+          <div class="notif-list" id="adminNotificationsList"></div>
         </div>
       </section>
     </div>
   </body>
 </html>
-

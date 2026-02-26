@@ -6,148 +6,88 @@
     <title>RoboTech Solutions EMS - Admin Reports</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/admin-pages.js"></script>
   </head>
   <body>
     <div class="app">
       <aside class="sidebar">
-        <div class="brand">
-          <div class="dot"></div>
-          <div>
-            <div class="brand-title">RoboTech Solutions EMS</div>
-            <div class="muted" style="font-size:.9rem">Admin</div>
-          </div>
-        </div>
+        <div class="brand"><div class="dot"></div><div><div class="brand-title">RoboTech Solutions EMS</div><div class="muted" style="font-size:.9rem">Admin</div></div></div>
         <nav class="nav">
-          <a href="./dashboard.html">
-            <span class="nav-icon">D</span><span>Dashboard</span>
-          </a>
-          <a href="./employees.html">
-            <span class="nav-icon">E</span><span>Employees</span>
-          </a>
-          <a href="./attendance.html">
-            <span class="nav-icon">A</span><span>Attendance</span>
-          </a>
-          <a href="./leave.html">
-            <span class="nav-icon">L</span><span>Leave</span>
-          </a>
-          <a href="./payroll.html">
-            <span class="nav-icon">P</span><span>Payroll</span>
-          </a>
-          <a class="active" href="./reports.html">
-            <span class="nav-icon">R</span><span>Reports</span>
-          </a>
-          <a href="./settings.html">
-            <span class="nav-icon">S</span><span>Settings</span>
-          </a>
-          <a href="./notifications.html">
-            <span class="nav-icon">N</span><span>Notifications</span>
-          </a>
-          <a href="./activity-logs.html">
-            <span class="nav-icon">A</span><span>Activity logs</span>
-          </a>
+          <a href="./dashboard.html"><span class="nav-icon">D</span><span>Dashboard</span></a>
+          <a href="./employees.html"><span class="nav-icon">E</span><span>Employees</span></a>
+          <a href="./attendance.html"><span class="nav-icon">A</span><span>Attendance</span></a>
+          <a href="./leave.html"><span class="nav-icon">L</span><span>Leave</span></a>
+          <a href="./payroll.html"><span class="nav-icon">P</span><span>Payroll</span></a>
+          <a class="active" href="./reports.html"><span class="nav-icon">R</span><span>Reports</span></a>
+          <a href="./settings.html"><span class="nav-icon">S</span><span>Settings</span></a>
+          <a href="./notifications.html"><span class="nav-icon">N</span><span>Notifications</span></a>
+          <a href="./activity-logs.html"><span class="nav-icon">A</span><span>Activity logs</span></a>
         </nav>
-
-        <div class="sidebar-profile">
-          <div class="sidebar-profile-main">
-            <div class="avatar-circle">AD</div>
-            <div>
-              <div class="sidebar-profile-name">Admin User</div>
-              <div class="sidebar-profile-role">Administrator</div>
-            </div>
-          </div>
-          <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">Manage profile</a>
-        </div>
-
-        <div class="sidebar-footer">
-          <hr />
-          <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
-        </div>
+        <div class="sidebar-profile"><div class="sidebar-profile-main"><div class="avatar-circle">AD</div><div><div class="sidebar-profile-name">Admin User</div><div class="sidebar-profile-role">Administrator</div></div></div><a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">Manage profile</a></div>
+        <div class="sidebar-footer"><hr /><div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div></div>
       </aside>
 
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">Reports & Analytics</div>
-            <div class="welcome-sub">Full access. Filter by date, department, role. Export to PDF or Excel.</div>
+            <div class="welcome-main" id="welcomeMain">Reports & Analytics</div>
+            <div class="welcome-sub" id="welcomeSub">Generate reports and analyze trends.</div>
           </div>
           <div class="topbar-actions">
-            <button class="icon-button" type="button" aria-label="Notifications">
-              <span class="icon-bell"></span>
-            </button>
-            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
-              <span class="avatar-circle small">AD</span>
-              <span class="topbar-profile-name">Admin User</span>
-            </button>
+            <button class="icon-button" type="button" aria-label="Notifications"><span class="icon-bell"></span></button>
+            <button class="topbar-profile" type="button" onclick="location.href='./profile.html'"><span class="avatar-circle small">AD</span><span class="topbar-profile-name">Admin User</span></button>
             <button class="btn ghost" id="logoutBtn">Logout</button>
           </div>
         </div>
 
         <div class="card">
-          <h2>Filter Reports</h2>
-          <p class="muted">Filter by date range, department, or role.</p>
+          <div class="card-header-row">
+            <h2>Filter Reports</h2>
+            <div class="download-actions">
+              <button class="btn primary" type="button" id="adminReportsApplyBtn">Apply</button>
+              <button class="btn ghost" type="button" id="adminReportsResetBtn">Reset</button>
+            </div>
+          </div>
           <div class="form" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px">
-            <label style="display:inline-flex;align-items:center;gap:6px">
-              From: <input type="date" />
-            </label>
-            <label style="display:inline-flex;align-items:center;gap:6px">
-              To: <input type="date" />
-            </label>
-            <label style="display:inline-flex;align-items:center;gap:6px">
-              Department: <select><option value="">All</option><option>IT</option><option>HR</option><option>Accounts</option><option>Sales &amp; Marketing</option></select>
-            </label>
-            <label style="display:inline-flex;align-items:center;gap:6px">
-              Role: <select><option value="">All</option><option>Admin</option><option>MD</option><option>HR</option><option>Supervisor</option><option>Employee</option></select>
-            </label>
+            <label>From <input type="date" id="adminReportsFromDate" /></label>
+            <label>To <input type="date" id="adminReportsToDate" /></label>
+            <label>Department <select id="adminReportsDepartment"></select></label>
+            <label>Role <select id="adminReportsRole"><option value="">All</option><option value="admin">Admin</option><option value="md">MD</option><option value="hr">HR</option><option value="supervisor">Supervisor</option><option value="employee">Employee</option></select></label>
           </div>
         </div>
 
-        <div class="card">
-          <h2>Available Reports</h2>
-          <p class="muted">Employee list, attendance (daily/monthly), leave usage, payroll summary.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card">
-              <div class="mini-title">Employee List Report</div>
-              <div class="mini-body">Full employee directory with department and role</div>
-              <div class="download-actions" style="margin-top:8px">
-                <button class="btn primary" type="button">PDF</button>
-                <button class="btn ghost" type="button">Excel</button>
-              </div>
+        <div class="grid two">
+          <div class="card">
+            <div class="card-header-row">
+              <h2>Attendance Summary</h2>
+              <button class="btn ghost" type="button" id="adminExportAttendanceBtn">Export CSV</button>
             </div>
-            <div class="mini-card">
-              <div class="mini-title">Attendance Report</div>
-              <div class="mini-body">Daily or monthly attendance summary</div>
-              <div class="download-actions" style="margin-top:8px">
-                <button class="btn primary" type="button">PDF</button>
-                <button class="btn ghost" type="button">Excel</button>
-              </div>
+            <div id="adminAttendanceChart" class="bar-chart"></div>
+          </div>
+          <div class="card">
+            <div class="card-header-row">
+              <h2>Leave Summary</h2>
+              <button class="btn ghost" type="button" id="adminExportLeaveBtn">Export CSV</button>
             </div>
-            <div class="mini-card">
-              <div class="mini-title">Leave Usage Report</div>
-              <div class="mini-body">Leave utilization by employee and department</div>
-              <div class="download-actions" style="margin-top:8px">
-                <button class="btn primary" type="button">PDF</button>
-                <button class="btn ghost" type="button">Excel</button>
-              </div>
+            <div id="adminLeaveChart" class="bar-chart"></div>
+          </div>
+          <div class="card">
+            <div class="card-header-row">
+              <h2>Payroll Summary</h2>
+              <button class="btn ghost" type="button" id="adminExportPayrollBtn">Export CSV</button>
             </div>
-            <div class="mini-card">
-              <div class="mini-title">Payroll Summary Report</div>
-              <div class="mini-body">Monthly payroll cost and breakdown</div>
-              <div class="download-actions" style="margin-top:8px">
-                <button class="btn primary" type="button">PDF</button>
-                <button class="btn ghost" type="button">Excel</button>
-              </div>
-            </div>
+            <div id="adminPayrollChart" class="bar-chart"></div>
+          </div>
+          <div class="card">
+            <h2>Report Stats</h2>
+            <div class="scroll-cards" id="adminReportStatsCards"></div>
           </div>
         </div>
-
-        <div class="card">
-          <h2>Visual analytics</h2>
-          <p class="muted">Charts will appear here once report data is available.</p>
-        </div>
-
       </section>
     </div>
   </body>
 </html>
-
