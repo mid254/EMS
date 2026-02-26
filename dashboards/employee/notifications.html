@@ -62,16 +62,16 @@
           </div>
         </div>
         <div class="card">
-          <h2>Leave Alerts</h2>
-          <div class="scroll-cards" style="margin-top:12px" id="leaveAlertsList"></div>
-        </div>
-        <div class="card">
-          <h2>Attendance Reminders</h2>
-          <div class="scroll-cards" style="margin-top:12px" id="attendanceAlertsList"></div>
-        </div>
-        <div class="card">
-          <h2>Announcements</h2>
-          <div class="scroll-cards" style="margin-top:12px" id="announcementList"></div>
+          <div class="card-header-row">
+            <h2>Notifications</h2>
+            <div class="download-actions">
+              <button class="btn ghost notif-filter-btn active" type="button" id="notifFilterAll">All</button>
+              <button class="btn ghost notif-filter-btn" type="button" id="notifFilterUnread">Unread</button>
+              <button class="btn ghost notif-filter-btn" type="button" id="notifFilterRead">Read</button>
+              <button class="btn primary" type="button" id="notifMarkAllReadBtn">Mark All Read</button>
+            </div>
+          </div>
+          <div class="notif-list" id="employeeNotificationsList"></div>
         </div>
       </section>
     </div>

@@ -61,43 +61,44 @@
             <button class="btn ghost" id="logoutBtn">Logout</button>
           </div>
         </div>
-        <div class="card">
-          <div class="card-header-row">
-            <h2>Apply for Leave</h2>
-            <button class="btn primary" type="button" id="newLeaveRequestBtn">+ New Leave Request</button>
+        <div class="grid two employee-leave-grid">
+          <div class="card">
+            <div class="card-header-row">
+              <h2>Apply for Leave</h2>
+              <button class="btn primary" type="button" id="newLeaveRequestBtn">+ New Leave Request</button>
+            </div>
+            <p class="muted">Apply for leave. View approval status and leave history.</p>
+            <div class="form" style="margin-top:12px">
+              <label>Leave type <select id="leaveType"><option>Annual</option><option>Sick</option><option>Maternity</option><option>Other</option></select></label>
+              <label>Start date <input type="date" id="leaveStartDate" /></label>
+              <label>End date <input type="date" id="leaveEndDate" /></label>
+              <label>Reason <input type="text" id="leaveReason" placeholder="Reason for leave" /></label>
+              <button class="btn primary" type="button" id="submitLeaveBtn">Submit Request</button>
+              <span id="leaveMsg" class="muted" aria-live="polite"></span>
+            </div>
           </div>
-          <p class="muted">Apply for leave. View approval status and leave history.</p>
-          <div class="form" style="margin-top:12px">
-            <label>Leave type <select id="leaveType"><option>Annual</option><option>Sick</option><option>Maternity</option><option>Other</option></select></label>
-            <label>Start date <input type="date" id="leaveStartDate" /></label>
-            <label>End date <input type="date" id="leaveEndDate" /></label>
-            <label>Reason <input type="text" id="leaveReason" placeholder="Reason for leave" /></label>
-            <button class="btn primary" type="button" id="submitLeaveBtn">Submit Request</button>
-            <span id="leaveMsg" class="muted" aria-live="polite"></span>
-          </div>
-        </div>
-        <div class="card">
-          <h2>My Leave History</h2>
-          <p class="muted">Leave type, Start/End date, Reason, Status (Pending / Approved / Rejected).</p>
-          <div style="overflow:auto;margin-top:12px">
-            <table>
-              <thead>
-                <tr>
-                  <th>Leave Type</th>
-                  <th>Start</th>
-                  <th>End</th>
-                  <th>Reason</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="myLeaveHistoryBody">
-                <tr>
-                  <td colspan="5" class="muted" style="text-align:center;padding:18px">
-                    No leave history to display yet.
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="card">
+            <h2>My Leave History</h2>
+            <div style="overflow:auto;margin-top:12px">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Leave Type</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="myLeaveHistoryBody">
+                  <tr>
+                    <td colspan="5" class="muted" style="text-align:center;padding:18px">
+                      No leave history to display yet.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>

@@ -31,6 +31,11 @@ function getPath() {
   return (window.location.pathname || "").toLowerCase();
 }
 
+let employeeNotificationsState = {
+  filter: "all",
+  items: [],
+};
+
 async function getDepartmentName(departmentId) {
   if (!departmentId || !window.supabaseClient) return "";
   const { data } = await window.supabaseClient
@@ -448,56 +453,183 @@ function renderNotifications(targetId, items) {
     .join("");
 }
 
+function buildNotificationTitle(action, entity) {
+  const raw = safeText(action, "Update").replaceAll("_", " ");
+  const title = raw.charAt(0).toUpperCase() + raw.slice(1);
+  if (!entity) return title;
+  return `${title} (${safeText(entity, "system")})`;
+}
+
+function applyNotificationFilter(filterKey) {
+  const list = document.getElementById("employeeNotificationsList");
+  if (!list) return;
+
+  ["notifFilterAll", "notifFilterUnread", "notifFilterRead"].forEach((id) => {
+    const btn = document.getElementById(id);
+    if (!btn) return;
+    btn.classList.remove("active");
+  });
+
+  if (filterKey === "unread") {
+    document.getElementById("notifFilterUnread")?.classList.add("active");
+  } else if (filterKey === "read") {
+    document.getElementById("notifFilterRead")?.classList.add("active");
+  } else {
+    document.getElementById("notifFilterAll")?.classList.add("active");
+  }
+
+  employeeNotificationsState.filter = filterKey;
+  const filtered = employeeNotificationsState.items.filter((item) => {
+    if (filterKey === "read") return !!item.is_read;
+    if (filterKey === "unread") return !item.is_read;
+    return true;
+  });
+
+  if (!filtered.length) {
+    list.innerHTML = '<div class="mini-card"><div class="mini-title">No notifications</div><div class="mini-body">No notifications in this filter.</div></div>';
+    return;
+  }
+
+  list.innerHTML = filtered
+    .map((item) => {
+      const stateClass = item.is_read ? "read" : "unread";
+      const actionBtn = item.is_read
+        ? `<button class="btn ghost notif-mark-unread-btn" type="button" data-id="${item.id}">Mark as Unread</button>`
+        : `<button class="btn ghost notif-mark-read-btn" type="button" data-id="${item.id}">Mark as Read</button>`;
+      return `
+        <div class="notif-item ${stateClass}">
+          <div class="notif-item-head">
+            <div class="notif-item-title">${buildNotificationTitle(item.action, item.entity)}</div>
+            <div class="notif-item-time">${formatDateTime(item.created_at)}</div>
+          </div>
+          <div class="notif-item-body">${safeText(item.body, "No details available.")}</div>
+          <div class="notif-item-actions">
+            ${actionBtn}
+            <button class="btn ghost notif-delete-btn" type="button" data-id="${item.id}">Delete</button>
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+async function updateNotificationRow(id, patchDetails) {
+  const sb = window.supabaseClient;
+  if (!sb) return false;
+
+  const item = employeeNotificationsState.items.find((x) => x.id === id);
+  if (!item) return false;
+  const mergedDetails = { ...(item.details || {}), ...(patchDetails || {}) };
+
+  const { error } = await sb.from("activity_logs").update({ details: mergedDetails }).eq("id", id);
+  if (error) {
+    console.error("Failed updating notification row:", error);
+    return false;
+  }
+
+  item.details = mergedDetails;
+  item.is_read = !!mergedDetails.notification_read;
+  item.deleted = !!mergedDetails.notification_deleted;
+  return true;
+}
+
+function wireNotificationActions() {
+  const list = document.getElementById("employeeNotificationsList");
+  if (!list) return;
+
+  list.addEventListener("click", async (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+    const id = target.dataset.id;
+    if (!id) return;
+
+    if (target.classList.contains("notif-mark-read-btn")) {
+      const ok = await updateNotificationRow(id, {
+        notification_read: true,
+        notification_read_at: new Date().toISOString(),
+      });
+      if (ok) applyNotificationFilter(employeeNotificationsState.filter);
+      return;
+    }
+
+    if (target.classList.contains("notif-mark-unread-btn")) {
+      const ok = await updateNotificationRow(id, {
+        notification_read: false,
+        notification_read_at: null,
+      });
+      if (ok) applyNotificationFilter(employeeNotificationsState.filter);
+      return;
+    }
+
+    if (target.classList.contains("notif-delete-btn")) {
+      const ok = await updateNotificationRow(id, {
+        notification_deleted: true,
+        notification_deleted_at: new Date().toISOString(),
+      });
+      if (ok) {
+        employeeNotificationsState.items = employeeNotificationsState.items.filter((x) => x.id !== id);
+        applyNotificationFilter(employeeNotificationsState.filter);
+      }
+    }
+  });
+
+  document.getElementById("notifFilterAll")?.addEventListener("click", () => applyNotificationFilter("all"));
+  document.getElementById("notifFilterUnread")?.addEventListener("click", () => applyNotificationFilter("unread"));
+  document.getElementById("notifFilterRead")?.addEventListener("click", () => applyNotificationFilter("read"));
+  document.getElementById("notifMarkAllReadBtn")?.addEventListener("click", async () => {
+    const unread = employeeNotificationsState.items.filter((item) => !item.is_read);
+    await Promise.all(
+      unread.map((item) =>
+        updateNotificationRow(item.id, {
+          notification_read: true,
+          notification_read_at: new Date().toISOString(),
+        })
+      )
+    );
+    applyNotificationFilter(employeeNotificationsState.filter);
+  });
+}
+
 async function loadNotifications() {
-  if (!window.supabaseClient || !document.getElementById("leaveAlertsList")) return;
+  if (!window.supabaseClient || !document.getElementById("employeeNotificationsList")) return;
   const sb = window.supabaseClient;
 
-  const { data: leaveRows } = await sb
-    .from("leaves")
-    .select("leave_type, start_date, end_date, status")
-    .order("created_at", { ascending: false })
-    .limit(5);
-
-  const leaveItems = (leaveRows || []).map((row) => ({
-    title: `Leave ${safeText(row.status, "pending")}`,
-    body: `${safeText(row.leave_type, "Leave")} (${formatDate(row.start_date)} - ${formatDate(row.end_date)})`,
-  }));
-  renderNotifications("leaveAlertsList", leaveItems);
-
-  const today = new Date();
-  const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate()).toISOString();
-  const todayEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59).toISOString();
-  const { data: attendanceRows } = await sb
-    .from("attendance")
-    .select("clock_in, clock_out")
-    .gte("clock_in", todayStart)
-    .lte("clock_in", todayEnd)
-    .order("clock_in", { ascending: false })
-    .limit(1);
-
-  const attendanceItems = !attendanceRows?.length
-    ? [{ title: "Clock-in Reminder", body: "No clock-in record for today yet." }]
-    : [
-        {
-          title: "Attendance Update",
-          body: attendanceRows[0].clock_out
-            ? `You completed today's session at ${formatDateTime(attendanceRows[0].clock_out)}.`
-            : `You clocked in at ${formatDateTime(attendanceRows[0].clock_in)} and are still clocked in.`,
-        },
-      ];
-  renderNotifications("attendanceAlertsList", attendanceItems);
-
-  const { data: activityRows } = await sb
+  const { data: activityRows, error } = await sb
     .from("activity_logs")
-    .select("action, created_at")
+    .select("id, action, entity, details, created_at")
     .order("created_at", { ascending: false })
-    .limit(5);
+    .limit(30);
 
-  const announcementItems = (activityRows || []).map((row) => ({
-    title: safeText(row.action, "Update"),
-    body: `Recorded on ${formatDateTime(row.created_at)}`,
-  }));
-  renderNotifications("announcementList", announcementItems);
+  if (error) {
+    const list = document.getElementById("employeeNotificationsList");
+    if (list) {
+      list.innerHTML = '<div class="mini-card"><div class="mini-title">Error</div><div class="mini-body">Unable to load notifications.</div></div>';
+    }
+    return;
+  }
+
+  employeeNotificationsState.items = (activityRows || [])
+    .map((row) => {
+      const details = row.details || {};
+      const body = safeText(
+        details.message,
+        details.reason || details.leave_type || details.status || details.address || details.phone || ""
+      );
+      return {
+        id: row.id,
+        action: row.action,
+        entity: row.entity,
+        details,
+        body,
+        created_at: row.created_at,
+        is_read: !!details.notification_read,
+        deleted: !!details.notification_deleted,
+      };
+    })
+    .filter((row) => !row.deleted);
+
+  wireNotificationActions();
+  applyNotificationFilter("all");
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
