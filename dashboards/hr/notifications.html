@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RoboTech Solutions EMS - Supervisor Notifications</title>
+    <title>RoboTech Solutions EMS - HR Notifications</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
     <script defer src="../../assets/js/roles.js"></script>
-    <script defer src="../../assets/js/supervisor.js"></script>
+    <script defer src="../../assets/js/hr.js"></script>
   </head>
   <body>
     <div class="app">
@@ -19,24 +19,26 @@
           <div class="dot"></div>
           <div>
             <div class="brand-title">RoboTech Solutions EMS</div>
-            <div class="muted" style="font-size:.9rem">Supervisor</div>
+            <div class="muted" style="font-size:.9rem">Human Resources</div>
           </div>
         </div>
         <nav class="nav">
           <a href="./dashboard.html"><span class="nav-icon">D</span><span>Dashboard</span></a>
-          <a href="./department.html"><span class="nav-icon">D</span><span>My Department</span></a>
+          <a href="./employees.html"><span class="nav-icon">E</span><span>Employees</span></a>
           <a href="./attendance.html"><span class="nav-icon">A</span><span>Attendance</span></a>
-          <a href="./leave.html"><span class="nav-icon">L</span><span>Leave Requests</span></a>
-          <a href="./tasks.html"><span class="nav-icon">T</span><span>Tasks</span></a>
+          <a href="./leave.html"><span class="nav-icon">L</span><span>Leave Management</span></a>
+          <a href="./payroll.html"><span class="nav-icon">P</span><span>Payroll Support</span></a>
+          <a href="./reports.html"><span class="nav-icon">R</span><span>Reports</span></a>
+          <a href="./policies.html"><span class="nav-icon">P</span><span>Policies</span></a>
           <a class="active" href="./notifications.html"><span class="nav-icon">N</span><span>Notifications</span></a>
           <a href="./profile.html"><span class="nav-icon">P</span><span>My Profile</span></a>
         </nav>
         <div class="sidebar-profile">
           <div class="sidebar-profile-main">
-            <div class="avatar-circle">S</div>
+            <div class="avatar-circle">HR</div>
             <div>
-              <div class="sidebar-profile-name">Supervisor</div>
-              <div class="sidebar-profile-role">Department</div>
+              <div class="sidebar-profile-name">HR Officer</div>
+              <div class="sidebar-profile-role">Human Resources</div>
             </div>
           </div>
           <a class="btn ghost sidebar-profile-btn text-white" href="./profile.html">My Profile</a>
@@ -50,13 +52,13 @@
         <div class="topbar">
           <div class="welcome">
             <div class="welcome-main" id="welcomeMain">Welcome</div>
-            <div class="welcome-sub" id="welcomeSub">Supervisor notifications</div>
+            <div class="welcome-sub" id="welcomeSub">HR notifications</div>
           </div>
           <div class="topbar-actions">
             <button class="icon-button" type="button" aria-label="Notifications"><span class="icon-bell"></span></button>
             <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
-              <span class="avatar-circle small">S</span>
-              <span class="topbar-profile-name">Supervisor</span>
+              <span class="avatar-circle small">HR</span>
+              <span class="topbar-profile-name">HR Officer</span>
             </button>
             <button class="btn ghost" id="logoutBtn">Logout</button>
           </div>

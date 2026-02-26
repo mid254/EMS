@@ -20,9 +20,11 @@ function wireNotificationButtons() {
   const notifButtons = document.querySelectorAll('button.icon-button[aria-label="Notifications"]');
   notifButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      if (window.location.pathname.includes("/dashboards/employee/")) {
-        window.location.href = "/dashboards/employee/notifications.html";
-      }
+      const path = window.location.pathname || "";
+      if (path.includes("/dashboards/employee/")) window.location.href = "/dashboards/employee/notifications.html";
+      else if (path.includes("/dashboards/hr/")) window.location.href = "/dashboards/hr/notifications.html";
+      else if (path.includes("/dashboards/managers/")) window.location.href = "/dashboards/managers/notifications.html";
+      else if (path.includes("/dashboards/supervisor/")) window.location.href = "/dashboards/supervisor/notifications.html";
     });
   });
 }

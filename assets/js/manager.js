@@ -12,6 +12,11 @@ function setInline(id, msg, isError = false) {
   el.style.color = isError ? "var(--danger)" : "var(--muted)";
 }
 
+const mdNotificationsState = {
+  items: [],
+  filter: "all",
+};
+
 async function logMdActivity(sb, profile, action, entity, details = {}) {
   await sb.from("activity_logs").insert({
     actor_user_id: profile.id,
@@ -425,6 +430,128 @@ async function loadMdProfile(sb, profile) {
   });
 }
 
+function mdNotificationTitle(action, entity) {
+  const raw = String(action || "Update").replaceAll("_", " ");
+  const title = raw.charAt(0).toUpperCase() + raw.slice(1);
+  return entity ? `${title} (${entity})` : title;
+}
+
+function mdApplyNotificationFilter(filterKey) {
+  const list = document.getElementById("employeeNotificationsList");
+  if (!list) return;
+  ["notifFilterAll", "notifFilterUnread", "notifFilterRead"].forEach((id) => document.getElementById(id)?.classList.remove("active"));
+  if (filterKey === "unread") document.getElementById("notifFilterUnread")?.classList.add("active");
+  else if (filterKey === "read") document.getElementById("notifFilterRead")?.classList.add("active");
+  else document.getElementById("notifFilterAll")?.classList.add("active");
+
+  mdNotificationsState.filter = filterKey;
+  const filtered = mdNotificationsState.items.filter((item) => {
+    if (filterKey === "read") return !!item.is_read;
+    if (filterKey === "unread") return !item.is_read;
+    return true;
+  });
+  if (!filtered.length) {
+    list.innerHTML = '<div class="mini-card"><div class="mini-title">No notifications</div><div class="mini-body">No notifications in this filter.</div></div>';
+    return;
+  }
+  list.innerHTML = filtered
+    .map((item) => {
+      const stateClass = item.is_read ? "read" : "unread";
+      const actionBtn = item.is_read
+        ? `<button class="btn ghost notif-mark-unread-btn" type="button" data-id="${item.id}">Mark as Unread</button>`
+        : `<button class="btn ghost notif-mark-read-btn" type="button" data-id="${item.id}">Mark as Read</button>`;
+      return `<div class="notif-item ${stateClass}">
+        <div class="notif-item-head">
+          <div class="notif-item-title">${mdNotificationTitle(item.action, item.entity)}</div>
+          <div class="notif-item-time">${new Date(item.created_at).toLocaleString()}</div>
+        </div>
+        <div class="notif-item-body">${item.body || "No details available."}</div>
+        <div class="notif-item-actions">
+          ${actionBtn}
+          <button class="btn ghost notif-delete-btn" type="button" data-id="${item.id}">Delete</button>
+        </div>
+      </div>`;
+    })
+    .join("");
+}
+
+async function mdUpdateNotificationRow(sb, id, patchDetails) {
+  const item = mdNotificationsState.items.find((x) => x.id === id);
+  if (!item) return false;
+  const merged = { ...(item.details || {}), ...(patchDetails || {}) };
+  const { error } = await sb.from("activity_logs").update({ details: merged }).eq("id", id);
+  if (error) return false;
+  item.details = merged;
+  item.is_read = !!merged.notification_read;
+  item.deleted = !!merged.notification_deleted;
+  return true;
+}
+
+function wireMdNotificationActions(sb) {
+  const list = document.getElementById("employeeNotificationsList");
+  if (!list) return;
+  list.addEventListener("click", async (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+    const id = target.dataset.id;
+    if (!id) return;
+    if (target.classList.contains("notif-mark-read-btn")) {
+      if (await mdUpdateNotificationRow(sb, id, { notification_read: true, notification_read_at: new Date().toISOString() })) {
+        mdApplyNotificationFilter(mdNotificationsState.filter);
+      }
+      return;
+    }
+    if (target.classList.contains("notif-mark-unread-btn")) {
+      if (await mdUpdateNotificationRow(sb, id, { notification_read: false, notification_read_at: null })) {
+        mdApplyNotificationFilter(mdNotificationsState.filter);
+      }
+      return;
+    }
+    if (target.classList.contains("notif-delete-btn")) {
+      if (await mdUpdateNotificationRow(sb, id, { notification_deleted: true, notification_deleted_at: new Date().toISOString() })) {
+        mdNotificationsState.items = mdNotificationsState.items.filter((x) => x.id !== id);
+        mdApplyNotificationFilter(mdNotificationsState.filter);
+      }
+    }
+  });
+
+  document.getElementById("notifFilterAll")?.addEventListener("click", () => mdApplyNotificationFilter("all"));
+  document.getElementById("notifFilterUnread")?.addEventListener("click", () => mdApplyNotificationFilter("unread"));
+  document.getElementById("notifFilterRead")?.addEventListener("click", () => mdApplyNotificationFilter("read"));
+  document.getElementById("notifMarkAllReadBtn")?.addEventListener("click", async () => {
+    const unread = mdNotificationsState.items.filter((x) => !x.is_read);
+    await Promise.all(unread.map((x) => mdUpdateNotificationRow(sb, x.id, { notification_read: true, notification_read_at: new Date().toISOString() })));
+    mdApplyNotificationFilter(mdNotificationsState.filter);
+  });
+}
+
+async function loadMdNotifications(sb) {
+  if (!document.getElementById("employeeNotificationsList")) return;
+  const { data, error } = await sb.from("activity_logs").select("id,action,entity,details,created_at").order("created_at", { ascending: false }).limit(60);
+  if (error) {
+    document.getElementById("employeeNotificationsList").innerHTML =
+      '<div class="mini-card"><div class="mini-title">Error</div><div class="mini-body">Unable to load notifications.</div></div>';
+    return;
+  }
+  mdNotificationsState.items = (data || [])
+    .map((row) => {
+      const d = row.details || {};
+      return {
+        id: row.id,
+        action: row.action,
+        entity: row.entity,
+        details: d,
+        body: d.message || d.reason || d.status || d.leave_type || "",
+        created_at: row.created_at,
+        is_read: !!d.notification_read,
+        deleted: !!d.notification_deleted,
+      };
+    })
+    .filter((x) => !x.deleted);
+  wireMdNotificationActions(sb);
+  mdApplyNotificationFilter("all");
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   const profile = await requireRole([Roles.manager, Roles.admin]);
   if (!profile) return;
@@ -442,5 +569,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadMdReports(sb, profile),
     loadMdAnnouncements(sb, profile),
     loadMdProfile(sb, profile),
+    loadMdNotifications(sb),
   ]);
 });

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RoboTech Solutions EMS - MD Attendance Insights</title>
+    <title>RoboTech Solutions EMS - MD Notifications</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -32,7 +32,7 @@
           <a href="./employees.html">
             <span class="nav-icon">E</span><span>Employees</span>
           </a>
-          <a class="active" href="./attendance.html">
+          <a href="./attendance.html">
             <span class="nav-icon">A</span><span>Attendance Insights</span>
           </a>
           <a href="./leave.html">
@@ -47,7 +47,12 @@
           <a href="./announcements.html">
             <span class="nav-icon">A</span><span>Announcements</span>
           </a>
-          <a href="./notifications.html"><span class="nav-icon">N</span><span>Notifications</span></a><a href="./profile.html"><span class="nav-icon">P</span><span>My Profile</span></a>
+          <a class="active" href="./notifications.html">
+            <span class="nav-icon">N</span><span>Notifications</span>
+          </a>
+          <a href="./profile.html">
+            <span class="nav-icon">P</span><span>My Profile</span>
+          </a>
         </nav>
 
         <div class="sidebar-profile">
@@ -66,17 +71,14 @@
           <div class="sidebar-footer-text">&copy; RoboTech Solutions EMS 2026</div>
         </div>
       </aside>
-
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main" id="welcomeMain">Attendance &amp; Productivity Insights</div>
-            <div class="welcome-sub" id="welcomeSub">Company-wide summary, late arrivals, absentee trends, department comparison</div>
+            <div class="welcome-main" id="welcomeMain">Welcome</div>
+            <div class="welcome-sub" id="welcomeSub">Managing Director notifications</div>
           </div>
           <div class="topbar-actions">
-            <button class="icon-button" type="button" aria-label="Notifications">
-              <span class="icon-bell"></span>
-            </button>
+            <button class="icon-button" type="button" aria-label="Notifications"><span class="icon-bell"></span></button>
             <button class="topbar-profile" type="button" onclick="location.href='./profile.html'">
               <span class="avatar-circle small">MD</span>
               <span class="topbar-profile-name">Managing Director</span>
@@ -84,41 +86,19 @@
             <button class="btn ghost" id="logoutBtn">Logout</button>
           </div>
         </div>
-
         <div class="card">
-          <h2>Daily Attendance Chart</h2>
-          <p class="muted">Company-wide attendance overview.</p>
-          <div class="chart-grid" style="margin-top:12px">
-            <div class="chart-block">
-              <div class="chart-title">Present vs Absent (Today)</div>
-              <p class="muted" style="margin:0" id="mdAttPresentAbsentSummary">--</p>
-            </div>
-            <div class="chart-block">
-              <div class="chart-title">Late Arrivals &amp; Absentee Trends</div>
-              <p class="muted" style="margin:0" id="mdAttLateAbsentSummary">--</p>
+          <div class="card-header-row">
+            <h2>Notifications</h2>
+            <div class="download-actions">
+              <button class="btn ghost notif-filter-btn active" type="button" id="notifFilterAll">All</button>
+              <button class="btn ghost notif-filter-btn" type="button" id="notifFilterUnread">Unread</button>
+              <button class="btn ghost notif-filter-btn" type="button" id="notifFilterRead">Read</button>
+              <button class="btn primary" type="button" id="notifMarkAllReadBtn">Mark All Read</button>
             </div>
           </div>
-        </div>
-
-        <div class="card">
-          <h2>Monthly Attendance Report</h2>
-          <p class="muted">Monthly summaries will appear here once data is available.</p>
-          <div class="scroll-cards" style="margin-top:12px" id="mdMonthlyAttendanceCards"></div>
-        </div>
-
-        <div class="card">
-          <h2>Department Comparison Graph</h2>
-          <p class="muted">Attendance by department.</p>
-          <div class="chart-grid" style="margin-top:12px">
-            <div class="chart-block">
-              <div class="chart-title">Attendance by Department</div>
-              <p class="muted" style="margin:0" id="mdDepartmentAttendanceSummary">--</p>
-            </div>
-          </div>
+          <div class="notif-list" id="employeeNotificationsList"></div>
         </div>
       </section>
     </div>
   </body>
 </html>
-
-

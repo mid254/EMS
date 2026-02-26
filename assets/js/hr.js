@@ -12,6 +12,11 @@ function hrSetInline(id, msg, isError = false) {
   el.style.color = isError ? "var(--danger)" : "var(--muted)";
 }
 
+const hrNotificationsState = {
+  items: [],
+  filter: "all",
+};
+
 async function hrLog(sb, profile, action, entity, details = {}) {
   await sb.from("activity_logs").insert({
     actor_user_id: profile.id,
@@ -287,6 +292,133 @@ async function loadHrProfile(sb, profile) {
   });
 }
 
+function hrNotificationTitle(action, entity) {
+  const raw = String(action || "Update").replaceAll("_", " ");
+  const title = raw.charAt(0).toUpperCase() + raw.slice(1);
+  return entity ? `${title} (${entity})` : title;
+}
+
+function hrApplyNotificationFilter(filterKey) {
+  const list = document.getElementById("employeeNotificationsList");
+  if (!list) return;
+
+  ["notifFilterAll", "notifFilterUnread", "notifFilterRead"].forEach((id) => {
+    document.getElementById(id)?.classList.remove("active");
+  });
+  if (filterKey === "unread") document.getElementById("notifFilterUnread")?.classList.add("active");
+  else if (filterKey === "read") document.getElementById("notifFilterRead")?.classList.add("active");
+  else document.getElementById("notifFilterAll")?.classList.add("active");
+
+  hrNotificationsState.filter = filterKey;
+  const filtered = hrNotificationsState.items.filter((item) => {
+    if (filterKey === "read") return !!item.is_read;
+    if (filterKey === "unread") return !item.is_read;
+    return true;
+  });
+
+  if (!filtered.length) {
+    list.innerHTML = '<div class="mini-card"><div class="mini-title">No notifications</div><div class="mini-body">No notifications in this filter.</div></div>';
+    return;
+  }
+
+  list.innerHTML = filtered
+    .map((item) => {
+      const stateClass = item.is_read ? "read" : "unread";
+      const actionBtn = item.is_read
+        ? `<button class="btn ghost notif-mark-unread-btn" type="button" data-id="${item.id}">Mark as Unread</button>`
+        : `<button class="btn ghost notif-mark-read-btn" type="button" data-id="${item.id}">Mark as Read</button>`;
+      return `<div class="notif-item ${stateClass}">
+        <div class="notif-item-head">
+          <div class="notif-item-title">${hrNotificationTitle(item.action, item.entity)}</div>
+          <div class="notif-item-time">${new Date(item.created_at).toLocaleString()}</div>
+        </div>
+        <div class="notif-item-body">${item.body || "No details available."}</div>
+        <div class="notif-item-actions">
+          ${actionBtn}
+          <button class="btn ghost notif-delete-btn" type="button" data-id="${item.id}">Delete</button>
+        </div>
+      </div>`;
+    })
+    .join("");
+}
+
+async function hrUpdateNotificationRow(sb, id, patchDetails) {
+  const item = hrNotificationsState.items.find((x) => x.id === id);
+  if (!item) return false;
+  const merged = { ...(item.details || {}), ...(patchDetails || {}) };
+  const { error } = await sb.from("activity_logs").update({ details: merged }).eq("id", id);
+  if (error) return false;
+  item.details = merged;
+  item.is_read = !!merged.notification_read;
+  item.deleted = !!merged.notification_deleted;
+  return true;
+}
+
+function wireHrNotificationActions(sb) {
+  const list = document.getElementById("employeeNotificationsList");
+  if (!list) return;
+  list.addEventListener("click", async (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+    const id = target.dataset.id;
+    if (!id) return;
+    if (target.classList.contains("notif-mark-read-btn")) {
+      if (await hrUpdateNotificationRow(sb, id, { notification_read: true, notification_read_at: new Date().toISOString() })) {
+        hrApplyNotificationFilter(hrNotificationsState.filter);
+      }
+      return;
+    }
+    if (target.classList.contains("notif-mark-unread-btn")) {
+      if (await hrUpdateNotificationRow(sb, id, { notification_read: false, notification_read_at: null })) {
+        hrApplyNotificationFilter(hrNotificationsState.filter);
+      }
+      return;
+    }
+    if (target.classList.contains("notif-delete-btn")) {
+      if (await hrUpdateNotificationRow(sb, id, { notification_deleted: true, notification_deleted_at: new Date().toISOString() })) {
+        hrNotificationsState.items = hrNotificationsState.items.filter((x) => x.id !== id);
+        hrApplyNotificationFilter(hrNotificationsState.filter);
+      }
+    }
+  });
+
+  document.getElementById("notifFilterAll")?.addEventListener("click", () => hrApplyNotificationFilter("all"));
+  document.getElementById("notifFilterUnread")?.addEventListener("click", () => hrApplyNotificationFilter("unread"));
+  document.getElementById("notifFilterRead")?.addEventListener("click", () => hrApplyNotificationFilter("read"));
+  document.getElementById("notifMarkAllReadBtn")?.addEventListener("click", async () => {
+    const unread = hrNotificationsState.items.filter((x) => !x.is_read);
+    await Promise.all(unread.map((x) => hrUpdateNotificationRow(sb, x.id, { notification_read: true, notification_read_at: new Date().toISOString() })));
+    hrApplyNotificationFilter(hrNotificationsState.filter);
+  });
+}
+
+async function loadHrNotifications(sb) {
+  if (!document.getElementById("employeeNotificationsList")) return;
+  const { data, error } = await sb.from("activity_logs").select("id,action,entity,details,created_at").order("created_at", { ascending: false }).limit(50);
+  if (error) {
+    document.getElementById("employeeNotificationsList").innerHTML =
+      '<div class="mini-card"><div class="mini-title">Error</div><div class="mini-body">Unable to load notifications.</div></div>';
+    return;
+  }
+  hrNotificationsState.items = (data || [])
+    .map((row) => {
+      const d = row.details || {};
+      return {
+        id: row.id,
+        action: row.action,
+        entity: row.entity,
+        details: d,
+        body: d.message || d.reason || d.status || d.leave_type || "",
+        created_at: row.created_at,
+        is_read: !!d.notification_read,
+        deleted: !!d.notification_deleted,
+      };
+    })
+    .filter((x) => !x.deleted);
+  wireHrNotificationActions(sb);
+  hrApplyNotificationFilter("all");
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   const profile = await requireRole([Roles.hr, Roles.admin]);
   if (!profile) return;
@@ -307,5 +439,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadHrReports(sb, profile),
     loadHrPolicies(sb, profile),
     loadHrProfile(sb, profile),
+    loadHrNotifications(sb),
   ]);
 });
