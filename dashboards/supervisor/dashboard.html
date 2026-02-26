@@ -84,39 +84,30 @@
         <div class="top-stats cards-grid">
           <div class="stat-card accent">
             <div class="stat-label">Total Employees (in Department)</div>
-            <div class="stat-value">25</div>
+            <div class="stat-value" id="supDeptEmployees">--</div>
           </div>
           <div class="stat-card accent">
             <div class="stat-label">Present Today</div>
-            <div class="stat-value">22</div>
+            <div class="stat-value" id="supPresentToday">--</div>
           </div>
           <div class="stat-card danger">
             <div class="stat-label">Absent / Late Today</div>
-            <div class="stat-value">3</div>
+            <div class="stat-value" id="supAbsentLateToday">--</div>
           </div>
           <div class="stat-card danger">
             <div class="stat-label">Pending Leave Requests</div>
-            <div class="stat-value">2</div>
+            <div class="stat-value" id="supPendingLeaveRequests">--</div>
           </div>
           <div class="stat-card danger">
             <div class="stat-label">Attendance Issues</div>
-            <div class="stat-value">1</div>
+            <div class="stat-value" id="supAttendanceIssues">--</div>
           </div>
         </div>
 
         <div class="card">
           <h2>Department Daily Overview</h2>
           <p class="muted">Monitor daily attendance, task compliance, and leave requests for your department only.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card">
-              <div class="mini-title">Today&apos;s Status</div>
-              <div class="mini-body">22 present, 2 late, 1 absent. 2 leave requests pending approval.</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Tasks</div>
-              <div class="mini-body">3 tasks in progress, 1 overdue.</div>
-            </div>
-          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="supOverviewCards"></div>
         </div>
       </section>
     </div>

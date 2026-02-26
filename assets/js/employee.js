@@ -307,6 +307,10 @@ async function wireLeavePage() {
 
   if (newLeaveBtn) {
     newLeaveBtn.addEventListener("click", () => {
+      const formWrap = document.getElementById("employeeLeaveForm");
+      if (formWrap) {
+        formWrap.style.display = formWrap.style.display === "none" ? "grid" : "none";
+      }
       const form = document.getElementById("leaveType");
       if (form) form.focus();
     });

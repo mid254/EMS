@@ -87,39 +87,30 @@
         <div class="top-stats cards-grid">
           <div class="stat-card accent">
             <div class="stat-label">Total Employees</div>
-            <div class="stat-value">128</div>
+            <div class="stat-value" id="hrTotalEmployees">--</div>
           </div>
           <div class="stat-card accent">
             <div class="stat-label">New Employees (This Month)</div>
-            <div class="stat-value">5</div>
+            <div class="stat-value" id="hrNewEmployeesThisMonth">--</div>
           </div>
           <div class="stat-card danger">
             <div class="stat-label">Employees on Leave Today</div>
-            <div class="stat-value">16</div>
+            <div class="stat-value" id="hrOnLeaveToday">--</div>
           </div>
           <div class="stat-card danger">
             <div class="stat-label">Pending Leave Requests</div>
-            <div class="stat-value">8</div>
+            <div class="stat-value" id="hrPendingLeaveRequests">--</div>
           </div>
           <div class="stat-card danger">
             <div class="stat-label">Attendance Issues (Late / Absent)</div>
-            <div class="stat-value">12</div>
+            <div class="stat-value" id="hrAttendanceIssues">--</div>
           </div>
         </div>
 
         <div class="card">
           <h2>HR Overview</h2>
           <p class="muted">Manage employee records, attendance policies, leave administration, and payroll coordination.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card">
-              <div class="mini-title">Recent Activity</div>
-              <div class="mini-body">3 new employees added this week. 8 leave requests pending.</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Attendance Alerts</div>
-              <div class="mini-body">5 attendance correction requests awaiting review.</div>
-            </div>
-          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="hrOverviewCards"></div>
         </div>
       </section>
     </div>

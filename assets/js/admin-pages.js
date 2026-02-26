@@ -517,6 +517,108 @@ async function loadAdminReportsPage() {
   await apply();
 }
 
+function setMiniCards(containerId, cards) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  if (!cards.length) {
+    el.innerHTML = '<div class="mini-card"><div class="mini-title">No data</div><div class="mini-body">No records available.</div></div>';
+    return;
+  }
+  el.innerHTML = cards
+    .map((card) => `<div class="mini-card" style="min-width:260px"><div class="mini-title">${card.title}</div><div class="mini-body">${card.body}</div></div>`)
+    .join("");
+}
+
+async function loadAdminAttendancePage() {
+  if (!document.getElementById("adminAttPresentToday")) return;
+  const sb = window.supabaseClient;
+  if (!sb) return;
+
+  const now = new Date();
+  const start = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString();
+  const end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59).toISOString();
+
+  const [attRes, empRes] = await Promise.all([
+    sb.from("attendance").select("user_id, clock_in, clock_out").gte("clock_in", start).lte("clock_in", end),
+    sb.from("employees").select("auth_user_id, full_name, department_id"),
+  ]);
+
+  const attendanceRows = attRes.data || [];
+  const employees = (empRes.data || []).filter((e) => e.auth_user_id);
+  const employeesById = new Map(employees.map((e) => [e.auth_user_id, e]));
+  const presentSet = new Set(attendanceRows.map((r) => r.user_id).filter(Boolean));
+
+  const lateThresholdHour = 9;
+  const earlyThresholdHour = 17;
+  const lateRows = attendanceRows.filter((r) => new Date(r.clock_in).getHours() >= lateThresholdHour);
+  const earlyRows = attendanceRows.filter((r) => r.clock_out && new Date(r.clock_out).getHours() < earlyThresholdHour);
+  const presentCount = presentSet.size;
+  const absentCount = Math.max(employees.length - presentCount, 0);
+
+  setText("adminAttPresentToday", String(presentCount));
+  setText("adminAttLateArrivals", String(lateRows.length));
+  setText("adminAttEarlyCheckouts", String(earlyRows.length));
+  setText("adminAttAbsentToday", String(absentCount));
+
+  const openCount = attendanceRows.filter((r) => !r.clock_out).length;
+  const completedCount = attendanceRows.filter((r) => !!r.clock_out).length;
+  setMiniCards("adminTodayAttendanceSummary", [
+    { title: "Present Employees", body: `${presentCount} employee(s) clocked in today.` },
+    { title: "Open Sessions", body: `${openCount} still clocked in.` },
+    { title: "Completed Sessions", body: `${completedCount} completed sessions today.` },
+    { title: "Early Checkouts", body: `${earlyRows.length} checked out before ${earlyThresholdHour}:00.` },
+  ]);
+
+  const { data: departments } = await sb.from("departments").select("id, name").order("name");
+  const deptMap = new Map((departments || []).map((d) => [d.id, d.name]));
+  const deptStats = new Map();
+  employees.forEach((e) => {
+    const key = e.department_id || "none";
+    if (!deptStats.has(key)) deptStats.set(key, { total: 0, present: 0 });
+    deptStats.get(key).total += 1;
+  });
+  attendanceRows.forEach((r) => {
+    const emp = employeesById.get(r.user_id);
+    if (!emp) return;
+    const key = emp.department_id || "none";
+    if (!deptStats.has(key)) deptStats.set(key, { total: 0, present: 0 });
+    deptStats.get(key).present += 1;
+  });
+  const deptCards = [...deptStats.entries()].map(([deptId, v]) => ({
+    title: deptMap.get(deptId) || "Unassigned",
+    body: `Present: ${v.present} / ${v.total} | Absent: ${Math.max(v.total - v.present, 0)}`,
+  }));
+  setMiniCards("adminDepartmentAttendance", deptCards);
+
+  const lateCards = lateRows
+    .slice(0, 20)
+    .map((r) => {
+      const emp = employeesById.get(r.user_id);
+      const dept = deptMap.get(emp?.department_id) || "Unassigned";
+      return {
+        title: adminSafeText(emp?.full_name, "Employee"),
+        body: `Clock-in: ${adminFormatDateTime(r.clock_in)} | Dept: ${dept}`,
+      };
+    });
+  setMiniCards("adminLateArrivalsList", lateCards);
+
+  const inlineMsg = document.getElementById("adminAttInlineMsg");
+  document.getElementById("adminAttApproveCorrectionsBtn")?.addEventListener("click", async () => {
+    await adminLogActivity("attendance_corrections_reviewed", "attendance", { message: "Admin reviewed attendance corrections." }, true);
+    if (inlineMsg) inlineMsg.textContent = "Attendance correction review action has been recorded.";
+  });
+  document.getElementById("adminAttExportReportBtn")?.addEventListener("click", () => {
+    const exportRows = attendanceRows.map((r) => ({
+      user_id: r.user_id,
+      clock_in: r.clock_in,
+      clock_out: r.clock_out || "",
+      status: r.clock_out ? "completed" : "open",
+    }));
+    downloadCsv("admin-attendance-report.csv", exportRows, ["user_id", "clock_in", "clock_out", "status"]);
+    if (inlineMsg) inlineMsg.textContent = "Attendance report exported.";
+  });
+}
+
 async function renderSettingsCards() {
   const sb = window.supabaseClient;
   const [depsRes, rolesRes, leaveTypesRes, workRes, holRes] = await Promise.all([
@@ -653,6 +755,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (path.endsWith("/notifications.html")) await loadAdminNotifications();
   if (path.endsWith("/activity-logs.html")) await loadAdminActivityLogs();
   if (path.endsWith("/leave.html")) await loadAdminLeavePage();
+  if (path.endsWith("/attendance.html")) await loadAdminAttendancePage();
   if (path.endsWith("/payroll.html")) await loadAdminPayrollPage();
   if (path.endsWith("/reports.html")) await loadAdminReportsPage();
   if (path.endsWith("/settings.html")) await wireAdminSettingsPage();

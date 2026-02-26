@@ -6,7 +6,11 @@
     <title>RoboTech Solutions EMS - Admin Attendance</title>
     <link rel="stylesheet" href="../../assets/css/styles.css" />
     <link rel="stylesheet" href="../_layout.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/admin-pages.js"></script>
   </head>
   <body>
     <div class="app">
@@ -68,8 +72,8 @@
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">Attendance Overview</div>
-            <div class="welcome-sub">Admin monitors attendance. View today&apos;s summary, late arrivals, early checkouts, department-wise stats.</div>
+            <div class="welcome-main" id="welcomeMain">Attendance Overview</div>
+            <div class="welcome-sub" id="welcomeSub">Admin monitors attendance. View today&apos;s summary, late arrivals, early checkouts, department-wise stats.</div>
           </div>
           <div class="topbar-actions">
             <button class="icon-button" type="button" aria-label="Notifications">
@@ -86,19 +90,19 @@
         <div class="top-stats cards-grid">
           <div class="stat-card accent">
             <div class="stat-label">Present Today</div>
-            <div class="stat-value">--</div>
+            <div class="stat-value" id="adminAttPresentToday">--</div>
           </div>
           <div class="stat-card danger">
             <div class="stat-label">Late Arrivals</div>
-            <div class="stat-value">--</div>
+            <div class="stat-value" id="adminAttLateArrivals">--</div>
           </div>
           <div class="stat-card danger">
             <div class="stat-label">Early Checkouts</div>
-            <div class="stat-value">--</div>
+            <div class="stat-value" id="adminAttEarlyCheckouts">--</div>
           </div>
           <div class="stat-card accent">
             <div class="stat-label">Absent</div>
-            <div class="stat-value">--</div>
+            <div class="stat-value" id="adminAttAbsentToday">--</div>
           </div>
         </div>
 
@@ -106,39 +110,25 @@
           <div class="card-header-row">
             <h2>Today&apos;s Attendance Summary</h2>
             <div class="download-actions">
-              <button class="btn ghost" type="button">Approve Corrections</button>
-              <button class="btn primary" type="button">Export Report</button>
+              <button class="btn ghost" type="button" id="adminAttApproveCorrectionsBtn">Approve Corrections</button>
+              <button class="btn primary" type="button" id="adminAttExportReportBtn">Export Report</button>
             </div>
           </div>
           <p class="muted">Admin view of today&apos;s attendance. Approve corrections or export report.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No attendance summary</div>
-              <div class="mini-body">Today&apos;s attendance summary will appear here once data is available.</div>
-            </div>
-          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="adminTodayAttendanceSummary"></div>
+          <div id="adminAttInlineMsg" class="muted" style="margin-top:8px"></div>
         </div>
 
         <div class="card">
           <h2>Department-wise Attendance</h2>
           <p class="muted">Attendance breakdown by department for today.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No department breakdown</div>
-              <div class="mini-body">Department-wise attendance will appear here once data is available.</div>
-            </div>
-          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="adminDepartmentAttendance"></div>
         </div>
 
         <div class="card">
           <h2>Late Arrivals</h2>
           <p class="muted">Employees who clocked in after the scheduled start time.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card" style="min-width:260px">
-              <div class="mini-title">No late arrivals</div>
-              <div class="mini-body">Late arrivals will appear here once data is available.</div>
-            </div>
-          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="adminLateArrivalsList"></div>
         </div>
       </section>
     </div>

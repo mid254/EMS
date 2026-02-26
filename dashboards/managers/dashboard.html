@@ -9,6 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script defer src="../../assets/js/supabase-client.js"></script>
     <script defer src="../../assets/js/app.js"></script>
+    <script defer src="../../assets/js/roles.js"></script>
+    <script defer src="../../assets/js/manager.js"></script>
   </head>
   <body>
     <div class="app">
@@ -70,8 +72,8 @@
       <section class="content">
         <div class="topbar">
           <div class="welcome">
-            <div class="welcome-main">MD Dashboard</div>
-            <div class="welcome-sub">Executive overview. Bird&apos;s-eye view of company performance.</div>
+            <div class="welcome-main" id="welcomeMain">MD Dashboard</div>
+            <div class="welcome-sub" id="welcomeSub">Executive overview. Bird&apos;s-eye view of company performance.</div>
           </div>
           <div class="topbar-actions">
             <button class="icon-button" type="button" aria-label="Notifications">
@@ -88,43 +90,34 @@
         <div class="top-stats cards-grid">
           <div class="stat-card accent">
             <div class="stat-label">Total Employees</div>
-            <div class="stat-value">128</div>
+            <div class="stat-value" id="mdTotalEmployees">--</div>
           </div>
           <div class="stat-card accent">
             <div class="stat-label">Active Departments</div>
-            <div class="stat-value">8</div>
+            <div class="stat-value" id="mdActiveDepartments">--</div>
           </div>
           <div class="stat-card accent">
             <div class="stat-label">Employees Present Today</div>
-            <div class="stat-value">112</div>
+            <div class="stat-value" id="mdPresentToday">--</div>
           </div>
           <div class="stat-card danger">
             <div class="stat-label">Employees On Leave</div>
-            <div class="stat-value">16</div>
+            <div class="stat-value" id="mdOnLeaveToday">--</div>
           </div>
           <div class="stat-card danger">
             <div class="stat-label">Pending High-Level Approvals</div>
-            <div class="stat-value">5</div>
+            <div class="stat-value" id="mdPendingApprovals">--</div>
           </div>
           <div class="stat-card accent">
             <div class="stat-label">Attendance Compliance Rate</div>
-            <div class="stat-value">94%</div>
+            <div class="stat-value" id="mdAttendanceCompliance">--</div>
           </div>
         </div>
 
         <div class="card">
           <h2>Executive Summary</h2>
           <p class="muted">High-level strategic overview. No day-to-day data entry.</p>
-          <div class="scroll-cards" style="margin-top:12px">
-            <div class="mini-card">
-              <div class="mini-title">Company Performance</div>
-              <div class="mini-body">Overall attendance compliance at 94%. 5 senior leave requests pending.</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-title">Department Health</div>
-              <div class="mini-body">All 8 departments active. IT and HR leading attendance rates.</div>
-            </div>
-          </div>
+          <div class="scroll-cards" style="margin-top:12px" id="mdOverviewCards"></div>
         </div>
       </section>
     </div>
