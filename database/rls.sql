@@ -21,6 +21,43 @@ as $$
   select department_id from public.profiles where id = auth.uid()
 $$;
 
+-- Helper: check if current user is assignee of a task (RLS-safe)
+create or replace function public.is_task_assignee(p_task_id uuid)
+returns boolean
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select exists (
+    select 1
+    from public.task_assignees ta
+    where ta.task_id = p_task_id
+      and ta.assignee_user_id = auth.uid()
+  )
+$$;
+
+-- Helper: check if current user can manage a task (RLS-safe)
+create or replace function public.can_manage_task(p_task_id uuid)
+returns boolean
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select exists (
+    select 1
+    from public.tasks t
+    where t.id = p_task_id
+      and (
+        (public.current_role() = 'supervisor'
+          and t.supervisor_user_id = auth.uid()
+          and t.department_id = public.current_department_id())
+        or public.current_role() in ('admin','hr','md')
+      )
+  )
+$$;
+
 -- Departments
 alter table public.departments enable row level security;
 drop policy if exists "departments_select_auth" on public.departments;
@@ -268,14 +305,7 @@ drop policy if exists "tasks_employee_read_assigned" on public.tasks;
 create policy "tasks_employee_read_assigned"
 on public.tasks for select
 to authenticated
-using (
-  exists (
-    select 1
-    from public.task_assignees ta
-    where ta.task_id = tasks.id
-      and ta.assignee_user_id = auth.uid()
-  )
-);
+using (public.is_task_assignee(tasks.id));
 
 -- Task assignees
 alter table public.task_assignees enable row level security;
@@ -301,60 +331,20 @@ drop policy if exists "task_assignees_supervisor_insert" on public.task_assignee
 create policy "task_assignees_supervisor_insert"
 on public.task_assignees for insert
 to authenticated
-with check (
-  exists (
-    select 1
-    from public.tasks t
-    where t.id = task_assignees.task_id
-      and (
-        (public.current_role() = 'supervisor' and t.supervisor_user_id = auth.uid() and t.department_id = public.current_department_id())
-        or public.current_role() in ('admin','hr','md')
-      )
-  )
-);
+with check (public.can_manage_task(task_assignees.task_id));
 
 drop policy if exists "task_assignees_supervisor_update" on public.task_assignees;
 create policy "task_assignees_supervisor_update"
 on public.task_assignees for update
 to authenticated
-using (
-  exists (
-    select 1
-    from public.tasks t
-    where t.id = task_assignees.task_id
-      and (
-        (public.current_role() = 'supervisor' and t.supervisor_user_id = auth.uid() and t.department_id = public.current_department_id())
-        or public.current_role() in ('admin','hr','md')
-      )
-  )
-)
-with check (
-  exists (
-    select 1
-    from public.tasks t
-    where t.id = task_assignees.task_id
-      and (
-        (public.current_role() = 'supervisor' and t.supervisor_user_id = auth.uid() and t.department_id = public.current_department_id())
-        or public.current_role() in ('admin','hr','md')
-      )
-  )
-);
+using (public.can_manage_task(task_assignees.task_id))
+with check (public.can_manage_task(task_assignees.task_id));
 
 drop policy if exists "task_assignees_supervisor_delete" on public.task_assignees;
 create policy "task_assignees_supervisor_delete"
 on public.task_assignees for delete
 to authenticated
-using (
-  exists (
-    select 1
-    from public.tasks t
-    where t.id = task_assignees.task_id
-      and (
-        (public.current_role() = 'supervisor' and t.supervisor_user_id = auth.uid() and t.department_id = public.current_department_id())
-        or public.current_role() in ('admin','hr','md')
-      )
-  )
-);
+using (public.can_manage_task(task_assignees.task_id));
 
 drop policy if exists "task_assignees_employee_read_self" on public.task_assignees;
 create policy "task_assignees_employee_read_self"
